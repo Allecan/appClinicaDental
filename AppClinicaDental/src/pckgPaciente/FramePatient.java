@@ -5,7 +5,16 @@
  */
 package pckgPaciente;
 
+import Conexion.BDConnection;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,15 +25,19 @@ public class FramePatient extends javax.swing.JFrame {
     /**
      * Creates new form FramePatient
      */
+    DefaultTableModel modelPatient = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int col) {
+            return col == 7;
+        }
+    };
+
     public FramePatient() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        jPanel1.setBackground(new Color(0, 0, 0, 0));
-        jPanelAgregarPaciente.setVisible(false);
-        jPanelAgregarPaciente.setBackground(new Color(0, 0, 0, 0));
-        jPanelVerPaciente.setVisible(false);
-        jPanelVerPaciente.setBackground(new Color(0, 0, 0, 0));
+        setPropertiesGUI();
+
+//        setTablePatient(modelPatient);
+        setTablePatient();
     }
 
     /**
@@ -37,10 +50,31 @@ public class FramePatient extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelAgregarPaciente = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jTextFieldDPI = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jSeparator7 = new javax.swing.JSeparator();
+        jTextFieldApellido = new javax.swing.JTextField();
+        jTextFieldApellidoFechanac = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
+        jTextFieldApellido1 = new javax.swing.JTextField();
+        jSeparator9 = new javax.swing.JSeparator();
+        jTextFieldApellido2 = new javax.swing.JTextField();
+        jSeparator10 = new javax.swing.JSeparator();
+        jButtonSaveDataPatient = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanelVerPaciente = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePatient = new javax.swing.JTable();
+        jPanelFondo = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonMin = new javax.swing.JButton();
         jButtonVer = new javax.swing.JButton();
@@ -55,22 +89,104 @@ public class FramePatient extends javax.swing.JFrame {
 
         jPanelAgregarPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setText("Escriba aca datos");
-        jPanelAgregarPaciente.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 280, -1));
+        jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel3.setText("Nombre/s:");
+        jPanelAgregarPaciente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 120, 30));
+
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel1.setText("Celular:");
+        jPanelAgregarPaciente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 170, 30));
+
+        jLabel4.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel4.setText("DPI:");
+        jPanelAgregarPaciente.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 120, 30));
+
+        jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel5.setText("Apellido/s:");
+        jPanelAgregarPaciente.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 120, 30));
+
+        jLabel6.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel6.setText("Fecha Nacimiento:");
+        jPanelAgregarPaciente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 170, 30));
+
+        jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel7.setText("Telefono:");
+        jPanelAgregarPaciente.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 170, 30));
+        jPanelAgregarPaciente.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 410, 10));
+
+        jTextFieldDPI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldDPI.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 410, 10));
+
+        jTextFieldNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldNombre.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 410, 10));
+
+        jTextFieldApellido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldApellido.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 410, -1));
+
+        jTextFieldApellidoFechanac.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldApellidoFechanac.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldApellidoFechanac, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 410, 10));
+
+        jTextFieldApellido1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldApellido1.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, 410, 10));
+
+        jTextFieldApellido2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldApellido2.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 410, 10));
+
+        jButtonSaveDataPatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/add.png"))); // NOI18N
+        jButtonSaveDataPatient.setBorder(null);
+        jButtonSaveDataPatient.setBorderPainted(false);
+        jButtonSaveDataPatient.setContentAreaFilled(false);
+        jButtonSaveDataPatient.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonSaveDataPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveDataPatientActionPerformed(evt);
+            }
+        });
+        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 90, 100));
+
+        jLabel8.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        jLabel8.setText("Formulario para agregar un nuevo Paciente");
+        jPanelAgregarPaciente.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/Extra1.png"))); // NOI18N
+        jPanelAgregarPaciente.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 330, 440));
 
         getContentPane().add(jPanelAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 1050, 720));
 
         jPanelVerPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("QUIERO VER");
-        jPanelVerPaciente.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
+        jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "DPI", "Nombre", "Apellido", "Edad", "Direccion", "Telefono", "Celular"
+            }
+        ));
+        jScrollPane1.setViewportView(jTablePatient);
+
+        jPanelVerPaciente.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 720));
 
         getContentPane().add(jPanelVerPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 1050, 720));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 20, 720));
+        jPanelFondo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 20, 720));
 
         jButtonMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/5.png"))); // NOI18N
         jButtonMin.setBorder(null);
@@ -81,7 +197,7 @@ public class FramePatient extends javax.swing.JFrame {
                 jButtonMinActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 60, 50));
+        jPanelFondo.add(jButtonMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 60, 50));
 
         jButtonVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/ver1.png"))); // NOI18N
         jButtonVer.setBorder(null);
@@ -94,7 +210,7 @@ public class FramePatient extends javax.swing.JFrame {
                 jButtonVerActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 80, 60));
+        jPanelFondo.add(jButtonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 80, 60));
 
         jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/3.png"))); // NOI18N
         jButtonSalir.setBorder(null);
@@ -106,31 +222,33 @@ public class FramePatient extends javax.swing.JFrame {
                 jButtonSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, 50, 50));
+        jPanelFondo.add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, 50, 50));
 
-        jButtonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/add.png"))); // NOI18N
+        jButtonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/addP1.png"))); // NOI18N
         jButtonAdd.setBorder(null);
         jButtonAdd.setBorderPainted(false);
         jButtonAdd.setContentAreaFilled(false);
         jButtonAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonAdd.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/add2.png"))); // NOI18N
+        jButtonAdd.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/addP2.png"))); // NOI18N
+        jButtonAdd.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/addP2.png"))); // NOI18N
+        jButtonAdd.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/addP2.png"))); // NOI18N
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 100, 100));
+        jPanelFondo.add(jButtonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 100, 100));
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modulo de pacientes");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+        jPanelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
         jLabelFondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/fondoPacient.png"))); // NOI18N
-        jPanel1.add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1220, 800));
+        jPanelFondo.add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1220, 800));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1230, 820));
+        getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -4, 1230, 820));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -151,7 +269,52 @@ public class FramePatient extends javax.swing.JFrame {
     private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         jPanelVerPaciente.setVisible(true);
         jPanelAgregarPaciente.setVisible(false);
+//        int fila = modelPatient.getRowCount();
+//        if (modelPatient.getRowCount() > 0) {
+//            modelPatient.getDataVector().removeAllElements();
+//            revalidate();
+////            while (fila >= 1) {
+////                modelPatient.removeRow(fila);
+////                System.out.println(fila);
+////                fila--;
+////            }
+//        } else {
+//            System.out.println("No hay nada que borrar");
+//        }
+//
+//        String sql = "SELECT * FROM paciente";
+//
+//        try {
+//
+//            Statement st = BDConnection.createInstance().createStatement();
+//            ResultSet rs = st.executeQuery(sql);
+//
+//            String[] datosConsultaPaciente = new String[7];
+//            while (rs.next()) {
+//                datosConsultaPaciente[0] = rs.getString(2);
+//                datosConsultaPaciente[1] = rs.getString(3);
+//                datosConsultaPaciente[2] = rs.getString(4);
+//                datosConsultaPaciente[3] = rs.getString(5);
+//                datosConsultaPaciente[4] = rs.getString(6);
+//                datosConsultaPaciente[5] = rs.getString(7);
+//                datosConsultaPaciente[6] = rs.getString(8);
+//                modelPatient.addRow(datosConsultaPaciente);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
     }//GEN-LAST:event_jButtonVerActionPerformed
+
+    private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
+        Object[] botones = {"Aceptar", "Cancelar"};
+        int opcionElegida = JOptionPane.showOptionDialog(null, " Guardar este nuevo paciente?", "Alerta", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, botones, null);
+        if (opcionElegida == 0) {
+            System.out.println("Proceder a ");
+        } else {
+            System.out.println("Cancelar operacion");
+        }
+    }//GEN-LAST:event_jButtonSaveDataPatientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,17 +352,68 @@ public class FramePatient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonMin;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonSaveDataPatient;
     private javax.swing.JButton jButtonVer;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAgregarPaciente;
+    private javax.swing.JPanel jPanelFondo;
     private javax.swing.JPanel jPanelVerPaciente;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTable jTablePatient;
+    private javax.swing.JTextField jTextFieldApellido;
+    private javax.swing.JTextField jTextFieldApellido1;
+    private javax.swing.JTextField jTextFieldApellido2;
+    private javax.swing.JTextField jTextFieldApellidoFechanac;
+    private javax.swing.JTextField jTextFieldDPI;
+    private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void setTablePatient() {
+//         private void setTablePatient(DefaultTableModel modelPatient) {
+        modelPatient.addColumn("DPI");
+        modelPatient.addColumn("Nombre");
+        modelPatient.addColumn("Apellido");
+        modelPatient.addColumn("Edad");
+        modelPatient.addColumn("Direccion");
+        modelPatient.addColumn("Telefono");
+        modelPatient.addColumn("Celular");
+        jTablePatient.setModel(modelPatient);
+        jTablePatient.getColumnModel().getColumn(0).setPreferredWidth(100);
+        jTablePatient.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTablePatient.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTablePatient.getColumnModel().getColumn(3).setPreferredWidth(5);
+        jTablePatient.getColumnModel().getColumn(4).setPreferredWidth(60);
+        jTablePatient.getColumnModel().getColumn(5).setPreferredWidth(20);
+        jTablePatient.getColumnModel().getColumn(6).setPreferredWidth(20);
+    }
+
+    private void setPropertiesGUI() {
+        this.setLocationRelativeTo(null);
+        this.setBackground(new Color(0, 0, 0, 0));
+        jPanelFondo.setBackground(new Color(0, 0, 0, 0));
+        jPanelAgregarPaciente.setVisible(false);
+        jPanelAgregarPaciente.setBackground(Color.WHITE);
+        jPanelVerPaciente.setVisible(false);
+        jPanelVerPaciente.setBackground(Color.WHITE);
+        jTextFieldDPI.setBackground(new Color(0, 0, 0, 0));
+    }
 }

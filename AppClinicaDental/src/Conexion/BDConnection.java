@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Conexion;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,17 +14,18 @@ import java.sql.SQLException;
  * @author Erick
  */
 public class BDConnection {
+
     private String url = "";
     private String user = "";
     private String bdName = "";
     private String password = "";
     private static int instanceLimiter = 4;
     private static Connection instance = null;
-    
-     private BDConnection() throws SQLException {
+
+    private BDConnection() throws SQLException {
 
         url = "jdbc:mysql://localhost:3306";
-        bdName = "inventario";
+        bdName = "bdclinicadental";
         user = "root";
         password = "suis moi camille";
         try {
@@ -37,7 +39,7 @@ public class BDConnection {
     public static Connection createInstance() throws SQLException {
 
         if (instanceLimiter != 0) {
-            BDConnection bdConnection = new BDConnection();
+            new BDConnection();
             instanceLimiter--;
             return instance;
         } else {
@@ -45,5 +47,5 @@ public class BDConnection {
         }
         return instance;
     }
-    
+
 }
