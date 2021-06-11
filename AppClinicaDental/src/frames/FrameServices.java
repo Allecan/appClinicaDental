@@ -27,21 +27,62 @@ public class FrameServices extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        minimizer = new javax.swing.JButton();
+        Close = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        jLabel2.setText("Servicios");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 140, 40));
+
+        minimizer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/5.png"))); // NOI18N
+        minimizer.setBorder(null);
+        minimizer.setBorderPainted(false);
+        minimizer.setContentAreaFilled(false);
+        minimizer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        minimizer.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/minus.png"))); // NOI18N
+        minimizer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minimizerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(minimizer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, -1, -1));
+
+        Close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/3.png"))); // NOI18N
+        Close.setBorder(null);
+        Close.setBorderPainted(false);
+        Close.setContentAreaFilled(false);
+        Close.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Close.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/4.png"))); // NOI18N
+        Close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/fondoPacient.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 800));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
+        dispose();
+    }//GEN-LAST:event_CloseActionPerformed
+
+    private void minimizerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizerActionPerformed
+        this.setState(ICONIFIED);
+    }//GEN-LAST:event_minimizerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +120,10 @@ public class FrameServices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Close;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton minimizer;
     // End of variables declaration//GEN-END:variables
 }
