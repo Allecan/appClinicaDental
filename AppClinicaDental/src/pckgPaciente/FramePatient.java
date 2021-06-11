@@ -6,11 +6,9 @@
 package pckgPaciente;
 
 import Conexion.BDConnection;
+import java.sql.*;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -62,15 +60,18 @@ public class FramePatient extends javax.swing.JFrame {
         jTextFieldNombre = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         jTextFieldApellido = new javax.swing.JTextField();
-        jTextFieldApellidoFechanac = new javax.swing.JTextField();
+        jTextFieldFechanac = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
-        jTextFieldApellido1 = new javax.swing.JTextField();
+        jTextFieldTel = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
-        jTextFieldApellido2 = new javax.swing.JTextField();
+        jTextFieldCel = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         jButtonSaveDataPatient = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextFieldDirec = new javax.swing.JTextField();
+        jSeparator11 = new javax.swing.JSeparator();
         jPanelVerPaciente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
@@ -91,57 +92,57 @@ public class FramePatient extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel3.setText("Nombre/s:");
-        jPanelAgregarPaciente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 120, 30));
+        jPanelAgregarPaciente.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 120, 30));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel1.setText("Celular:");
-        jPanelAgregarPaciente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 170, 30));
+        jPanelAgregarPaciente.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 170, 30));
 
         jLabel4.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel4.setText("DPI:");
-        jPanelAgregarPaciente.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 120, 30));
+        jPanelAgregarPaciente.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel5.setText("Apellido/s:");
-        jPanelAgregarPaciente.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 120, 30));
+        jPanelAgregarPaciente.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 120, 30));
 
         jLabel6.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel6.setText("Fecha Nacimiento:");
-        jPanelAgregarPaciente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 170, 30));
+        jPanelAgregarPaciente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 170, 30));
 
         jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabel7.setText("Telefono:");
-        jPanelAgregarPaciente.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 170, 30));
-        jPanelAgregarPaciente.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 410, 10));
+        jPanelAgregarPaciente.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 170, 30));
+        jPanelAgregarPaciente.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 410, 10));
 
         jTextFieldDPI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTextFieldDPI.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 410, -1));
-        jPanelAgregarPaciente.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 410, 10));
+        jPanelAgregarPaciente.add(jTextFieldDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 410, 10));
 
         jTextFieldNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTextFieldNombre.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 410, -1));
-        jPanelAgregarPaciente.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 410, 10));
+        jPanelAgregarPaciente.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 410, 10));
 
         jTextFieldApellido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTextFieldApellido.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 410, -1));
+        jPanelAgregarPaciente.add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 410, -1));
 
-        jTextFieldApellidoFechanac.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jTextFieldApellidoFechanac.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldApellidoFechanac, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 410, -1));
-        jPanelAgregarPaciente.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 410, 10));
+        jTextFieldFechanac.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldFechanac.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldFechanac, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 410, 10));
 
-        jTextFieldApellido1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jTextFieldApellido1.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 410, -1));
-        jPanelAgregarPaciente.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, 410, 10));
+        jTextFieldTel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldTel.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 410, 10));
 
-        jTextFieldApellido2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jTextFieldApellido2.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 410, -1));
-        jPanelAgregarPaciente.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 410, 10));
+        jTextFieldCel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldCel.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldCel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 410, 10));
 
         jButtonSaveDataPatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/add.png"))); // NOI18N
         jButtonSaveDataPatient.setBorder(null);
@@ -153,7 +154,7 @@ public class FramePatient extends javax.swing.JFrame {
                 jButtonSaveDataPatientActionPerformed(evt);
             }
         });
-        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 90, 100));
+        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 90, 100));
 
         jLabel8.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel8.setText("Formulario para agregar un nuevo Paciente");
@@ -161,6 +162,15 @@ public class FramePatient extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/Extra1.png"))); // NOI18N
         jPanelAgregarPaciente.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 330, 440));
+
+        jLabel10.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel10.setText("Direccion:");
+        jPanelAgregarPaciente.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 170, 30));
+
+        jTextFieldDirec.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldDirec.setBorder(null);
+        jPanelAgregarPaciente.add(jTextFieldDirec, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 410, -1));
+        jPanelAgregarPaciente.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 410, 10));
 
         getContentPane().add(jPanelAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 1050, 720));
 
@@ -307,6 +317,22 @@ public class FramePatient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVerActionPerformed
 
     private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
+        Connection instance;
+        String DPI = jTextFieldDPI.getText();
+        String nombre = jTextFieldNombre.getText();
+        String apellido = jTextFieldApellido.getText();
+        String fechaNac = jTextFieldFechanac.getText();
+        String direccion = jTextFieldDirec.getText();
+        String tel = jTextFieldTel.getText();
+        String cel = jTextFieldCel.getText();
+        try {
+            instance = BDConnection.createInstance();
+            AdminPatient.setConnection(instance);
+            AdminPatient.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
+        } catch (SQLException ex) {
+            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         Object[] botones = {"Aceptar", "Cancelar"};
         int opcionElegida = JOptionPane.showOptionDialog(null, " Guardar este nuevo paciente?", "Alerta", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, botones, null);
         if (opcionElegida == 0) {
@@ -358,6 +384,7 @@ public class FramePatient extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSaveDataPatient;
     private javax.swing.JButton jButtonVer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -373,6 +400,7 @@ public class FramePatient extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator7;
@@ -380,11 +408,12 @@ public class FramePatient extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTablePatient;
     private javax.swing.JTextField jTextFieldApellido;
-    private javax.swing.JTextField jTextFieldApellido1;
-    private javax.swing.JTextField jTextFieldApellido2;
-    private javax.swing.JTextField jTextFieldApellidoFechanac;
+    private javax.swing.JTextField jTextFieldCel;
     private javax.swing.JTextField jTextFieldDPI;
+    private javax.swing.JTextField jTextFieldDirec;
+    private javax.swing.JTextField jTextFieldFechanac;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTel;
     // End of variables declaration//GEN-END:variables
 
     private void setTablePatient() {

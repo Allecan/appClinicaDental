@@ -19,7 +19,7 @@ public class BDConnection {
     private String user = "";
     private String bdName = "";
     private String password = "";
-    private static int instanceLimiter = 4;
+    private static int instanceLimiter = 10;
     private static Connection instance = null;
 
     private BDConnection() throws SQLException {
