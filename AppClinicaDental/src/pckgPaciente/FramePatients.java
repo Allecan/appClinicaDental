@@ -8,6 +8,7 @@ package pckgPaciente;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,7 +24,6 @@ public class FramePatients extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         jPanel1.setBackground(new Color(0, 0, 0, 0));
-        jButtonExit.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -38,6 +38,7 @@ public class FramePatients extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButtonMini = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -70,6 +71,9 @@ public class FramePatients extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, 40, 40));
+
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,6 +133,7 @@ public class FramePatients extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonMini;
     private javax.swing.JLabel jLabel1;
