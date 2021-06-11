@@ -5,8 +5,18 @@
  */
 package pkgServicie;
 
+import Conexion.BDConnection;
 import java.awt.Color;
-
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import pkgServicie.ServiceManagement;
 /**
  *
  * @author Erick
@@ -23,6 +33,7 @@ public class Servicies extends javax.swing.JFrame {
         jTextFieldNewServicie.setBackground(new Color(0,0,0,0));
         jTextFieldNewServiciePrice.setBackground(new Color(0,0,0,0));
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +60,7 @@ public class Servicies extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldNewServicie = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,21 +90,29 @@ public class Servicies extends javax.swing.JFrame {
         });
         jPanelServicie.add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, -1));
 
-        jButtonShowService.setText("Mostrar Servicios");
+        jButtonShowService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/list.png"))); // NOI18N
+        jButtonShowService.setBorderPainted(false);
+        jButtonShowService.setContentAreaFilled(false);
+        jButtonShowService.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonShowService.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/list (1).png"))); // NOI18N
         jButtonShowService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonShowServiceActionPerformed(evt);
             }
         });
-        jPanelServicie.add(jButtonShowService, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanelServicie.add(jButtonShowService, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jButtonAddService.setText("Agregar Servicio");
+        jButtonAddService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/dental1.png"))); // NOI18N
+        jButtonAddService.setBorderPainted(false);
+        jButtonAddService.setContentAreaFilled(false);
+        jButtonAddService.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAddService.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/dental.png"))); // NOI18N
         jButtonAddService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddServiceActionPerformed(evt);
             }
         });
-        jPanelServicie.add(jButtonAddService, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+        jPanelServicie.add(jButtonAddService, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,7 +137,7 @@ public class Servicies extends javax.swing.JFrame {
 
         jPanelShowServices.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 240));
 
-        jPanelServicie.add(jPanelShowServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 480, 250));
+        jPanelServicie.add(jPanelShowServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 480, 250));
 
         jPanelRegistrarServicio.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRegistrarServicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -152,7 +172,8 @@ public class Servicies extends javax.swing.JFrame {
         jPanelRegistrarServicio.add(jTextFieldNewServicie, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 250, 30));
         jPanelRegistrarServicio.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 260, 20));
 
-        jPanelServicie.add(jPanelRegistrarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 460, 200));
+        jPanelServicie.add(jPanelRegistrarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 460, 200));
+        jPanelServicie.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 10, 370));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/fondoPacient.png"))); // NOI18N
@@ -167,6 +188,12 @@ public class Servicies extends javax.swing.JFrame {
     private void jButtonShowServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowServiceActionPerformed
         jPanelShowServices.setVisible(true);
         jPanelRegistrarServicio.setVisible(false);
+        ServiceManagement sm = new ServiceManagement();
+        try {
+            jTable2.setModel(sm.showService());
+        } catch (SQLException ex) {
+            Logger.getLogger(Servicies.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonShowServiceActionPerformed
 
     private void jButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddServiceActionPerformed
@@ -240,6 +267,7 @@ public class Servicies extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextFieldNewServicie;
     private javax.swing.JTextField jTextFieldNewServiciePrice;

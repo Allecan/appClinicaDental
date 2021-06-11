@@ -23,9 +23,9 @@ public class BDConnection {
      private BDConnection() throws SQLException {
 
         url = "jdbc:mysql://localhost:3306";
-        bdName = "inventario";
+        bdName = "bdclinicadental";
         user = "root";
-        password = "suis moi camille";
+        password = "brotha98";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             instance = DriverManager.getConnection(url + "/" + bdName, user, password);   //url, user, password
@@ -35,9 +35,8 @@ public class BDConnection {
     }
 
     public static Connection createInstance() throws SQLException {
-
         if (instanceLimiter != 0) {
-            BDConnection bdConnection = new BDConnection();
+            new BDConnection();
             instanceLimiter--;
             return instance;
         } else {
