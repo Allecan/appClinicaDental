@@ -36,6 +36,7 @@ public class FramePatients extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
         jButtonMini = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -47,6 +48,9 @@ public class FramePatients extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 20, 720));
 
         jButtonMini.setIcon(new javax.swing.ImageIcon("C:\\Users\\allec\\Documents\\NetBeansProjects\\AnyDis2\\appClinicaDental\\AppClinicaDental\\src\\pckgPaciente\\imgs\\5.png")); // NOI18N
         jButtonMini.setBorder(null);
@@ -72,8 +76,12 @@ public class FramePatients extends javax.swing.JFrame {
         });
         jPanel1.add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, 40, 40));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/add.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, 90));
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,7 +98,7 @@ public class FramePatients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jButtonMiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMiniActionPerformed
@@ -139,5 +147,6 @@ public class FramePatients extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
