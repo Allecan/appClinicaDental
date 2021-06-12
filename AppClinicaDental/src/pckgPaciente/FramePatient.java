@@ -279,20 +279,24 @@ public class FramePatient extends javax.swing.JFrame {
     private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         jPanelVerPaciente.setVisible(true);
         jPanelAgregarPaciente.setVisible(false);
+        
+        jTablePatient.setModel(AdminPatient.visualiarListadoPaciente());
+        System.out.println(modelPatient.getRowCount());
+
 //        int fila = modelPatient.getRowCount();
-//        if (modelPatient.getRowCount() > 0) {
-//            modelPatient.getDataVector().removeAllElements();
-//            revalidate();
-////            while (fila >= 1) {
-////                modelPatient.removeRow(fila);
-////                System.out.println(fila);
-////                fila--;
-////            }
-//        } else {
-//            System.out.println("No hay nada que borrar");
-//        }
+        if (modelPatient.getRowCount() > 0) {
+            modelPatient.getDataVector().removeAllElements();
+            revalidate();
+//            while (fila >= 1) {
+//                modelPatient.removeRow(fila);
+//                System.out.println(fila);
+//                fila--;
+//            }
+        } else {
+            System.out.println("No hay nada que borrar");
+        }
 //
-//        String sql = "SELECT * FROM paciente";
+//        String sql = "SELECT * FROM pacientenuevo";
 //
 //        try {
 //
@@ -317,26 +321,25 @@ public class FramePatient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVerActionPerformed
 
     private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
-        Connection instance;
-        String DPI = jTextFieldDPI.getText();
-        String nombre = jTextFieldNombre.getText();
-        String apellido = jTextFieldApellido.getText();
-        String fechaNac = jTextFieldFechanac.getText();
-        String direccion = jTextFieldDirec.getText();
-        String tel = jTextFieldTel.getText();
-        String cel = jTextFieldCel.getText();
-        try {
-            instance = BDConnection.createInstance();
-            AdminPatient.setConnection(instance);
-            AdminPatient.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
-        } catch (SQLException ex) {
-            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         Object[] botones = {"Aceptar", "Cancelar"};
         int opcionElegida = JOptionPane.showOptionDialog(null, " Guardar este nuevo paciente?", "Alerta", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, botones, null);
         if (opcionElegida == 0) {
+            //        Connection instance;
             System.out.println("Proceder a ");
+            String DPI = jTextFieldDPI.getText();
+            String nombre = jTextFieldNombre.getText();
+            String apellido = jTextFieldApellido.getText();
+            String fechaNac = jTextFieldFechanac.getText();
+            String direccion = jTextFieldDirec.getText();
+            String tel = jTextFieldTel.getText();
+            String cel = jTextFieldCel.getText();
+
+            try {
+                AdminPatient.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
+//            instance = BDConnection.createInstance();          
+            } catch (SQLException ex) {
+                ex.getCause();
+            }
         } else {
             System.out.println("Cancelar operacion");
         }
