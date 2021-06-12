@@ -23,12 +23,7 @@ public class ServiceManagement{
         try {
             Connection Instance = BDConnection.createInstance();
             DefaultTableModel modelo = new DefaultTableModel();
-//             {
-//                @Override
-//                public boolean isCellEditable(int fila, int col) {
-//                    return col == 3;
-//                }
-//            };
+
             modelo.addColumn("Servicio");
             modelo.addColumn("Precio Q.");
            // servicios.setModel(modelo);
@@ -36,7 +31,7 @@ public class ServiceManagement{
             String sql = "";
             if (valor.equals(""))
             {
-                sql="SELECT * FROM servicio";
+                sql="SELECT * FROM servicio where deshabilitar = 1";  
             }
             String[] datos = new String[3];
             Statement st = Instance.createStatement();
