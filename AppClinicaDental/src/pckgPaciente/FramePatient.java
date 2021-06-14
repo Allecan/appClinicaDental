@@ -22,6 +22,10 @@ public class FramePatient extends javax.swing.JFrame {
 
     /**
      * Creates new form FramePatient
+     *  FramePatient frame = new FramePatient();
+        frame.setInstance(instance);
+        frame.setVisible(true);
+        this.dispose();
      */
     DefaultTableModel modelPatient = new DefaultTableModel() {
         @Override
@@ -29,6 +33,13 @@ public class FramePatient extends javax.swing.JFrame {
             return col == 7;
         }
     };
+
+    int x, y;
+    Connection instance;
+
+    public void setInstance(Connection instance) {
+        this.instance = instance;
+    }
 
     public FramePatient() {
         initComponents();
@@ -251,8 +262,19 @@ public class FramePatient extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Modulo de pacientes");
-        jPanelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        jLabel2.setText("        Modulo de pacientes");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel2MouseDragged(evt);
+            }
+        });
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
+        });
+        jPanelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1070, 60));
 
         jLabelFondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/fondoPacient.png"))); // NOI18N
@@ -279,45 +301,16 @@ public class FramePatient extends javax.swing.JFrame {
     private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         jPanelVerPaciente.setVisible(true);
         jPanelAgregarPaciente.setVisible(false);
-        
+
         jTablePatient.setModel(AdminPatient.visualiarListadoPaciente());
         System.out.println(modelPatient.getRowCount());
 
-//        int fila = modelPatient.getRowCount();
         if (modelPatient.getRowCount() > 0) {
             modelPatient.getDataVector().removeAllElements();
             revalidate();
-//            while (fila >= 1) {
-//                modelPatient.removeRow(fila);
-//                System.out.println(fila);
-//                fila--;
-//            }
         } else {
             System.out.println("No hay nada que borrar");
         }
-//
-//        String sql = "SELECT * FROM pacientenuevo";
-//
-//        try {
-//
-//            Statement st = BDConnection.createInstance().createStatement();
-//            ResultSet rs = st.executeQuery(sql);
-//
-//            String[] datosConsultaPaciente = new String[7];
-//            while (rs.next()) {
-//                datosConsultaPaciente[0] = rs.getString(2);
-//                datosConsultaPaciente[1] = rs.getString(3);
-//                datosConsultaPaciente[2] = rs.getString(4);
-//                datosConsultaPaciente[3] = rs.getString(5);
-//                datosConsultaPaciente[4] = rs.getString(6);
-//                datosConsultaPaciente[5] = rs.getString(7);
-//                datosConsultaPaciente[6] = rs.getString(8);
-//                modelPatient.addRow(datosConsultaPaciente);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }//GEN-LAST:event_jButtonVerActionPerformed
 
     private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
@@ -344,6 +337,15 @@ public class FramePatient extends javax.swing.JFrame {
             System.out.println("Cancelar operacion");
         }
     }//GEN-LAST:event_jButtonSaveDataPatientActionPerformed
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel2MousePressed
+
+    private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+    }//GEN-LAST:event_jLabel2MouseDragged
 
     /**
      * @param args the command line arguments

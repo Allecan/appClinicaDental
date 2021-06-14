@@ -5,12 +5,6 @@
  */
 package frames;
 
-import java.sql.*;
-
-import Conexion.BDConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author allec
@@ -20,9 +14,7 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    Connection instance = BDConnection.createInstance();
-
-    public Menu() throws SQLException {
+    public Menu() {
         initComponents();
     }
 
@@ -81,11 +73,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Menu().setVisible(true);
-                } catch (SQLException ex) {
-                    ex.getCause();
-                }
+                    new Menu().setVisible(true);                
             }
         });
     }

@@ -15,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Patient {
 
-    String dpi;
-    String nombre;
-    String apellido;
-    String direccion;
-    String fechaNac;
-    String tel;
-    String cel;
+    private String dpi;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private String fechaNac;
+    private String tel;
+    private String cel;
 
 //    static Connection instanceBD;
     public String getFechaNac() {
@@ -86,7 +86,7 @@ public class Patient {
     public void insertToBD() throws SQLException {
         Connection instance = BDConnection.createInstance();
         PreparedStatement pst
-                = instance.prepareStatement("INSERT INTO pacientenuevo(dpi, nombre, apellido, fechaNacimiento, direccion, "
+                = instance.prepareStatement("INSERT INTO paciente(dpi, nombre, apellido, fechaNacimiento, direccion, "
                         + "telefono, celular)VALUES(?,?,?,?,?,?,?)");
         pst.setString(1, this.dpi);
         pst.setString(2, this.nombre);
@@ -107,7 +107,7 @@ public class Patient {
         modelTab.addColumn("Direccion");
         modelTab.addColumn("Telefono");
         modelTab.addColumn("Celular");
-        String sql = "SELECT * FROM pacientenuevo";
+        String sql = "SELECT * FROM paciente";
         try {
             Statement st = BDConnection.createInstance().createStatement();
             ResultSet rs = st.executeQuery(sql);

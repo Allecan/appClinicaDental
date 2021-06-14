@@ -20,7 +20,7 @@ public class BDConnection {
     private String user = "";
     private String bdName = "";
     private String password = "";
-    private static int instanceLimiter = 10;
+    private static int instanceLimiter = 3;
     private static Connection instance = null;
 
     private BDConnection() throws SQLException {
@@ -46,7 +46,7 @@ public class BDConnection {
         } else {
             System.out.println("ERROR 00 -- Limite de conexiones superado");
         }
-        return instance;
+        return null;
     }
 
 }
