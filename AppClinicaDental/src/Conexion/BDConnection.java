@@ -6,7 +6,6 @@
 package Conexion;
 
 import java.sql.*;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -20,7 +19,7 @@ public class BDConnection {
     private String user = "";
     private String bdName = "";
     private String password = "";
-    private static int instanceLimiter = 3;
+    private static int instanceLimiter = 1;
     private static Connection instance = null;
 
     private BDConnection() throws SQLException {
@@ -47,6 +46,5 @@ public class BDConnection {
             System.out.println("ERROR 00 -- Limite de conexiones superado");
         }
         return null;
-    }
-
+    }  
 }
