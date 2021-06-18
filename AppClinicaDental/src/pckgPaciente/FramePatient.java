@@ -22,11 +22,8 @@ import pckgMenu.MenuMain;
 public class FramePatient extends javax.swing.JFrame {
 
     /**
-     * Creates new form FramePatient
-     *  FramePatient frame = new FramePatient();
-        frame.setInstance(instance);
-        frame.setVisible(true);
-        this.dispose();
+     * Creates new form FramePatient FramePatient frame = new FramePatient();
+     * frame.setInstance(instance); frame.setVisible(true); this.dispose();
      */
     DefaultTableModel modelPatient = new DefaultTableModel() {
         @Override
@@ -36,16 +33,13 @@ public class FramePatient extends javax.swing.JFrame {
     };
 
     int x, y;
-    Connection instance;
 
-    public void setInstance(Connection instance) {
-        this.instance = instance;
-    }
+    AdminPatient administradoPaciente;
 
     public FramePatient() {
         initComponents();
         setPropertiesGUI();
-
+        administradoPaciente = new AdminPatient();
 //        setTablePatient(modelPatient);
         setTablePatient();
     }
@@ -63,9 +57,6 @@ public class FramePatient extends javax.swing.JFrame {
         jButtonClose = new javax.swing.JButton();
         jLabelCabecera = new javax.swing.JLabel();
         jSeparatorFondo = new javax.swing.JSeparator();
-        jPanelVerPaciente = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTablePatient = new javax.swing.JTable();
         jPanelAgregarPaciente = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -91,6 +82,9 @@ public class FramePatient extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextFieldDirec = new javax.swing.JTextField();
         jSeparator11 = new javax.swing.JSeparator();
+        jPanelVerPaciente = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePatient = new javax.swing.JTable();
         jPanelFondo = new javax.swing.JPanel();
         jButtonAdd = new javax.swing.JButton();
         jButtonVer = new javax.swing.JButton();
@@ -147,25 +141,6 @@ public class FramePatient extends javax.swing.JFrame {
         jSeparatorFondo.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparatorFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 20, 800));
 
-        jPanelVerPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "DPI", "Nombre", "Apellido", "Edad", "Direccion", "Telefono", "Celular"
-            }
-        ));
-        jScrollPane1.setViewportView(jTablePatient);
-
-        jPanelVerPaciente.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1020, 750));
-
-        getContentPane().add(jPanelVerPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
-
         jPanelAgregarPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
@@ -195,7 +170,7 @@ public class FramePatient extends javax.swing.JFrame {
 
         jTextFieldDPI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTextFieldDPI.setBorder(null);
-        jPanelAgregarPaciente.add(jTextFieldDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 410, -1));
+        jPanelAgregarPaciente.add(jTextFieldDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 75, 410, 30));
         jPanelAgregarPaciente.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 410, 10));
 
         jTextFieldNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -252,6 +227,25 @@ public class FramePatient extends javax.swing.JFrame {
 
         getContentPane().add(jPanelAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
 
+        jPanelVerPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "DPI", "Nombre", "Apellido", "Edad", "Direccion", "Telefono", "Celular"
+            }
+        ));
+        jScrollPane1.setViewportView(jTablePatient);
+
+        jPanelVerPaciente.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1020, 750));
+
+        getContentPane().add(jPanelVerPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
+
         jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonAdd.setForeground(new java.awt.Color(0, 0, 0));
@@ -307,7 +301,7 @@ public class FramePatient extends javax.swing.JFrame {
     private void jButtonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerActionPerformed
         jPanelVerPaciente.setVisible(true);
         jPanelAgregarPaciente.setVisible(false);
-        jTablePatient.setModel(AdminPatient.seeAllPatients());
+        jTablePatient.setModel(administradoPaciente.seeAllPatients());
 
         if (modelPatient.getRowCount() > 0) {
             modelPatient.getDataVector().removeAllElements();
@@ -332,7 +326,7 @@ public class FramePatient extends javax.swing.JFrame {
             String cel = jTextFieldCel.getText();
 
             try {
-                AdminPatient.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
+                administradoPaciente.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
 //            instance = BDConnection.createInstance();          
             } catch (SQLException ex) {
                 ex.getCause();
@@ -452,6 +446,5 @@ public class FramePatient extends javax.swing.JFrame {
         jPanelAgregarPaciente.setBackground(Color.WHITE);
         jPanelVerPaciente.setVisible(false);
         jPanelVerPaciente.setBackground(Color.WHITE);
-        jTextFieldDPI.setBackground(new Color(0, 0, 0, 0));
     }
 }

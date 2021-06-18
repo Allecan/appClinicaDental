@@ -41,8 +41,19 @@ public class PatientSQL {
             return null;
         }        
     }
-
-//    public void setInstance(Connection instanceGlobal) {
-//        this.instance = instanceGlobal;
-//    }
+    public int insertPatientToBD(Patient paciente) throws SQLException {
+        
+        PreparedStatement pst
+                = instance.prepareStatement("INSERT INTO paciente(dpi, nombre, apellido, fechaNacimiento, direccion, "
+                        + "telefono, celular)VALUES(?,?,?,?,?,?,?)");
+        pst.setString(1, paciente.getDpi());
+        pst.setString(2, paciente.getNombre());
+        pst.setString(3, paciente.getApellido());
+        pst.setString(4, paciente.getFechaNac());
+        pst.setString(5, paciente.getDireccion());
+        pst.setString(6, paciente.getTel());
+        pst.setString(7, paciente.getCel());
+        int status = pst.executeUpdate();
+        return status;
+    }
 }
