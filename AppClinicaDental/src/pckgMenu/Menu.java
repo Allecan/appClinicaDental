@@ -81,7 +81,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabelCabecera.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabelCabecera.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/barra2.png"))); // NOI18N
+        jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/barra.png"))); // NOI18N
         jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jLabelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
