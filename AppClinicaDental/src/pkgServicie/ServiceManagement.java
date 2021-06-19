@@ -4,47 +4,30 @@
  * and open the template in the editor.
  */
 package pkgServicie;
-import Conexion.BDConnection;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import pkgServicie.ServiceSQL;
 /**
  *
  * @author Erick
  */
-public class ServiceManagement{
+public class ServiceManagement {
+    ResultSet rs2;
+    ServiceSQL sq = new ServiceSQL();
+    
     public DefaultTableModel showService() throws SQLException {
-        String valor = "";
-       // JTable servicios = null;
-        try {
-            Connection Instance = BDConnection.createInstance();
-            DefaultTableModel modelo = new DefaultTableModel();
-
-            modelo.addColumn("Servicio");
-            modelo.addColumn("Precio Q.");
-           // servicios.setModel(modelo);
-            
-            String sql = "";
-            if (valor.equals(""))
-            {
-                sql="SELECT * FROM servicio where deshabilitar = 1";  
-            }
-            String[] datos = new String[3];
-            Statement st = Instance.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                datos[0] = rs.getString(2);
-                datos[1] = rs.getString(3);
-                modelo.addRow(datos);
-            }
-           return modelo; 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error" + ex);
+        rs2 = sq.SelectServices();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Servicio");
+        modelo.addColumn("Precio Q.");
+        String[] datos = new String[3];
+        while (rs2.next()) {
+            datos[0] = rs2.getString(2);
+            datos[1] = rs2.getString(3);
+            modelo.addRow(datos);
         }
-        return null;
+        return modelo;
+
     }
 }

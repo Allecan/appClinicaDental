@@ -37,7 +37,6 @@ public class Service {
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
-    
-    
+      
            
 }
