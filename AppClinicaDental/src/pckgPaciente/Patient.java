@@ -19,7 +19,6 @@ public class Patient {
     private String tel;
     private String cel;
 
-//    static Connection instanceBD;
     public String getFechaNac() {
         return fechaNac;
     }
@@ -75,5 +74,5 @@ public class Patient {
     public void setCel(String cel) {
         this.cel = cel;
     }
-    
+
 }

@@ -21,12 +21,11 @@ public class PatientSQL {
         String sql = "SELECT dpi, nombre, apellido, fechaNacimiento, direccion, telefono, celular FROM paciente;";
         try {
             Statement st = instance.createStatement();
-            ResultSet rs = st.executeQuery(sql);           
+            ResultSet rs = st.executeQuery(sql);
             List<Patient> listaPacientes = new ArrayList<Patient>();
-//            String[] datosConsultaPaciente = new String[7];
             while (rs.next()) {
                 Patient paciente = new Patient();
-                paciente.setDpi(rs.getString(1)) ;
+                paciente.setDpi(rs.getString(1));
                 paciente.setNombre(rs.getString(2));
                 paciente.setApellido(rs.getString(3));
                 paciente.setFechaNac(rs.getString(4));
@@ -39,21 +38,30 @@ public class PatientSQL {
         } catch (SQLException ex) {
             ex.getCause();
             return null;
-        }        
+        }
     }
-    public int insertPatientToBD(Patient paciente) throws SQLException {
-        
-        PreparedStatement pst
-                = instance.prepareStatement("INSERT INTO paciente(dpi, nombre, apellido, fechaNacimiento, direccion, "
-                        + "telefono, celular)VALUES(?,?,?,?,?,?,?)");
-        pst.setString(1, paciente.getDpi());
-        pst.setString(2, paciente.getNombre());
-        pst.setString(3, paciente.getApellido());
-        pst.setString(4, paciente.getFechaNac());
-        pst.setString(5, paciente.getDireccion());
-        pst.setString(6, paciente.getTel());
-        pst.setString(7, paciente.getCel());
-        int status = pst.executeUpdate();
-        return status;
+
+    public boolean insertPatientToBD(Patient paciente) {
+
+        PreparedStatement pst;
+        boolean status;
+        try {
+            pst = instance.prepareStatement("INSERT INTO paciente(dpi, nombre, apellido, fechaNacimiento, direccion, "
+                    + "telefono, celular)VALUES(?,?,?,?,?,?,?)");
+            pst.setString(1, paciente.getDpi());
+            pst.setString(2, paciente.getNombre());
+            pst.setString(3, paciente.getApellido());
+            pst.setString(4, paciente.getFechaNac());
+            pst.setString(5, paciente.getDireccion());
+            pst.setString(6, paciente.getTel());
+            pst.setString(7, paciente.getCel());
+            pst.executeUpdate();
+            status = true;
+            return status;
+        } catch (SQLException ex) {
+//            ex.printStackTrace();
+            status = false;
+            return status;
+        }
     }
 }
