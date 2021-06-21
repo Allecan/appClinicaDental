@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pckgMenu.MenuMain;
 import pkgServicie.ServiceManagement;
 /**
  *
@@ -17,12 +18,15 @@ import pkgServicie.ServiceManagement;
  */
 public class FrameService extends javax.swing.JFrame {
     int x, y;
+    ServiceManagement sm = new ServiceManagement();
+    MenuMain menu = new MenuMain();
 
     /**
      * Creates new form Servicies
      */
     public FrameService() {
         initComponents();
+        this.setLocationRelativeTo(null);
         jPanelRegistrarServicio.setVisible(false);
         jPanelShowServices.setVisible(false);
         jTextFieldNewServicie.setBackground(new Color(0,0,0,0));
@@ -48,6 +52,7 @@ public class FrameService extends javax.swing.JFrame {
         jPanelShowServices = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jSeparator3 = new javax.swing.JSeparator();
         jPanelRegistrarServicio = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldNewServiciePrice = new javax.swing.JTextField();
@@ -55,37 +60,40 @@ public class FrameService extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldNewServicie = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
+        jButtonSave = new javax.swing.JButton();
         jLabelCabecera = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanelServicie.setBackground(new java.awt.Color(255, 255, 255));
         jPanelServicie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/5.png"))); // NOI18N
+        jButtonMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/min1.png"))); // NOI18N
         jButtonMinimize.setBorderPainted(false);
         jButtonMinimize.setContentAreaFilled(false);
+        jButtonMinimize.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/min2.png"))); // NOI18N
         jButtonMinimize.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/minus.png"))); // NOI18N
         jButtonMinimize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMinimizeActionPerformed(evt);
             }
         });
-        jPanelServicie.add(jButtonMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 50, 40));
+        jPanelServicie.add(jButtonMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 30, 30));
 
-        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/3.png"))); // NOI18N
+        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/exit1.png"))); // NOI18N
         jButtonClose.setBorderPainted(false);
         jButtonClose.setContentAreaFilled(false);
-        jButtonClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/4.png"))); // NOI18N
+        jButtonClose.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/exit2.png"))); // NOI18N
+        jButtonClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/exit2.png"))); // NOI18N
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCloseActionPerformed(evt);
             }
         });
-        jPanelServicie.add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 60, 40));
+        jPanelServicie.add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 40, 30));
 
         jButtonShowService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/list.png"))); // NOI18N
         jButtonShowService.setBorderPainted(false);
@@ -114,7 +122,7 @@ public class FrameService extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Servicios");
-        jPanelServicie.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
+        jPanelServicie.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, -1, -1));
 
         jPanelShowServices.setBackground(new java.awt.Color(255, 255, 255));
         jPanelShowServices.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -132,9 +140,10 @@ public class FrameService extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jPanelShowServices.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 240));
+        jPanelShowServices.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 240));
 
-        jPanelServicie.add(jPanelShowServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 480, 250));
+        jPanelServicie.add(jPanelShowServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 480, 250));
+        jPanelServicie.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 10, 380));
 
         jPanelRegistrarServicio.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRegistrarServicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,13 +178,25 @@ public class FrameService extends javax.swing.JFrame {
         jPanelRegistrarServicio.add(jTextFieldNewServicie, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 250, 30));
         jPanelRegistrarServicio.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 260, 20));
 
-        jPanelServicie.add(jPanelRegistrarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 460, 200));
-        jPanelServicie.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 10, 390));
+        jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/diskette.png"))); // NOI18N
+        jButtonSave.setBorderPainted(false);
+        jButtonSave.setContentAreaFilled(false);
+        jButtonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonSave.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/diskette (1).png"))); // NOI18N
+        jButtonSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/floppy-disk (1).png"))); // NOI18N
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+        jPanelRegistrarServicio.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 70, -1));
+
+        jPanelServicie.add(jPanelRegistrarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 510, 240));
 
         jLabelCabecera.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabelCabecera.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/barra.png"))); // NOI18N
-        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabelCabeceraMouseDragged(evt);
@@ -186,14 +207,9 @@ public class FrameService extends javax.swing.JFrame {
                 jLabelCabeceraMousePressed(evt);
             }
         });
-        jPanelServicie.add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 860, 60));
+        jPanelServicie.add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, -1));
 
-        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/blanco.jpg"))); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanelServicie.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
-
-        getContentPane().add(jPanelServicie, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, -1));
+        getContentPane().add(jPanelServicie, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,7 +217,6 @@ public class FrameService extends javax.swing.JFrame {
     private void jButtonShowServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowServiceActionPerformed
         jPanelShowServices.setVisible(true);
         jPanelRegistrarServicio.setVisible(false);
-        ServiceManagement sm = new ServiceManagement();
         try {
             jTable2.setModel(sm.showService());
         } catch (SQLException ex) {
@@ -212,10 +227,12 @@ public class FrameService extends javax.swing.JFrame {
     private void jButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddServiceActionPerformed
         jPanelRegistrarServicio.setVisible(true);
         jPanelShowServices.setVisible(false);
+        
     }//GEN-LAST:event_jButtonAddServiceActionPerformed
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
         dispose();
+        MenuMain.menuVisible();
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void jButtonMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinimizeActionPerformed
@@ -240,6 +257,12 @@ public class FrameService extends javax.swing.JFrame {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jLabelCabeceraMousePressed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+         sm.getServiceValues(jTextFieldNewServicie.getText(), jTextFieldNewServiciePrice.getText(), true);
+         jTextFieldNewServicie.setText("");
+         jTextFieldNewServiciePrice.setText("");
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,8 +310,8 @@ public class FrameService extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddService;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonMinimize;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonShowService;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

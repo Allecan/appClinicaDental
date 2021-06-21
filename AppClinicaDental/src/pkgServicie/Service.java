@@ -10,9 +10,18 @@ package pkgServicie;
  * @author Erick
  */
 public class Service {
-    private String NameofService;
-    private float price;
+    private String NameofService, price, enableString;
     private boolean enable;
+    private Service servicio;
+    
+   
+    public Service getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Service servicio) {
+        this.servicio = servicio;
+    }
 
     public String getNameofService() {
         return NameofService;
@@ -22,16 +31,22 @@ public class Service {
         this.NameofService = NameofService;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public boolean isEnable() {
-        return enable;
+    public int isEnable() { //Funcion que trabaja con el valor inicial true 
+        if (enable == true) {   // en el boolean para poder agregar un nuevo servicio
+            enableString = "True";
+            return 1;
+        }
+        else enableString = "False";
+        return 0;
+       
     }
 
     public void setEnable(boolean enable) {

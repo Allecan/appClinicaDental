@@ -15,12 +15,12 @@ import pckgMenu.MenuMain;
  * @author Erick
  */
 public class ServiceSQL {
-    Connection instance;
-    MenuMain menu = new MenuMain();
-    
+    Connection instance = (Connection) MenuMain.getInstance();
+    MenuMain menu = new MenuMain(); 
+    Service sv = new Service();
     public ResultSet SelectServices(){
         try {
-            instance = (Connection) menu.getInstance();
+            
             String sql= "SELECT * FROM servicio where deshabilitar = 1";  
             Statement st = instance.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -30,5 +30,21 @@ public class ServiceSQL {
         } 
         return null;
     }
-
+    
+    public int insertService(Service service){
+        try {
+            instance = (Connection) MenuMain.getInstance();
+            PreparedStatement pst = 
+                    instance.prepareStatement("INSERT INTO Servicio (nombreservicio, precio, deshabilitar) values(?,?,?)");
+            pst.setString(1, service.getNameofService());
+            pst.setString(2, service.getPrice());
+            pst.setInt(3, service.isEnable());
+            int registro = pst.executeUpdate();
+            return registro;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error" + e);
+        } 
+        return 0;
+    }
+    
 }
