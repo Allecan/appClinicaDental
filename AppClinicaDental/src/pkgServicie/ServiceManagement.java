@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 import pkgServicie.ServiceSQL;
 /**
  *
@@ -22,12 +23,14 @@ public class ServiceManagement {
     public DefaultTableModel showService() throws SQLException {
         rs2 = sq.SelectServices();
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
         modelo.addColumn("Servicio");
         modelo.addColumn("Precio Q.");
-        String[] datos = new String[3];
+        String[] datos = new String[4];
         while (rs2.next()) {
-            datos[0] = rs2.getString(2);
-            datos[1] = rs2.getString(3);
+            datos[0] = rs2.getString(1);
+            datos[1] = rs2.getString(2);
+            datos[2] = rs2.getString(3);
             modelo.addRow(datos);
         }
         return modelo;
@@ -82,4 +85,56 @@ public class ServiceManagement {
             JOptionPane.showMessageDialog(null, "Error el registrar");
         }
     }
+    
+    //Funcion para Deshabilitar un servicio
+    public void DisableService(JTable tablaService){
+        int fila = tablaService.getSelectedRow();
+        String Id = tablaService.getValueAt(fila, 0).toString();
+        int idservice = Integer.parseInt(Id);
+        //int Id = 0;
+        if (fila ==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione una casilla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            int k = JOptionPane.showConfirmDialog(null, "Desea deshabilitar el servicio", "Deshabilitar", JOptionPane.YES_NO_OPTION);
+            if (k == JOptionPane.YES_OPTION) {
+                int resultSQL = sq.DisableServiceSQL(idservice);
+                if (resultSQL > 0) {
+                    System.out.println("Se ha deshabilitado");
+                } else {
+                    System.out.println("No se ha deshabilitado");
+                }
+            }
+        }   
+    }
+    
+    //Funcion para habilitar un servicio
+    /*public JTable EnableService(JTable tablaService){
+       int fila = tablaService.getSelectedRow();
+        
+        String Id = tablaService.getValueAt(fila, 0).toString();
+        String NombreServicio = tablaService.getValueAt(fila, 1).toString();
+        String PrecioServicio = tablaService.getValueAt(fila, 2).toString();
+        
+        //String Id = tablaService.getValueAt(1, 0).toString();
+        if (fila ==-2){
+            JOptionPane.showMessageDialog(null, "Seleccione una casilla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            Id = tablaService.getValueAt(fila, 0).toString();
+        }
+        
+        int k = JOptionPane.showConfirmDialog(null, "Desea Habilitar el servicio", "Habilitar", JOptionPane.YES_NO_OPTION);
+        if(k==JOptionPane.YES_OPTION){
+            ServiceSQL serverSQL = new ServiceSQL();
+            if (serverSQL.EnableServiceSQL()==0){
+                System.out.println("Se ha Habilitado");
+            }
+            else{
+                System.out.println("No se ha Habilitado");
+            }
+        }
+        return null;
+    }*/
+    
 }

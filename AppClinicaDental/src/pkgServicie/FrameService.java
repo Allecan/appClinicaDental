@@ -20,6 +20,7 @@ public class FrameService extends javax.swing.JFrame {
     int x, y;
     ServiceManagement sm = new ServiceManagement();
     MenuMain menu = new MenuMain();
+    ServiceSQL SSQL= new ServiceSQL();
 
     /**
      * Creates new form Servicies
@@ -43,6 +44,9 @@ public class FrameService extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuOpciones = new javax.swing.JPopupMenu();
+        jMenuHabilitarServicio = new javax.swing.JMenuItem();
+        jMenuDeshabilitarServicio = new javax.swing.JMenuItem();
         jPanelServicie = new javax.swing.JPanel();
         jButtonMinimize = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
@@ -62,6 +66,22 @@ public class FrameService extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButtonSave = new javax.swing.JButton();
         jLabelCabecera = new javax.swing.JLabel();
+
+        jMenuHabilitarServicio.setText("Habilitar Servicio");
+        jMenuHabilitarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuHabilitarServicioActionPerformed(evt);
+            }
+        });
+        jPopupMenuOpciones.add(jMenuHabilitarServicio);
+
+        jMenuDeshabilitarServicio.setText("Deshabilitar Servicio");
+        jMenuDeshabilitarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDeshabilitarServicioActionPerformed(evt);
+            }
+        });
+        jPopupMenuOpciones.add(jMenuDeshabilitarServicio);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -129,15 +149,16 @@ public class FrameService extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2"
             }
         ));
+        jTable2.setComponentPopupMenu(jPopupMenuOpciones);
         jScrollPane2.setViewportView(jTable2);
 
         jPanelShowServices.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 240));
@@ -264,6 +285,15 @@ public class FrameService extends javax.swing.JFrame {
          jTextFieldNewServiciePrice.setText("");
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    private void jMenuDeshabilitarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeshabilitarServicioActionPerformed
+        // TODO add your handling code here:
+        sm.DisableService(jTable2);
+    }//GEN-LAST:event_jMenuDeshabilitarServicioActionPerformed
+
+    private void jMenuHabilitarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHabilitarServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuHabilitarServicioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -316,9 +346,12 @@ public class FrameService extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelCabecera;
+    private javax.swing.JMenuItem jMenuDeshabilitarServicio;
+    private javax.swing.JMenuItem jMenuHabilitarServicio;
     private javax.swing.JPanel jPanelRegistrarServicio;
     private javax.swing.JPanel jPanelServicie;
     private javax.swing.JPanel jPanelShowServices;
+    private javax.swing.JPopupMenu jPopupMenuOpciones;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

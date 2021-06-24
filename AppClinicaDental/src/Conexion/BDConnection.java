@@ -25,7 +25,7 @@ public class BDConnection {
         url = "jdbc:mysql://localhost:3306";
         bdName = "bdclinicadental";
         user = "root";
-        password = "brotha98";
+        password = "manzana123";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             instance = DriverManager.getConnection(url + "/" + bdName, user, password);   //url, user, password

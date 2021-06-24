@@ -7,6 +7,9 @@ package pkgServicie;
 import com.mysql.jdbc.Connection;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import pckgMenu.MenuMain;
 
@@ -18,6 +21,7 @@ public class ServiceSQL {
     Connection instance = (Connection) MenuMain.getInstance();
     MenuMain menu = new MenuMain(); 
     Service sv = new Service();
+    
     public ResultSet SelectServices(){
         try {
             
@@ -47,4 +51,35 @@ public class ServiceSQL {
         return 0;
     }
     
+    //Deshabilitar Servicio 
+    public int DisableServiceSQL(int idDisable){
+        int SQL = 0;
+        try {
+            instance = (Connection) MenuMain.getInstance();
+            PreparedStatement pst = instance.prepareStatement("");
+            //String nombreservicio = "";
+            //String precioservicio = "";
+            SQL = pst.executeUpdate("UPDATE servicio set deshabilitar ='"+"0"+ "'WHERE idservicio='"+idDisable+"'");
+            return SQL;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error" + e);
+        }  
+        return SQL;
+    }
+    
+    //Habilitar Servicio
+     /*public int EnableServiceSQL(){
+        try {
+            instance = (Connection) MenuMain.getInstance();
+            PreparedStatement pst = instance.prepareStatement("");
+            String id= "";
+            String nombreservicio = "";
+            String precioservicio = "";
+            int SQL = pst.executeUpdate("UPDATE servicio set Habilitado ='"+"1"+ "'WHERE idservicio='"+id+"'and nombreServicio='"+nombreservicio+"'and precio='"+precioservicio+"'");
+            return SQL;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error" + e);
+        }   
+        return 0;
+     }*/                  
 }
