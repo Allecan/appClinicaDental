@@ -28,6 +28,7 @@ public class FrameService extends javax.swing.JFrame {
     public FrameService() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jPanelShowDisabledServices.setVisible(false);
         jPanelRegistrarServicio.setVisible(false);
         jPanelShowServices.setVisible(false);
         jTextFieldNewServicie.setBackground(new Color(0,0,0,0));
@@ -66,6 +67,8 @@ public class FrameService extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButtonSave = new javax.swing.JButton();
         jLabelCabecera = new javax.swing.JLabel();
+        jPanelShowDisabledServices = new javax.swing.JPanel();
+        jButtonDisabledService = new javax.swing.JButton();
 
         jMenuHabilitarServicio.setText("Habilitar Servicio");
         jMenuHabilitarServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -149,17 +152,29 @@ public class FrameService extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+
         jTable2.setComponentPopupMenu(jPopupMenuOpciones);
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jPanelShowServices.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 240));
 
@@ -230,6 +245,20 @@ public class FrameService extends javax.swing.JFrame {
         });
         jPanelServicie.add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, -1));
 
+        jPanelShowDisabledServices.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelShowDisabledServices.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonDisabledService.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jButtonDisabledService.setText("Mostrar Servicos Deshabilitado");
+        jButtonDisabledService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDisabledServiceActionPerformed(evt);
+            }
+        });
+        jPanelShowDisabledServices.add(jButtonDisabledService, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 40));
+
+        jPanelServicie.add(jPanelShowDisabledServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 200, 40));
+
         getContentPane().add(jPanelServicie, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 430));
 
         pack();
@@ -238,6 +267,7 @@ public class FrameService extends javax.swing.JFrame {
     private void jButtonShowServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowServiceActionPerformed
         jPanelShowServices.setVisible(true);
         jPanelRegistrarServicio.setVisible(false);
+        jPanelShowDisabledServices.setVisible(true);
         try {
             jTable2.setModel(sm.showService());
         } catch (SQLException ex) {
@@ -248,6 +278,7 @@ public class FrameService extends javax.swing.JFrame {
     private void jButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddServiceActionPerformed
         jPanelRegistrarServicio.setVisible(true);
         jPanelShowServices.setVisible(false);
+        jPanelShowDisabledServices.setVisible(false);
         
     }//GEN-LAST:event_jButtonAddServiceActionPerformed
 
@@ -286,13 +317,31 @@ public class FrameService extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jMenuDeshabilitarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeshabilitarServicioActionPerformed
-        // TODO add your handling code here:
-        sm.DisableService(jTable2);
+        try {
+            // TODO add your handling code here:
+            sm.DisableService(jTable2);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuDeshabilitarServicioActionPerformed
 
     private void jMenuHabilitarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuHabilitarServicioActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            sm.ServiceEnable(jTable2);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuHabilitarServicioActionPerformed
+
+    private void jButtonDisabledServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDisabledServiceActionPerformed
+        // TODO add your handling code here:
+       try {
+            jTable2.setModel(sm.showServiceDisable());
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonDisabledServiceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +388,7 @@ public class FrameService extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddService;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonDisabledService;
     private javax.swing.JButton jButtonMinimize;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JButton jButtonShowService;
@@ -350,6 +400,7 @@ public class FrameService extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuHabilitarServicio;
     private javax.swing.JPanel jPanelRegistrarServicio;
     private javax.swing.JPanel jPanelServicie;
+    private javax.swing.JPanel jPanelShowDisabledServices;
     private javax.swing.JPanel jPanelShowServices;
     private javax.swing.JPopupMenu jPopupMenuOpciones;
     private javax.swing.JScrollPane jScrollPane2;

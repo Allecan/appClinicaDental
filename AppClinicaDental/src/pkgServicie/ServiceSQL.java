@@ -35,6 +35,19 @@ public class ServiceSQL {
         return null;
     }
     
+    public ResultSet SelectservicesDisabled(){
+       try {
+            
+            String sql= "SELECT * FROM servicio where deshabilitar = 0";  
+            Statement st = instance.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error" + e);
+        } 
+        return null; 
+    }
+    
     public int insertService(Service service){
         try {
             instance = (Connection) MenuMain.getInstance();
@@ -52,34 +65,30 @@ public class ServiceSQL {
     }
     
     //Deshabilitar Servicio 
-    public int DisableServiceSQL(int idDisable){
+    public int DisableServiceSQL(int idDisable) {
         int SQL = 0;
         try {
             instance = (Connection) MenuMain.getInstance();
             PreparedStatement pst = instance.prepareStatement("");
-            //String nombreservicio = "";
-            //String precioservicio = "";
-            SQL = pst.executeUpdate("UPDATE servicio set deshabilitar ='"+"0"+ "'WHERE idservicio='"+idDisable+"'");
+            SQL = pst.executeUpdate("UPDATE servicio set deshabilitar ='" + "0" + "'WHERE idservicio='" + idDisable + "'");
             return SQL;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error" + e);
-        }  
+        }
         return SQL;
     }
     
     //Habilitar Servicio
-     /*public int EnableServiceSQL(){
+    public int EnableServiceSQL(int idEnable){
+        int SQL = 1;
         try {
             instance = (Connection) MenuMain.getInstance();
             PreparedStatement pst = instance.prepareStatement("");
-            String id= "";
-            String nombreservicio = "";
-            String precioservicio = "";
-            int SQL = pst.executeUpdate("UPDATE servicio set Habilitado ='"+"1"+ "'WHERE idservicio='"+id+"'and nombreServicio='"+nombreservicio+"'and precio='"+precioservicio+"'");
+            SQL = pst.executeUpdate("UPDATE servicio set deshabilitar='" + "1" + "'WHERE idservicio='" + idEnable + "'");
             return SQL;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error" + e);
-        }   
-        return 0;
-     }*/                  
+        }
+        return SQL;
+    }    
 }
