@@ -183,21 +183,21 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPatientActionPerformed
 
     private void jButtonServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServiceActionPerformed
-//        FrameService frame = new FrameService();
-//        frame.setVisible(true);
-//        this.setVisible(false);
+        //        FrameService frame = new FrameService();
+        //        frame.setVisible(true);
+        //        this.setVisible(false);
     }//GEN-LAST:event_jButtonServiceActionPerformed
 
     private void jButtonConsulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsulActionPerformed
-        FrameConsultation frame = new FrameConsultation();
-        frame.setVisible(true);
-        this.setVisible(false);
+//        FrameConsultation frame = new FrameConsultation();
+//        frame.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_jButtonConsulActionPerformed
 
     private void jButtonAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppointActionPerformed
-        FrameAppointment frame = new FrameAppointment();
-        frame.setVisible(true);
-        this.setVisible(false);
+//        FrameAppointment frame = new FrameAppointment();
+//        frame.setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_jButtonAppointActionPerformed
 
     /**

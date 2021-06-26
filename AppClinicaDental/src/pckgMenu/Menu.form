@@ -190,7 +190,7 @@
               <AbsoluteConstraints x="510" y="60" width="260" height="230"/>
             </Constraint>
           </Constraints>
-        </Component>
+        </Component>     
         <Component class="javax.swing.JButton" name="jButtonAppoint">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
