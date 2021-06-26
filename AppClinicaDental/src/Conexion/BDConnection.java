@@ -44,7 +44,7 @@ public class BDConnection {
             return instance;
         } else {
             System.out.println("ERROR 00 -- Limite de conexiones superado");
-            return null;
-        }    
-    }
+        }
+        return null;
+    }  
 }

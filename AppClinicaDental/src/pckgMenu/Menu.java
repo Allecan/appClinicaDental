@@ -10,7 +10,7 @@ import java.sql.*;
 import javax.swing.*;
 import pckgAppointment.FrameAppointment;
 import pckgConsultation.FrameConsultation;
-import pckgPatient.FramePatient;
+import pckgPaciente.FramePatient;
 
 /**
  *
@@ -41,9 +41,9 @@ public class Menu extends javax.swing.JFrame {
         jButtonSalir = new javax.swing.JButton();
         jLabelCabecera = new javax.swing.JLabel();
         jPanelFondo = new javax.swing.JPanel();
+        jButtonConsul = new javax.swing.JButton();
         jButtonPatient = new javax.swing.JButton();
         jButtonService = new javax.swing.JButton();
-        jButtonConsul = new javax.swing.JButton();
         jButtonAppoint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,6 +97,19 @@ public class Menu extends javax.swing.JFrame {
 
         jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButtonConsul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/icConsulta.png"))); // NOI18N
+        jButtonConsul.setBorder(null);
+        jButtonConsul.setBorderPainted(false);
+        jButtonConsul.setContentAreaFilled(false);
+        jButtonConsul.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonConsul.setFocusPainted(false);
+        jButtonConsul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsulActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jButtonConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 190, 250));
+
         jButtonPatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/icPaci.png"))); // NOI18N
         jButtonPatient.setBorder(null);
         jButtonPatient.setBorderPainted(false);
@@ -122,19 +135,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanelFondo.add(jButtonService, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 260, 230));
-
-        jButtonConsul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/icConsulta.png"))); // NOI18N
-        jButtonConsul.setBorder(null);
-        jButtonConsul.setBorderPainted(false);
-        jButtonConsul.setContentAreaFilled(false);
-        jButtonConsul.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonConsul.setFocusPainted(false);
-        jButtonConsul.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsulActionPerformed(evt);
-            }
-        });
-        jPanelFondo.add(jButtonConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 190, 250));
 
         jButtonAppoint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/icAppoint.png"))); // NOI18N
         jButtonAppoint.setBorder(null);
