@@ -10,8 +10,8 @@ import java.sql.*;
 import javax.swing.*;
 import pckgAppointment.FrameAppointment;
 import pckgConsultation.FrameConsultation;
+import pkgServicie.*;
 import pckgPaciente.FramePatient;
-
 /**
  *
  * @author allec
@@ -183,9 +183,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPatientActionPerformed
 
     private void jButtonServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServiceActionPerformed
-        //        FrameService frame = new FrameService();
-        //        frame.setVisible(true);
-        //        this.setVisible(false);
+                FrameService frame = new FrameService();
+                frame.setVisible(true);
+                this.setVisible(false);
     }//GEN-LAST:event_jButtonServiceActionPerformed
 
     private void jButtonConsulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsulActionPerformed

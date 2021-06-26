@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Conexion;
-
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -14,20 +13,19 @@ import java.sql.SQLException;
  * @author Erick
  */
 public class BDConnection {
-
     private String url = "";
     private String user = "";
     private String bdName = "";
     private String password = "";
-    private static int instanceLimiter = 1;
+    private static int instanceLimiter = 4;
     private static Connection instance = null;
-
-    private BDConnection() throws SQLException {
+    
+     private BDConnection() throws SQLException {
 
         url = "jdbc:mysql://localhost:3306";
         bdName = "bdclinicadental";
         user = "root";
-        password = "suis moi camille";
+        password = "manzana123";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             instance = DriverManager.getConnection(url + "/" + bdName, user, password);   //url, user, password
@@ -37,7 +35,6 @@ public class BDConnection {
     }
 
     public static Connection createInstance() throws SQLException {
-
         if (instanceLimiter != 0) {
             new BDConnection();
             instanceLimiter--;
@@ -45,6 +42,7 @@ public class BDConnection {
         } else {
             System.out.println("ERROR 00 -- Limite de conexiones superado");
         }
-        return null;
-    }  
+        return instance;
+    }
+    
 }
