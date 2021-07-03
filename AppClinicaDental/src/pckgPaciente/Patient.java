@@ -5,12 +5,16 @@
  */
 package pckgPaciente;
 
+import pckgAppointment.Cita;
+import java.util.List;
+
 /**
  *
  * @author allec
  */
 public class Patient {
 
+    private Integer idPaciente;
     private String dpi;
     private String nombre;
     private String apellido;
@@ -18,6 +22,15 @@ public class Patient {
     private String fechaNac;
     private String tel;
     private String cel;
+    private List<Cita> listaCita;
+
+    public Integer getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Integer idPaciente) {
+        this.idPaciente = idPaciente;
+    }
 
     public String getFechaNac() {
         return fechaNac;
@@ -75,4 +88,11 @@ public class Patient {
         this.cel = cel;
     }
 
+    public List<Cita> getListaCita() {
+        return listaCita;
+    }
+
+    public void setListaCita(List<Cita> listaCita) {
+        this.listaCita = listaCita;
+    }
 }

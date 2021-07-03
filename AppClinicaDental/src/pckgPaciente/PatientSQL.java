@@ -64,4 +64,27 @@ public class PatientSQL {
             return status;
         }
     }
+
+    public Patient findPatient(int idPaciente) {
+        String sql = "SELECT dpi, nombre, apellido, fechaNacimiento, direccion, telefono, celular FROM paciente "
+                + "WHERE idPaciente =" + idPaciente;
+        try {
+            Patient paciente = new Patient();
+            Statement st = instance.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                paciente.setDpi(rs.getString(1));
+                paciente.setNombre(rs.getString(2));
+                paciente.setApellido(rs.getString(3));
+                paciente.setFechaNac(rs.getString(4));
+                paciente.setDireccion(rs.getString(5));
+                paciente.setTel(rs.getString(6));
+                paciente.setCel(rs.getString(7));
+            }
+            return paciente;
+        } catch (SQLException ex) {
+            ex.getMessage();
+            return null;
+        }
+    }
 }

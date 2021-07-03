@@ -5,17 +5,25 @@
  */
 package pckgAppointment;
 
+import java.awt.Color;
+import pckgMenu.MenuMain;
+
 /**
  *
  * @author allec
  */
 public class FrameAppointment extends javax.swing.JFrame {
 
+    private int x, y;
+    private AdminCita adminCita;
+
     /**
      * Creates new form FrameAppointments
      */
     public FrameAppointment() {
         initComponents();
+        setPropertiesGUI();
+        adminCita = new AdminCita();
     }
 
     /**
@@ -27,58 +35,307 @@ public class FrameAppointment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        toggleButtonGroup = new javax.swing.ButtonGroup();
+        toggleTableButtonGroup = new javax.swing.ButtonGroup();
+        jButtonMin = new javax.swing.JButton();
+        jButtonClose = new javax.swing.JButton();
+        jLabelBarraCabecera = new javax.swing.JLabel();
+        jSeparatorFondo = new javax.swing.JSeparator();
+        jPanelAgendarCita = new javax.swing.JPanel();
+        labelTitutloVisualizar1 = new javax.swing.JLabel();
+        jLabelDPI = new javax.swing.JLabel();
+        jComboPacientes = new javax.swing.JComboBox<>();
+        jPanelVerCitas = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableCita = new javax.swing.JTable();
+        labelTitutloVisualizar = new javax.swing.JLabel();
+        jToggleButtonCancels = new javax.swing.JToggleButton();
+        jToggleButtonWait = new javax.swing.JToggleButton();
+        jToggleButtonChecked = new javax.swing.JToggleButton();
+        jPanelFondo = new javax.swing.JPanel();
+        toggleButtonVisualizar = new javax.swing.JToggleButton();
+        toggleButtonAgendar = new javax.swing.JToggleButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/min1.png"))); // NOI18N
+        jButtonMin.setBorder(null);
+        jButtonMin.setBorderPainted(false);
+        jButtonMin.setContentAreaFilled(false);
+        jButtonMin.setFocusPainted(false);
+        jButtonMin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/min2.png"))); // NOI18N
+        jButtonMin.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/min2.png"))); // NOI18N
+        jButtonMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMinActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 50, 50));
+
+        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/exit1.png"))); // NOI18N
+        jButtonClose.setBorder(null);
+        jButtonClose.setBorderPainted(false);
+        jButtonClose.setContentAreaFilled(false);
+        jButtonClose.setFocusPainted(false);
+        jButtonClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/exit2.png"))); // NOI18N
+        jButtonClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/exit2.png"))); // NOI18N
+        jButtonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCloseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 60, 50));
+
+        jLabelBarraCabecera.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
+        jLabelBarraCabecera.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelBarraCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBarraCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/barra.png"))); // NOI18N
+        jLabelBarraCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jLabelBarraCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelBarraCabeceraMouseDragged(evt);
+            }
+        });
+        jLabelBarraCabecera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelBarraCabeceraMousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabelBarraCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 50));
+
+        jSeparatorFondo.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparatorFondo.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorFondo.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparatorFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 10, 790));
+
+        jPanelAgendarCita.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelTitutloVisualizar1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        labelTitutloVisualizar1.setText("Agendar cita");
+        jPanelAgendarCita.add(labelTitutloVisualizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabelDPI.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelDPI.setText("Elija al paciente:");
+        jPanelAgendarCita.add(jLabelDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 160, 30));
+
+        jComboPacientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jComboPacientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jComboPacientes.setFocusable(false);
+        jPanelAgendarCita.add(jComboPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 590, -1));
+
+        getContentPane().add(jPanelAgendarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
+
+        jPanelVerCitas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTableCita.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTableCita.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableCita.setCellSelectionEnabled(true);
+        jTableCita.setFocusable(false);
+        jTableCita.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTableCita.setShowGrid(false);
+        jTableCita.setShowVerticalLines(true);
+        jTableCita.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTableCita);
+
+        jPanelVerCitas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1010, 690));
+
+        labelTitutloVisualizar.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        labelTitutloVisualizar.setText("Listado citas");
+        jPanelVerCitas.add(labelTitutloVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        toggleTableButtonGroup.add(jToggleButtonCancels);
+        jToggleButtonCancels.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttoncancel1.png"))); // NOI18N
+        jToggleButtonCancels.setBorder(null);
+        jToggleButtonCancels.setBorderPainted(false);
+        jToggleButtonCancels.setContentAreaFilled(false);
+        jToggleButtonCancels.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButtonCancels.setFocusPainted(false);
+        jToggleButtonCancels.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttoncancel2.png"))); // NOI18N
+        jToggleButtonCancels.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttoncancel3.png"))); // NOI18N
+        jToggleButtonCancels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonCancelsActionPerformed(evt);
+            }
+        });
+        jPanelVerCitas.add(jToggleButtonCancels, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 160, 50, 41));
+
+        toggleTableButtonGroup.add(jToggleButtonWait);
+        jToggleButtonWait.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonwait1.png"))); // NOI18N
+        jToggleButtonWait.setBorder(null);
+        jToggleButtonWait.setBorderPainted(false);
+        jToggleButtonWait.setContentAreaFilled(false);
+        jToggleButtonWait.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButtonWait.setFocusPainted(false);
+        jToggleButtonWait.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonwait2.png"))); // NOI18N
+        jToggleButtonWait.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonwait3.png"))); // NOI18N
+        jToggleButtonWait.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonWaitActionPerformed(evt);
+            }
+        });
+        jPanelVerCitas.add(jToggleButtonWait, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 70, 50, 41));
+
+        toggleTableButtonGroup.add(jToggleButtonChecked);
+        jToggleButtonChecked.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonchecked1.png"))); // NOI18N
+        jToggleButtonChecked.setBorder(null);
+        jToggleButtonChecked.setBorderPainted(false);
+        jToggleButtonChecked.setContentAreaFilled(false);
+        jToggleButtonChecked.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToggleButtonChecked.setFocusPainted(false);
+        jToggleButtonChecked.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonchecked2.png"))); // NOI18N
+        jToggleButtonChecked.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonchecked3.png"))); // NOI18N
+        jToggleButtonChecked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonCheckedActionPerformed(evt);
+            }
+        });
+        jPanelVerCitas.add(jToggleButtonChecked, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 115, 50, 41));
+
+        getContentPane().add(jPanelVerCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
+
+        jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        toggleButtonGroup.add(toggleButtonVisualizar);
+        toggleButtonVisualizar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        toggleButtonVisualizar.setForeground(new java.awt.Color(0, 0, 0));
+        toggleButtonVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/seeA1.png"))); // NOI18N
+        toggleButtonVisualizar.setBorder(null);
+        toggleButtonVisualizar.setBorderPainted(false);
+        toggleButtonVisualizar.setContentAreaFilled(false);
+        toggleButtonVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        toggleButtonVisualizar.setFocusPainted(false);
+        toggleButtonVisualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toggleButtonVisualizar.setLabel("Visualizar Citas");
+        toggleButtonVisualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/seeP2.png"))); // NOI18N
+        toggleButtonVisualizar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/seeP3.png"))); // NOI18N
+        toggleButtonVisualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toggleButtonVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleButtonVisualizarActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(toggleButtonVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 130, -1));
+
+        toggleButtonGroup.add(toggleButtonAgendar);
+        toggleButtonAgendar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        toggleButtonAgendar.setForeground(new java.awt.Color(0, 0, 0));
+        toggleButtonAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/aggA1.png"))); // NOI18N
+        toggleButtonAgendar.setBorder(null);
+        toggleButtonAgendar.setBorderPainted(false);
+        toggleButtonAgendar.setContentAreaFilled(false);
+        toggleButtonAgendar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        toggleButtonAgendar.setFocusPainted(false);
+        toggleButtonAgendar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toggleButtonAgendar.setLabel("Agendar Cita");
+        toggleButtonAgendar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/aggA2.png"))); // NOI18N
+        toggleButtonAgendar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/aggA3.png"))); // NOI18N
+        toggleButtonAgendar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toggleButtonAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleButtonAgendarActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(toggleButtonAgendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 130, -1));
+
+        getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinActionPerformed
+        this.setState(ICONIFIED);
+    }//GEN-LAST:event_jButtonMinActionPerformed
+
+    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
+        dispose();
+        MenuMain.menuVisible();
+    }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jLabelBarraCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraCabeceraMouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+    }//GEN-LAST:event_jLabelBarraCabeceraMouseDragged
+
+    private void jLabelBarraCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBarraCabeceraMousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabelBarraCabeceraMousePressed
+
+    private void toggleButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonVisualizarActionPerformed
+        jPanelAgendarCita.setVisible(false);
+        jPanelVerCitas.setVisible(true);
+        jTableCita.setModel(adminCita.seeAllAppoints(0));
+    }//GEN-LAST:event_toggleButtonVisualizarActionPerformed
+
+    private void toggleButtonAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonAgendarActionPerformed
+        jPanelAgendarCita.setVisible(true);
+        jPanelVerCitas.setVisible(false);
+        setInicialComponents();
+    }//GEN-LAST:event_toggleButtonAgendarActionPerformed
+
+    private void jToggleButtonWaitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonWaitActionPerformed
+        jTableCita.setModel(adminCita.seeAllAppoints(0));
+    }//GEN-LAST:event_jToggleButtonWaitActionPerformed
+
+    private void jToggleButtonCheckedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonCheckedActionPerformed
+        jTableCita.setModel(adminCita.seeAllAppoints(1));
+    }//GEN-LAST:event_jToggleButtonCheckedActionPerformed
+
+    private void jToggleButtonCancelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonCancelsActionPerformed
+        jTableCita.setModel(adminCita.seeAllAppoints(2));
+    }//GEN-LAST:event_jToggleButtonCancelsActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrameAppointment().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonMin;
+    private javax.swing.JComboBox<String> jComboPacientes;
+    private javax.swing.JLabel jLabelBarraCabecera;
+    private javax.swing.JLabel jLabelDPI;
+    private javax.swing.JPanel jPanelAgendarCita;
+    private javax.swing.JPanel jPanelFondo;
+    private javax.swing.JPanel jPanelVerCitas;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparatorFondo;
+    private javax.swing.JTable jTableCita;
+    private javax.swing.JToggleButton jToggleButtonCancels;
+    private javax.swing.JToggleButton jToggleButtonChecked;
+    private javax.swing.JToggleButton jToggleButtonWait;
+    private javax.swing.JLabel labelTitutloVisualizar;
+    private javax.swing.JLabel labelTitutloVisualizar1;
+    private javax.swing.JToggleButton toggleButtonAgendar;
+    private javax.swing.ButtonGroup toggleButtonGroup;
+    private javax.swing.JToggleButton toggleButtonVisualizar;
+    private javax.swing.ButtonGroup toggleTableButtonGroup;
     // End of variables declaration//GEN-END:variables
+
+    private void setPropertiesGUI() {
+        this.setLocationRelativeTo(null);
+        this.setBackground(new Color(0, 0, 0, 0));
+        this.setBackground(new Color(0, 0, 0, 0));
+        jPanelFondo.setBackground(new Color(0xEDF0F2));
+        jPanelAgendarCita.setVisible(false);
+        jPanelAgendarCita.setBackground(Color.WHITE);
+        jPanelVerCitas.setVisible(false);
+        jPanelVerCitas.setBackground(Color.WHITE);
+        jTableCita.setDefaultEditor(Object.class, null);
+        jToggleButtonWait.setToolTipText("Ver citas en espera");
+        jToggleButtonChecked.setToolTipText("Ver citas atendidas");
+        jToggleButtonCancels.setToolTipText("Ver citas canceladas");
+    }
+
+    private void setInicialComponents() {
+
+    }
 }
