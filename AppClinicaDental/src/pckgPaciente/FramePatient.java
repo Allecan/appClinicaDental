@@ -218,7 +218,7 @@ public class FramePatient extends javax.swing.JFrame {
                 jButtonSaveDataPatientActionPerformed(evt);
             }
         });
-        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 90, 100));
+        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 90, 100));
 
         labelTitutloAgregar.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         labelTitutloAgregar.setText("Paciente Nuevo");

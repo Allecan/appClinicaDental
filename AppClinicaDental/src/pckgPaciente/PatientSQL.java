@@ -66,8 +66,8 @@ public class PatientSQL {
     }
 
     public Patient findPatient(String key) {
-        String sql = "SELECT idPaciente, dpi, nombre, apellido, fechaNacimiento, direccion, telefono, celular FROM paciente "
-                + "WHERE idPaciente =" + key + " OR dpi =" + key;
+        String sql = "SELECT idPaciente, dpi, nombre, apellido, fechaNacimiento, direccion, telefono, celular "
+                + "FROM paciente WHERE idPaciente =" + key + " OR dpi =" + key + " OR nombre =" + key;
         try {
             Patient paciente = new Patient();
             Statement st = instance.createStatement();

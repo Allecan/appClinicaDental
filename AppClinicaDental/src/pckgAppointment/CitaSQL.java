@@ -42,12 +42,11 @@ public class CitaSQL {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
-
     }
 
     public List<Cita> selectAllAppoints(int status) {
         java.sql.Date sqlDate;
-        String sql = "SELECT fecha, hora, paciente_idPaciente FROM cita "
+        String sql = "SELECT idCita, fecha, hora, paciente_idPaciente FROM cita "
                 + "WHERE status =" + status + " ORDER BY fecha ASC, hora ASC";
         try {
             Statement st = instance.createStatement();
@@ -55,9 +54,10 @@ public class CitaSQL {
             List<Cita> listaCitas = new ArrayList<Cita>();
             while (rs.next()) {
                 Cita cita = new Cita();
-                cita.setFecha(sqlDate = new java.sql.Date(rs.getDate(1).getTime()));
-                cita.setHora(rs.getString(2));
-                paciente = psql.findPatient(String.valueOf(rs.getInt(3)));
+                cita.setIdCita(rs.getInt(1));
+                cita.setFecha(sqlDate = new java.sql.Date(rs.getDate(2).getTime()));
+                cita.setHora(rs.getString(3));
+                paciente = psql.findPatient(String.valueOf(rs.getInt(4)));
                 cita.setPaciente_idPaciente(paciente);
                 listaCitas.add(cita);
             }
@@ -67,5 +67,16 @@ public class CitaSQL {
             return null;
         }
     }
-//    
+
+    public boolean updateAppoint(int idCita) {
+        PreparedStatement pst;
+        try {
+            pst = instance.prepareStatement("UPDATE cita SET status = 2 WHERE idCita = " + idCita);           
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
+    }
 }
