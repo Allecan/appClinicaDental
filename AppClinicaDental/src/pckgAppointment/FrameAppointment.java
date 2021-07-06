@@ -6,6 +6,13 @@
 package pckgAppointment;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import pckgMenu.MenuMain;
 
 /**
@@ -43,8 +50,19 @@ public class FrameAppointment extends javax.swing.JFrame {
         jSeparatorFondo = new javax.swing.JSeparator();
         jPanelAgendarCita = new javax.swing.JPanel();
         labelTitutloVisualizar1 = new javax.swing.JLabel();
-        jLabelDPI = new javax.swing.JLabel();
-        jComboPacientes = new javax.swing.JComboBox<>();
+        jLabel2p = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jTextFieldSearching = new javax.swing.JTextField();
+        jTextFieldMins = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTablePatients = new javax.swing.JTable();
+        jLabelBusqueda1 = new javax.swing.JLabel();
+        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jLabelFecha = new javax.swing.JLabel();
+        jTextFieldHora = new javax.swing.JTextField();
+        jLabelHora = new javax.swing.JLabel();
+        jComboTiempo = new javax.swing.JComboBox<>();
         jPanelVerCitas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCita = new javax.swing.JTable();
@@ -116,14 +134,81 @@ public class FrameAppointment extends javax.swing.JFrame {
         labelTitutloVisualizar1.setText("Agendar cita");
         jPanelAgendarCita.add(labelTitutloVisualizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jLabelDPI.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
-        jLabelDPI.setText("Elija al paciente:");
-        jPanelAgendarCita.add(jLabelDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 160, 30));
+        jLabel2p.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel2p.setText(":");
+        jPanelAgendarCita.add(jLabel2p, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 10, 20));
 
-        jComboPacientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jComboPacientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboPacientes.setFocusable(false);
-        jPanelAgendarCita.add(jComboPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 590, -1));
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jPanelAgendarCita.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 125, 410, 5));
+
+        jTextFieldSearching.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldSearchingMouseClicked(evt);
+            }
+        });
+        jTextFieldSearching.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldSearchingKeyReleased(evt);
+            }
+        });
+        jPanelAgendarCita.add(jTextFieldSearching, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 410, 30));
+
+        jTextFieldMins.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldMins.setBorder(null);
+        jPanelAgendarCita.add(jTextFieldMins, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 50, 25));
+
+        jTablePatients.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTablePatients.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTablePatients.setCellSelectionEnabled(true);
+        jTablePatients.setFocusable(false);
+        jTablePatients.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTablePatients.setShowGrid(false);
+        jTablePatients.setShowVerticalLines(true);
+        jTablePatients.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTablePatients);
+
+        jPanelAgendarCita.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1030, 130));
+
+        jLabelBusqueda1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelBusqueda1.setText("Paciente:");
+        jPanelAgendarCita.add(jLabelBusqueda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 160, 30));
+
+        jDateChooserFecha.setDateFormatString("EEEE d MMM y");
+        jDateChooserFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jDateChooserFecha.setMaxSelectableDate(new java.util.Date(4102470084000L));
+        jPanelAgendarCita.add(jDateChooserFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 180, 30));
+
+        jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanelAgendarCita.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+
+        jLabelFecha.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelFecha.setText("Fecha de la cita:");
+        jPanelAgendarCita.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 160, 30));
+
+        jTextFieldHora.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jTextFieldHora.setBorder(null);
+        jPanelAgendarCita.add(jTextFieldHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 50, -1));
+
+        jLabelHora.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelHora.setText("Hora de la cita:");
+        jPanelAgendarCita.add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 160, 30));
+
+        jComboTiempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "am", "pm" }));
+        jPanelAgendarCita.add(jComboTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 60, 25));
 
         getContentPane().add(jPanelAgendarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
 
@@ -279,6 +364,7 @@ public class FrameAppointment extends javax.swing.JFrame {
         jPanelAgendarCita.setVisible(true);
         jPanelVerCitas.setVisible(false);
         setInicialComponents();
+
     }//GEN-LAST:event_toggleButtonAgendarActionPerformed
 
     private void jToggleButtonWaitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonWaitActionPerformed
@@ -293,22 +379,58 @@ public class FrameAppointment extends javax.swing.JFrame {
         jTableCita.setModel(adminCita.seeAllAppoints(2));
     }//GEN-LAST:event_jToggleButtonCancelsActionPerformed
 
+    private void jTextFieldSearchingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSearchingMouseClicked
+        Font font = new Font("Segoe UI Semilight", Font.PLAIN, 18);
+        jTextFieldSearching.setText("");
+        jTextFieldSearching.setForeground(Color.black);
+        jTextFieldSearching.setFont(font);
+    }//GEN-LAST:event_jTextFieldSearchingMouseClicked
+
+    private void jTextFieldSearchingKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchingKeyReleased
+        TableRowSorter<TableModel> tableFilter = new TableRowSorter<TableModel>(jTablePatients.getModel());
+        jTablePatients.setRowSorter(tableFilter);
+        tableFilter.setRowFilter(RowFilter.regexFilter(jTextFieldSearching.getText()));
+    }//GEN-LAST:event_jTextFieldSearchingKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String dpi = jTablePatients.getModel().getValueAt(jTablePatients.getSelectedRow(), 0).toString();
+        String fecha = adminCita.dateFormat(jDateChooserFecha.getDate(), "yyyy-MM-dd");
+        String hora = jTextFieldHora.getText() + ":" + jTextFieldMins.getText();
+        boolean status = adminCita.registerAppoint(fecha, hora, dpi);
+        if (status == true) {
+            System.out.println("Registro exitoso");;
+        } else {
+            System.out.println("Error");;
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonMin;
-    private javax.swing.JComboBox<String> jComboPacientes;
+    private javax.swing.JComboBox<String> jComboTiempo;
+    private com.toedter.calendar.JDateChooser jDateChooserFecha;
+    private javax.swing.JLabel jLabel2p;
     private javax.swing.JLabel jLabelBarraCabecera;
-    private javax.swing.JLabel jLabelDPI;
+    private javax.swing.JLabel jLabelBusqueda1;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelHora;
     private javax.swing.JPanel jPanelAgendarCita;
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JPanel jPanelVerCitas;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparatorFondo;
     private javax.swing.JTable jTableCita;
+    private javax.swing.JTable jTablePatients;
+    private javax.swing.JTextField jTextFieldHora;
+    private javax.swing.JTextField jTextFieldMins;
+    private javax.swing.JTextField jTextFieldSearching;
     private javax.swing.JToggleButton jToggleButtonCancels;
     private javax.swing.JToggleButton jToggleButtonChecked;
     private javax.swing.JToggleButton jToggleButtonWait;
@@ -330,12 +452,17 @@ public class FrameAppointment extends javax.swing.JFrame {
         jPanelVerCitas.setVisible(false);
         jPanelVerCitas.setBackground(Color.WHITE);
         jTableCita.setDefaultEditor(Object.class, null);
+        jTablePatients.setDefaultEditor(Object.class, null);
         jToggleButtonWait.setToolTipText("Ver citas en espera");
         jToggleButtonChecked.setToolTipText("Ver citas atendidas");
         jToggleButtonCancels.setToolTipText("Ver citas canceladas");
     }
 
     private void setInicialComponents() {
-
+        jTablePatients.setModel(adminCita.listPatients());
+        Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
+        jTextFieldSearching.setText("Escriba DPI, Nombre o Apellido...");
+        jTextFieldSearching.setForeground(new Color(153, 153, 153));
+        jTextFieldSearching.setFont(font);
     }
 }

@@ -5,7 +5,7 @@
  */
 package pckgAppointment;
 
-import java.util.Date;
+import java.sql.Date;
 import pckgPaciente.Patient;
 
 /**

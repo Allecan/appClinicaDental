@@ -65,25 +65,46 @@ public class PatientSQL {
         }
     }
 
-    public Patient findPatient(int idPaciente) {
-        String sql = "SELECT dpi, nombre, apellido, fechaNacimiento, direccion, telefono, celular FROM paciente "
-                + "WHERE idPaciente =" + idPaciente;
+    public Patient findPatient(String key) {
+        String sql = "SELECT idPaciente, dpi, nombre, apellido, fechaNacimiento, direccion, telefono, celular FROM paciente "
+                + "WHERE idPaciente =" + key + " OR dpi =" + key;
         try {
             Patient paciente = new Patient();
             Statement st = instance.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                paciente.setDpi(rs.getString(1));
-                paciente.setNombre(rs.getString(2));
-                paciente.setApellido(rs.getString(3));
-                paciente.setFechaNac(rs.getString(4));
-                paciente.setDireccion(rs.getString(5));
-                paciente.setTel(rs.getString(6));
-                paciente.setCel(rs.getString(7));
+                 paciente.setIdPaciente(rs.getInt(1));
+                paciente.setDpi(rs.getString(2));
+                paciente.setNombre(rs.getString(3));
+                paciente.setApellido(rs.getString(4));
+                paciente.setFechaNac(rs.getString(5));
+                paciente.setDireccion(rs.getString(6));
+                paciente.setTel(rs.getString(7));
+                paciente.setCel(rs.getString(8));
             }
             return paciente;
         } catch (SQLException ex) {
             ex.getMessage();
+            return null;
+        }
+    }
+
+    public List<Patient> selectDpiNameLastPatient() {
+        String sql = "SELECT dpi, nombre, apellido FROM paciente";
+        try {
+            Statement st = instance.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            List<Patient> listaPacientes = new ArrayList<Patient>();
+            while (rs.next()) {
+                Patient paciente = new Patient();
+                paciente.setDpi(rs.getString(1));
+                paciente.setNombre(rs.getString(2));
+                paciente.setApellido(rs.getString(3));
+                listaPacientes.add(paciente);
+            }
+            return listaPacientes;
+        } catch (SQLException ex) {
+            ex.getCause();
             return null;
         }
     }
