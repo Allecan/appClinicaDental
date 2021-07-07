@@ -390,16 +390,25 @@ public class FrameAppointment extends javax.swing.JFrame {
     private void jToggleButtonWaitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonWaitActionPerformed
         jTableCita.setModel(adminCita.seeAllAppoints(0));
         jLabelTitleV.setText("Citas pendientes");
+        jTableCita.getColumnModel().getColumn(3).setMinWidth(0);
+        jTableCita.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTableCita.getColumnModel().getColumn(3).setWidth(0);
     }//GEN-LAST:event_jToggleButtonWaitActionPerformed
 
     private void jToggleButtonCheckedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonCheckedActionPerformed
         jTableCita.setModel(adminCita.seeAllAppoints(1));
         jLabelTitleV.setText("Citas atendidas");
+        jTableCita.getColumnModel().getColumn(3).setMinWidth(0);
+        jTableCita.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTableCita.getColumnModel().getColumn(3).setWidth(0);
     }//GEN-LAST:event_jToggleButtonCheckedActionPerformed
 
     private void jToggleButtonCancelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonCancelsActionPerformed
         jTableCita.setModel(adminCita.seeAllAppoints(2));
         jLabelTitleV.setText("Citas canceladas");
+        jTableCita.getColumnModel().getColumn(3).setMinWidth(0);
+        jTableCita.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTableCita.getColumnModel().getColumn(3).setWidth(0);
     }//GEN-LAST:event_jToggleButtonCancelsActionPerformed
 
     private void jTextFieldSearchingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSearchingMouseClicked
