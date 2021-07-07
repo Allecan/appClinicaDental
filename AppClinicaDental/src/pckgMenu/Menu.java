@@ -6,24 +6,24 @@
 package pckgMenu;
 
 import java.awt.Color;
-import java.sql.*;
-import javax.swing.*;
+import javax.swing.JLabel;
 import pckgAppointment.FrameAppointment;
 import pckgConsultation.FrameConsultation;
-import pkgServicie.*;
+import pkgServicie.FrameService;
 import pckgPaciente.FramePatient;
+
 /**
  *
  * @author allec
  */
 public class Menu extends javax.swing.JFrame {
 
-    int x, y; //variables que sirven para obtener cordenadas para poder mover el Frame Menu
+    private int x, y; //variables que sirven para obtener cordenadas para poder mover el Frame Menu
 
     /**
      * Creates new form Menu
      */
-    public Menu() throws SQLException {
+    public Menu() {
         initComponents();
         setPropertiesGUI(); //metodo para establecer las propiedades graficas del Frame Menu
     }
@@ -183,9 +183,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPatientActionPerformed
 
     private void jButtonServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServiceActionPerformed
-                FrameService frame = new FrameService();
-                frame.setVisible(true);
-                this.setVisible(false);
+        FrameService frame = new FrameService();
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonServiceActionPerformed
 
     private void jButtonConsulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsulActionPerformed
@@ -195,49 +195,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsulActionPerformed
 
     private void jButtonAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppointActionPerformed
-//        FrameAppointment frame = new FrameAppointment();
-//        frame.setVisible(true);
-//        this.setVisible(false);
+        //instancia nueva para acceder al modulo, Frame, de Citas
+        FrameAppointment frame = new FrameAppointment();
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonAppointActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Menu().setVisible(true);
-                } catch (SQLException ex) {
-                    ex.getCause();
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAppoint;

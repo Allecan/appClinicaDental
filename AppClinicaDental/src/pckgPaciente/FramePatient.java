@@ -10,11 +10,8 @@ import java.awt.Font;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import pckgMenu.MenuMain;
@@ -24,14 +21,12 @@ import pckgMenu.MenuMain;
  */
 public class FramePatient extends javax.swing.JFrame {
 
-    DefaultTableModel modelPatient = new DefaultTableModel();
-    int x, y;
+    private int x, y;
     AdminPatient adminPaciente;
 
     public FramePatient() {
         initComponents();
         setPropertiesGUI();
-        setTablePatient();
         adminPaciente = new AdminPatient();
     }
 
@@ -87,8 +82,8 @@ public class FramePatient extends javax.swing.JFrame {
         jLabelBuscar = new javax.swing.JLabel();
         labelTitutloVisualizar = new javax.swing.JLabel();
         jPanelFondo = new javax.swing.JPanel();
-        toggleButtonNuevoP = new javax.swing.JToggleButton();
-        toggleButtonVisualizarP = new javax.swing.JToggleButton();
+        toggleButtonVisualizar = new javax.swing.JToggleButton();
+        toggleButtonNuevo = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -223,7 +218,7 @@ public class FramePatient extends javax.swing.JFrame {
                 jButtonSaveDataPatientActionPerformed(evt);
             }
         });
-        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 90, 100));
+        jPanelAgregarPaciente.add(jButtonSaveDataPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 90, 100));
 
         labelTitutloAgregar.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         labelTitutloAgregar.setText("Paciente Nuevo");
@@ -325,47 +320,47 @@ public class FramePatient extends javax.swing.JFrame {
 
         jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        toggleGroup.add(toggleButtonNuevoP);
-        toggleButtonNuevoP.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        toggleButtonNuevoP.setForeground(new java.awt.Color(0, 0, 0));
-        toggleButtonNuevoP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/seeP1.png"))); // NOI18N
-        toggleButtonNuevoP.setText("Visualizar Pacientes");
-        toggleButtonNuevoP.setBorder(null);
-        toggleButtonNuevoP.setBorderPainted(false);
-        toggleButtonNuevoP.setContentAreaFilled(false);
-        toggleButtonNuevoP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        toggleButtonNuevoP.setFocusPainted(false);
-        toggleButtonNuevoP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        toggleButtonNuevoP.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/seeP2.png"))); // NOI18N
-        toggleButtonNuevoP.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/seeP3.png"))); // NOI18N
-        toggleButtonNuevoP.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toggleButtonNuevoP.addActionListener(new java.awt.event.ActionListener() {
+        toggleGroup.add(toggleButtonVisualizar);
+        toggleButtonVisualizar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        toggleButtonVisualizar.setForeground(new java.awt.Color(0, 0, 0));
+        toggleButtonVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/seeP1.png"))); // NOI18N
+        toggleButtonVisualizar.setText("Visualizar Pacientes");
+        toggleButtonVisualizar.setBorder(null);
+        toggleButtonVisualizar.setBorderPainted(false);
+        toggleButtonVisualizar.setContentAreaFilled(false);
+        toggleButtonVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        toggleButtonVisualizar.setFocusPainted(false);
+        toggleButtonVisualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toggleButtonVisualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/seeP2.png"))); // NOI18N
+        toggleButtonVisualizar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/seeP3.png"))); // NOI18N
+        toggleButtonVisualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toggleButtonVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleButtonNuevoPActionPerformed(evt);
+                toggleButtonVisualizarActionPerformed(evt);
             }
         });
-        jPanelFondo.add(toggleButtonNuevoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 130, -1));
+        jPanelFondo.add(toggleButtonVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 130, -1));
 
-        toggleGroup.add(toggleButtonVisualizarP);
-        toggleButtonVisualizarP.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        toggleButtonVisualizarP.setForeground(new java.awt.Color(0, 0, 0));
-        toggleButtonVisualizarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/newP1.png"))); // NOI18N
-        toggleButtonVisualizarP.setText("Nuevo Paciente");
-        toggleButtonVisualizarP.setBorder(null);
-        toggleButtonVisualizarP.setBorderPainted(false);
-        toggleButtonVisualizarP.setContentAreaFilled(false);
-        toggleButtonVisualizarP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        toggleButtonVisualizarP.setFocusPainted(false);
-        toggleButtonVisualizarP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        toggleButtonVisualizarP.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/newP2.png"))); // NOI18N
-        toggleButtonVisualizarP.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/newP3.png"))); // NOI18N
-        toggleButtonVisualizarP.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toggleButtonVisualizarP.addActionListener(new java.awt.event.ActionListener() {
+        toggleGroup.add(toggleButtonNuevo);
+        toggleButtonNuevo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        toggleButtonNuevo.setForeground(new java.awt.Color(0, 0, 0));
+        toggleButtonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/newP1.png"))); // NOI18N
+        toggleButtonNuevo.setText("Nuevo Paciente");
+        toggleButtonNuevo.setBorder(null);
+        toggleButtonNuevo.setBorderPainted(false);
+        toggleButtonNuevo.setContentAreaFilled(false);
+        toggleButtonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        toggleButtonNuevo.setFocusPainted(false);
+        toggleButtonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toggleButtonNuevo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/newP2.png"))); // NOI18N
+        toggleButtonNuevo.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/newP3.png"))); // NOI18N
+        toggleButtonNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toggleButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleButtonVisualizarPActionPerformed(evt);
+                toggleButtonNuevoActionPerformed(evt);
             }
         });
-        jPanelFondo.add(toggleButtonVisualizarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 130, -1));
+        jPanelFondo.add(toggleButtonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 130, -1));
 
         getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 780));
 
@@ -458,24 +453,18 @@ public class FramePatient extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldCelKeyReleased
 
-    private void toggleButtonVisualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonVisualizarPActionPerformed
+    private void toggleButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonNuevoActionPerformed
         jPanelAgregarPaciente.setVisible(true);
         jPanelVerPaciente.setVisible(false);
         setInicialComponents();
-    }//GEN-LAST:event_toggleButtonVisualizarPActionPerformed
+    }//GEN-LAST:event_toggleButtonNuevoActionPerformed
 
-    private void toggleButtonNuevoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonNuevoPActionPerformed
+    private void toggleButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonVisualizarActionPerformed
         jPanelVerPaciente.setVisible(true);
         jPanelAgregarPaciente.setVisible(false);
         jTablePatient.setModel(adminPaciente.seeAllPatients());
         jTablePatient.setAutoCreateRowSorter(true);
-        if (modelPatient.getRowCount() > 0) {
-            modelPatient.getDataVector().removeAllElements();
-            revalidate();
-        } else {
-            System.out.println("NtERS");
-        }
-    }//GEN-LAST:event_toggleButtonNuevoPActionPerformed
+    }//GEN-LAST:event_toggleButtonVisualizarActionPerformed
 
     private void jTextFieldSearchingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSearchingMouseClicked
         Font font = new Font("Segoe UI Semilight", Font.PLAIN, 18);
@@ -533,35 +522,15 @@ public class FramePatient extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTel;
     private javax.swing.JLabel labelTitutloAgregar;
     private javax.swing.JLabel labelTitutloVisualizar;
-    private javax.swing.JToggleButton toggleButtonNuevoP;
-    private javax.swing.JToggleButton toggleButtonVisualizarP;
+    private javax.swing.JToggleButton toggleButtonNuevo;
+    private javax.swing.JToggleButton toggleButtonVisualizar;
     private javax.swing.ButtonGroup toggleGroup;
     // End of variables declaration//GEN-END:variables
-
-    private void setTablePatient() {
-        modelPatient.addColumn("DPI");
-        modelPatient.addColumn("Nombre");
-        modelPatient.addColumn("Apellido");
-        modelPatient.addColumn("Edad");
-        modelPatient.addColumn("Direccion");
-        modelPatient.addColumn("Telefono");
-        modelPatient.addColumn("Celular");
-        jTablePatient.setModel(modelPatient);
-        jTablePatient.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTablePatient.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jTablePatient.getColumnModel().getColumn(2).setPreferredWidth(50);
-        jTablePatient.getColumnModel().getColumn(3).setPreferredWidth(5);
-        jTablePatient.getColumnModel().getColumn(4).setPreferredWidth(60);
-        jTablePatient.getColumnModel().getColumn(5).setPreferredWidth(20);
-        jTablePatient.getColumnModel().getColumn(6).setPreferredWidth(20);
-        jTablePatient.setDefaultEditor(Object.class, null);
-    }
 
     private void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         jPanelFondo.setBackground(new Color(0xEDF0F2));
-        jSeparatorFondo.setBackground(Color.BLACK);
         jPanelAgregarPaciente.setVisible(false);
         jPanelAgregarPaciente.setBackground(Color.WHITE);
         jPanelVerPaciente.setVisible(false);
@@ -569,7 +538,8 @@ public class FramePatient extends javax.swing.JFrame {
         jComboDia.setBackground(Color.WHITE);
         jComboMes.setBackground(Color.WHITE);
         jComboAño.setBackground(Color.WHITE);
-
+        jTablePatient.setDefaultEditor(Object.class, null);
+        
         Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
         jTextFieldSearching.setText("Busqueda...");
         jTextFieldSearching.setForeground(new Color(153, 153, 153));

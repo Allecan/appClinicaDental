@@ -17,15 +17,15 @@ public class BDConnection {
     private String user = "";
     private String bdName = "";
     private String password = "";
-    private static int instanceLimiter = 4;
+    private static int instanceLimiter = 1;
     private static Connection instance = null;
     
      private BDConnection() throws SQLException {
 
         url = "jdbc:mysql://localhost:3306";
         bdName = "bdclinicadental";
-        user = "root";
-        password = "manzana123";
+        user = "devxehuetan";
+        password = "devxehuetan2021";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             instance = DriverManager.getConnection(url + "/" + bdName, user, password);   //url, user, password
@@ -40,9 +40,8 @@ public class BDConnection {
             instanceLimiter--;
             return instance;
         } else {
-            System.out.println("ERROR 00 -- Limite de conexiones superado");
+            System.out.println("ERROR 00 -- Limite de conexiones a la BD superado");
         }
         return instance;
-    }
-    
+    }    
 }
