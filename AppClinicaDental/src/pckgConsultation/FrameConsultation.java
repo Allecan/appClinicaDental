@@ -5,17 +5,33 @@
  */
 package pckgConsultation;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pckgMenu.MenuMain;
+
 /**
  *
  * @author allec
  */
 public class FrameConsultation extends javax.swing.JFrame {
 
+    int x,y;
+    ConsultationManegement cm = new ConsultationManegement();
     /**
      * Creates new form FrameSales
      */
     public FrameConsultation() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        jComboBoxService.addItem("Servicios");
+       
+        try {
+            jComboBoxService.setModel(cm.ListService());
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameConsultation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -27,21 +43,200 @@ public class FrameConsultation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonMinimize = new javax.swing.JButton();
+        jButtonClose = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelCabecera = new javax.swing.JLabel();
+        jLabelServicio1 = new javax.swing.JLabel();
+        jLabelServicio = new javax.swing.JLabel();
+        jComboBoxService = new javax.swing.JComboBox<>();
+        jButtonSave = new javax.swing.JButton();
+        jButtonAddService = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableServiceData1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableServiceData = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaObservaciones = new javax.swing.JTextArea();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1.setText("jLabel1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 820));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/min1.png"))); // NOI18N
+        jButtonMinimize.setBorderPainted(false);
+        jButtonMinimize.setContentAreaFilled(false);
+        jButtonMinimize.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/min2.png"))); // NOI18N
+        jButtonMinimize.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/minus.png"))); // NOI18N
+        jButtonMinimize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMinimizeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 50, 40));
+
+        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/exit1.png"))); // NOI18N
+        jButtonClose.setBorderPainted(false);
+        jButtonClose.setContentAreaFilled(false);
+        jButtonClose.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/exit2.png"))); // NOI18N
+        jButtonClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/exit2.png"))); // NOI18N
+        jButtonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 50, 40));
+
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Consulta");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, -1, -1));
+
+        jLabelCabecera.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
+        jLabelCabecera.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/barra.png"))); // NOI18N
+        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabelCabeceraMouseDragged(evt);
+            }
+        });
+        jLabelCabecera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelCabeceraMousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        jLabelServicio1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelServicio1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelServicio1.setText("Observaciones");
+        jPanel1.add(jLabelServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 590, -1, -1));
+
+        jLabelServicio.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelServicio.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelServicio.setText("Seleccione Servicio:");
+        jPanel1.add(jLabelServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+
+        jComboBoxService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicios" }));
+        jComboBoxService.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxServiceMouseClicked(evt);
+            }
+        });
+        jComboBoxService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxServiceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxService, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 160, -1));
+
+        jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/diskette.png"))); // NOI18N
+        jButtonSave.setBorderPainted(false);
+        jButtonSave.setContentAreaFilled(false);
+        jButtonSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/diskette (1).png"))); // NOI18N
+        jPanel1.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 750, 70, 50));
+
+        jButtonAddService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/right-arrow.png"))); // NOI18N
+        jButtonAddService.setBorderPainted(false);
+        jButtonAddService.setContentAreaFilled(false);
+        jButtonAddService.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/right-arrow (1).png"))); // NOI18N
+        jButtonAddService.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddServiceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAddService, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 80, 40));
+
+        jTableServiceData1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTableServiceData1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableServiceData1.setCellSelectionEnabled(true);
+        jTableServiceData1.setFocusable(false);
+        jTableServiceData1.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTableServiceData1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(jTableServiceData1);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 530, 220));
+
+        jTableServiceData.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTableServiceData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableServiceData.setCellSelectionEnabled(true);
+        jTableServiceData.setFocusable(false);
+        jTableServiceData.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTableServiceData.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTableServiceData);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 530, 180));
+
+        jTextAreaObservaciones.setColumns(20);
+        jTextAreaObservaciones.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaObservaciones);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 610, 530, 150));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 820));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinimizeActionPerformed
+        this.setState(ICONIFIED);
+    }//GEN-LAST:event_jButtonMinimizeActionPerformed
+
+    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
+        dispose();
+        MenuMain.menuVisible();
+    }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jLabelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCabeceraMouseDragged
+        //metodo para establecer la posicion de la ventana cuando se arrastre el boton por la cabecera
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+    }//GEN-LAST:event_jLabelCabeceraMouseDragged
+
+    private void jLabelCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCabeceraMousePressed
+        //metodo que obtiene cordenadas actuales del Frame mediante la cabecera
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabelCabeceraMousePressed
+
+    private void jComboBoxServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxServiceActionPerformed
+         
+    }//GEN-LAST:event_jComboBoxServiceActionPerformed
+
+    private void jComboBoxServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxServiceMouseClicked
+        
+    }//GEN-LAST:event_jComboBoxServiceMouseClicked
+
+    private void jButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddServiceActionPerformed
+        String fecha = jTableServiceData.getModel().getValueAt(jTableServiceData.getSelectedRow(), 2).toString();
+        String hora = jTableServiceData.getModel().getValueAt(jTableServiceData.getSelectedRow(), 3).toString();
+//        String paciente= jTableServiceData.getModel().getValueAt(jTableServiceData.getSelectedRow(), 1).toString();
+        String observaciones = jTextAreaObservaciones.getText();
+        cm.getToInsert(jComboBoxService.getSelectedItem().toString(), fecha, hora, observaciones);  
+    }//GEN-LAST:event_jButtonAddServiceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +275,22 @@ public class FrameConsultation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddService;
+    private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonMinimize;
+    private javax.swing.JButton jButtonSave;
+    private javax.swing.JComboBox<String> jComboBoxService;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelCabecera;
+    private javax.swing.JLabel jLabelServicio;
+    private javax.swing.JLabel jLabelServicio1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableServiceData;
+    private javax.swing.JTable jTableServiceData1;
+    private javax.swing.JTextArea jTextAreaObservaciones;
     // End of variables declaration//GEN-END:variables
 }
