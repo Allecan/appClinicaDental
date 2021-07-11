@@ -28,6 +28,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static pckgConsultation.FrameReport.jTableService2;
 import pckgMenu.MenuMain;
 
 /**
@@ -38,15 +41,16 @@ public class Pdf {
     
     Connection instance = (Connection) MenuMain.getInstance();
     
-    public void pdf() throws IOException, SQLException{
+    
+    public void pdf(String NombrePaciente, String Total ){
         try {
             FileOutputStream archivo;
-            File file = new File("src/pdf/sevicio" + "1" + ".pdf");
+            File file = new File("src/pdf/sevicio" + "2" + ".pdf");
             archivo = new FileOutputStream(file);
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Image img = Image.getInstance("src/pckgReporte/logo.png");
+            Image img = Image.getInstance("src/pckgReporte/imgs/logo.jpg");
             
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLACK);
@@ -54,10 +58,10 @@ public class Pdf {
             Date date = new Date();
             fecha.add("Fecha: " + new SimpleDateFormat("dd-MM-yyyy").format(date)+"\n\n");
             
-            PdfPTable Encabezado = new PdfPTable(5);
+            PdfPTable Encabezado = new PdfPTable(3);
             Encabezado.setWidthPercentage(100);
             Encabezado.getDefaultCell().setBorder(0);
-            float[] ColumnaEncabezado = new float[]{60f, 10f, 70f, 40f};
+            float[] ColumnaEncabezado = new float[]{60f, 10f, 70f};
             Encabezado.setWidths(ColumnaEncabezado);
             Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
             Encabezado.addCell(img);
@@ -75,42 +79,41 @@ public class Pdf {
             
             Paragraph cli = new Paragraph();
             cli.add(Chunk.NEWLINE);
-            cli.add("Nombre del Paciente: " + "\n\n");
+            cli.add("Nombre del Paciente: " + NombrePaciente + "\n\n");
             doc.add(cli);
             
-            PdfPTable tabla = new PdfPTable(3);
+            PdfPTable tabla = new PdfPTable(2);
             tabla.setWidthPercentage(100);
-            float[] ColumnaTabla = new float[]{15f, 30f, 10f, 10f, 30f};
+            float[] ColumnaTabla = new float[]{30f, 15f};
             tabla.setWidths(ColumnaTabla);
             tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
             PdfPCell cl1 = new PdfPCell(new Phrase("Servicio", negrita));
             PdfPCell cl2 = new PdfPCell(new Phrase("Costo", negrita));
-            PdfPCell cl3 = new PdfPCell(new Phrase("Total", negrita));
+          
             cl1.setBackgroundColor(BaseColor.ORANGE);
             cl2.setBackgroundColor(BaseColor.ORANGE);
-            cl3.setBackgroundColor(BaseColor.ORANGE);
 
             tabla.addCell(cl1);
             tabla.addCell(cl2);
-            tabla.addCell(cl3);
-            
-            try {
-                //colocar el sql
-                String sql= "";  
-                Statement st = instance.createStatement();
-                ResultSet rs = st.executeQuery(sql);
+
+            for (int i = 0; i < jTableService2.getRowCount(); i++) {
+                String Servicio = jTableService2.getValueAt(i, 0).toString();
+                String Precio = jTableService2.getValueAt(i, 1).toString();
+               
+                tabla.addCell(Servicio);
+                tabla.addCell(Precio);
                 
-                 if (rs.next()) {
-                    do {
-                        tabla.addCell(rs.getString(2));
-                        tabla.addCell(rs.getString(3));
-                        tabla.addCell(rs.getString(4));
-                      
-                    } while (rs.next());
-                    doc.add(tabla);
-                }
-            } catch (DocumentException | SQLException e) {
             }
+            
+            doc.add(tabla);
+           
+            Paragraph info = new Paragraph();
+            info.add(Chunk.NEWLINE);
+            info.add("Total: " + Total);
+
+
+            info.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(info);
             
             doc.close();
             archivo.close();
@@ -118,6 +121,8 @@ public class Pdf {
             Desktop.getDesktop().open(file);
             
         } catch (DocumentException | FileNotFoundException e) {
+        } catch (IOException ex) {
+            Logger.getLogger(Pdf.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

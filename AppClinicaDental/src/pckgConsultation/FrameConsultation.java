@@ -21,6 +21,12 @@ public class FrameConsultation extends javax.swing.JFrame {
     private DefaultTableModel modeloTable = new DefaultTableModel();
     private int x, y;
     private ConsultationManegement cm;
+    public String Total = "";
+    public String NombrePaciente = "";
+    public String NombreServicio = "";
+    public String PrecioServicio = "";
+    public String codigo = "";
+    private FrameReport report = new FrameReport();
 
     /**
      * Creates new form FrameSales
@@ -63,6 +69,7 @@ public class FrameConsultation extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableAppoints = new javax.swing.JTable();
         jLabelNotificacion = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -202,6 +209,11 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableServiceData.setShowGrid(false);
         jTableServiceData.setShowVerticalLines(true);
         jTableServiceData.getTableHeader().setReorderingAllowed(false);
+        jTableServiceData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableServiceDataMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTableServiceData);
 
         jPanelFondo.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1150, 110));
@@ -240,6 +252,14 @@ public class FrameConsultation extends javax.swing.JFrame {
 
         jLabelNotificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jPanelFondo.add(jLabelNotificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 640, 40));
+
+        jButton3.setText("Mostrar Servicio Seleccionado");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 630, -1, -1));
 
         getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 780));
 
@@ -309,7 +329,32 @@ public class FrameConsultation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableAppointsMouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        report.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTableServiceDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableServiceDataMouseClicked
+        // TODO add your handling code here:
+        int fila = jTableAppoints.getSelectedRow();
+        int filaCodigo = jTableServiceData.getSelectedRow();
+        int filaNombreServicio = jTableServiceData.getSelectedRow();
+        int filaPrecioServicio = jTableServiceData.getSelectedRow();
+        Total = jLabelTotal.getText();
+        NombrePaciente = jTableAppoints.getValueAt(fila, 0).toString();
+        codigo = jTableServiceData.getValueAt(filaCodigo, 0).toString();
+        NombreServicio = jTableServiceData.getValueAt(filaNombreServicio, 1).toString();
+        PrecioServicio = jTableServiceData.getValueAt(filaPrecioServicio, 2).toString();
+        System.out.println(Total);
+        System.out.println(NombrePaciente);
+        System.out.println(NombreServicio);
+        System.out.println(PrecioServicio);
+        
+        report.agregarServicio(codigo, NombrePaciente, Total,NombreServicio, PrecioServicio);
+    }//GEN-LAST:event_jTableServiceDataMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonMin;
     private javax.swing.JButton jButtonNewC;
