@@ -59,9 +59,10 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableServiceData = new javax.swing.JTable();
         jLabelSelectService2 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableAppoints = new javax.swing.JTable();
+        jLabelNotificacion = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -128,11 +129,11 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTextAreaObservaciones.setRows(5);
         jScrollPane1.setViewportView(jTextAreaObservaciones);
 
-        jPanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 990, 100));
+        jPanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 990, 100));
 
         jLabelObservations.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelObservations.setText("Observaciones:");
-        jPanelFondo.add(jLabelObservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 160, 30));
+        jPanelFondo.add(jLabelObservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 120, 30));
 
         jLabelTitle.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabelTitle.setText("Registrar consulta");
@@ -140,7 +141,7 @@ public class FrameConsultation extends javax.swing.JFrame {
 
         jLabelSelectAppoint1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelSelectAppoint1.setText("Seleccione la cita:");
-        jPanelFondo.add(jLabelSelectAppoint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 160, 30));
+        jPanelFondo.add(jLabelSelectAppoint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 160, 30));
 
         jComboBoxService.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jComboBoxService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicios..." }));
@@ -150,11 +151,11 @@ public class FrameConsultation extends javax.swing.JFrame {
                 jComboBoxServiceActionPerformed(evt);
             }
         });
-        jPanelFondo.add(jComboBoxService, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 990, 30));
+        jPanelFondo.add(jComboBoxService, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 990, 30));
 
         jLabelTotServicies.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelTotServicies.setText("Total:");
-        jPanelFondo.add(jLabelTotServicies, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 450, 50, 30));
+        jPanelFondo.add(jLabelTotServicies, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 430, 50, 30));
 
         jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonSave1.png"))); // NOI18N
         jButtonSave.setBorder(null);
@@ -169,7 +170,7 @@ public class FrameConsultation extends javax.swing.JFrame {
                 jButtonSaveActionPerformed(evt);
             }
         });
-        jPanelFondo.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, -1, -1));
+        jPanelFondo.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
 
         jButtonNewC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/newC1.png"))); // NOI18N
         jButtonNewC.setBorder(null);
@@ -184,7 +185,7 @@ public class FrameConsultation extends javax.swing.JFrame {
                 jButtonNewCActionPerformed(evt);
             }
         });
-        jPanelFondo.add(jButtonNewC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 47, 42));
+        jPanelFondo.add(jButtonNewC, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 47, 42));
 
         jTableServiceData.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTableServiceData.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,16 +204,15 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableServiceData.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableServiceData);
 
-        jPanelFondo.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 1150, 90));
+        jPanelFondo.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1150, 110));
 
         jLabelSelectService2.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelSelectService2.setText("Seleccione servicio:");
-        jPanelFondo.add(jLabelSelectService2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 160, 30));
-        jPanelFondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 480, 240, 10));
+        jPanelFondo.add(jLabelSelectService2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, 30));
+        jPanelFondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 460, 240, 10));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel3.setText("A");
-        jPanelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 240, 30));
+        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jPanelFondo.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 430, 240, 30));
 
         jTableAppoints.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTableAppoints.setModel(new javax.swing.table.DefaultTableModel(
@@ -229,9 +229,17 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableAppoints.setShowGrid(false);
         jTableAppoints.setShowVerticalLines(true);
         jTableAppoints.getTableHeader().setReorderingAllowed(false);
+        jTableAppoints.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAppointsMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTableAppoints);
 
-        jPanelFondo.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1150, 140));
+        jPanelFondo.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1150, 140));
+
+        jLabelNotificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jPanelFondo.add(jLabelNotificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 640, 40));
 
         getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 780));
 
@@ -259,18 +267,43 @@ public class FrameConsultation extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-
+        String total = jLabelTotal.getText();
+        String observaciones = jTextAreaObservaciones.getText();
+        if (cm.updateConsul(total, observaciones) == true) {
+            jLabelNotificacion.setForeground(new Color(30, 215, 96));
+            jLabelNotificacion.setText("Registro exitoso");
+        } else {
+            jLabelNotificacion.setForeground(Color.RED);
+            jLabelNotificacion.setText("E R R O R al guardar, revise los campos");
+        }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonNewCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewCActionPerformed
-        setInicialComponents();
+        setInicialComponents();       
     }//GEN-LAST:event_jButtonNewCActionPerformed
 
     private void jComboBoxServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxServiceActionPerformed
         int idServicio = Character.getNumericValue(jComboBoxService.getSelectedItem().toString().charAt(0));
         ServiceSQL ssql = new ServiceSQL();
         modeloTable.addRow(ssql.selectServiceById(idServicio));
+
+        float total = 0;
+        for (int i = 0; i < jTableServiceData.getRowCount(); i++) {
+            total = total + Float.parseFloat(jTableServiceData.getValueAt(i, 2).toString());
+        }
+        jLabelTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jComboBoxServiceActionPerformed
+
+    private void jTableAppointsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAppointsMouseClicked
+       String idCita = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 3).toString();
+        if (cm.registryConsul(idCita) == true) {
+            jLabelNotificacion.setForeground(new Color(30, 215, 96));
+            jLabelNotificacion.setText("Consulta creada");
+        } else {
+            jLabelNotificacion.setForeground(Color.RED);
+            jLabelNotificacion.setText("E R R O R");
+        }
+    }//GEN-LAST:event_jTableAppointsMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClose;
@@ -280,13 +313,14 @@ public class FrameConsultation extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxService;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelCabecera;
+    private javax.swing.JLabel jLabelNotificacion;
     private javax.swing.JLabel jLabelObservations;
     private javax.swing.JLabel jLabelSelectAppoint1;
     private javax.swing.JLabel jLabelSelectService2;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelTotServicies;
+    private javax.swing.JLabel jLabelTotal;
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;

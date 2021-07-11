@@ -10,25 +10,26 @@ package pckgConsultation;
  * @author Erick
  */
 public class Consultation {
-    private String Date;
-    private String time;
+    private String fecha;
+    private String hora;
     private String observaciones;
     private float Total;
+    private int cita_idCita;
 
-    public String getDate() {
-        return Date;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setDate(String Date) {
-        this.Date = Date;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public String getTime() {
-        return time;
+    public String getHora() {
+        return hora;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public String getObservaciones() {
@@ -47,5 +48,11 @@ public class Consultation {
         this.Total = Total;
     }
 
-      
+    public int getCita_idCita() {
+        return cita_idCita;
+    }
+
+    public void setCita_idCita(int cita_idCita) {
+        this.cita_idCita = cita_idCita;
+    }
 }

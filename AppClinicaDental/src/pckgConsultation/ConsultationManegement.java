@@ -34,11 +34,11 @@ public class ConsultationManegement {
             datos[0] = String.valueOf(listaCitas.get(i).getIdServicio());
             datos[1] = listaCitas.get(i).getNombre();
             datos[2] = listaCitas.get(i).getPrecio();
-            modelCombo.addElement(datos[0]+ "- "+datos[1] + " - Precio: Q" + datos[2]);
+            modelCombo.addElement(datos[0] + "- " + datos[1] + " - Precio: Q" + datos[2]);
         }
         return modelCombo;
-    }    
-    
+    }
+
     public DefaultTableModel listApointments() {
         DefaultTableModel modelTable = new DefaultTableModel();
         modelTable.addColumn("Nombre Paciente");
@@ -50,7 +50,8 @@ public class ConsultationManegement {
         String[] datos = new String[4];
 
         for (int i = 0; i < listaCitas.size(); i++) {
-            datos[0] = String.valueOf(listaCitas.get(i).getPaciente_idPaciente().getNombre());
+            datos[0] = listaCitas.get(i).getPaciente_idPaciente().getNombre()
+                    + " " + listaCitas.get(i).getPaciente_idPaciente().getApellido();
             datos[1] = dateFormat(listaCitas.get(i).getFecha(), "EEEE dd MMMM");
             datos[2] = timeFormat(String.valueOf(listaCitas.get(i).getHora()), "HH:mm:ss", "hh:mm a");
             datos[3] = String.valueOf(listaCitas.get(i).getIdCita());
@@ -59,10 +60,33 @@ public class ConsultationManegement {
         return modelTable;
     }
 
-    public void getToInsert(String service, String fecha, String hora, String paciente) {
-        Consultation consul = new Consultation();
-        consul.setDate(fecha);
-        consul.setTime(hora);
+    public boolean registryConsul(String idCita) {
+        ConsultationSQL cnsql = new ConsultationSQL();
+         Date fechaNow = new Date();
+          Consultation consul = new Consultation();
+          consul.setFecha(dateFormat(fechaNow, "yyyy-MM-dd"));
+          consul.setCita_idCita(Integer.parseInt(idCita));
+        if (cnsql.insertConsultation(consul) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updateConsul(String total, String observaciones) {
+        Date fechaNow = new Date();
+        float totalC = (float) (Math.round(Float.parseFloat(total) * 100.0) / 100.0);
+        
+        Consultation consul = new Consultation();       
+        consul.setHora(dateFormat(fechaNow, "HH:mm"));
+        consul.setObservaciones(observaciones);
+        consul.setTotal(totalC);
+        ConsultationSQL cnsql = new ConsultationSQL();
+        if (cnsql.updateConsultation(consul) == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private String dateFormat(Date date, String format) {
