@@ -279,23 +279,27 @@ public class FrameConsultation extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonNewCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewCActionPerformed
-        setInicialComponents();       
+        setInicialComponents();
     }//GEN-LAST:event_jButtonNewCActionPerformed
 
     private void jComboBoxServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxServiceActionPerformed
-        int idServicio = Character.getNumericValue(jComboBoxService.getSelectedItem().toString().charAt(0));
+        ConsultationSQL consql = new ConsultationSQL();
         ServiceSQL ssql = new ServiceSQL();
-        modeloTable.addRow(ssql.selectServiceById(idServicio));
-
+        int idServicio = Character.getNumericValue(jComboBoxService.getSelectedItem().toString().charAt(0));
         float total = 0;
+
+        modeloTable.addRow(ssql.selectServiceById(idServicio));
+        consql.insertConsulDetail(idServicio);
+
         for (int i = 0; i < jTableServiceData.getRowCount(); i++) {
             total = total + Float.parseFloat(jTableServiceData.getValueAt(i, 2).toString());
         }
+
         jLabelTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jComboBoxServiceActionPerformed
 
     private void jTableAppointsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAppointsMouseClicked
-       String idCita = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 3).toString();
+        String idCita = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 3).toString();
         if (cm.registryConsul(idCita) == true) {
             jLabelNotificacion.setForeground(new Color(30, 215, 96));
             jLabelNotificacion.setText("Consulta creada");

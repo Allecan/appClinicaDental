@@ -55,6 +55,22 @@ public class ConsultationSQL {
         }
     }
 
+    public boolean insertConsulDetail(int idServicio){
+        PreparedStatement pst;
+        try {
+            pst = instance.prepareStatement("INSERT INTO detalleconsulta(consulta_idConsulta, servicio_idServicio) "
+                    + "VALUES(?,?)");
+            pst.setInt(1, getLastConsul());
+            pst.setInt(2, idServicio);
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
+        
+    }
+    
     private int getLastConsul() {
         String sql = "SELECT idConsulta FROM consulta ORDER BY idConsulta DESC LIMIT 1";
 

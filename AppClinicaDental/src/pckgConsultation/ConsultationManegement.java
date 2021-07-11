@@ -87,8 +87,8 @@ public class ConsultationManegement {
         } else {
             return false;
         }
-    }
-
+    }   
+    
     private String dateFormat(Date date, String format) {
         SimpleDateFormat formato = new SimpleDateFormat(format);
         if (date != null) {
