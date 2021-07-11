@@ -5,6 +5,7 @@
  */
 package pckgConsultation;
 
+import Reportes.Pdf;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
@@ -20,13 +21,7 @@ public class FrameConsultation extends javax.swing.JFrame {
 
     private DefaultTableModel modeloTable = new DefaultTableModel();
     private int x, y;
-    private ConsultationManegement cm;
-    public String Total = "";
-    public String NombrePaciente = "";
-    public String NombreServicio = "";
-    public String PrecioServicio = "";
-    public String codigo = "";
-    private FrameReport report = new FrameReport();
+    private ConsultationManegement cm;  
 
     /**
      * Creates new form FrameSales
@@ -69,7 +64,7 @@ public class FrameConsultation extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableAppoints = new javax.swing.JTable();
         jLabelNotificacion = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonFactura = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -136,11 +131,11 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTextAreaObservaciones.setRows(5);
         jScrollPane1.setViewportView(jTextAreaObservaciones);
 
-        jPanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 990, 100));
+        jPanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 990, 100));
 
         jLabelObservations.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelObservations.setText("Observaciones:");
-        jPanelFondo.add(jLabelObservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 120, 30));
+        jPanelFondo.add(jLabelObservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 120, 30));
 
         jLabelTitle.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabelTitle.setText("Registrar consulta");
@@ -161,13 +156,14 @@ public class FrameConsultation extends javax.swing.JFrame {
         jPanelFondo.add(jComboBoxService, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 990, 30));
 
         jLabelTotServicies.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
-        jLabelTotServicies.setText("Total:");
-        jPanelFondo.add(jLabelTotServicies, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 430, 50, 30));
+        jLabelTotServicies.setText("Total: Q.");
+        jPanelFondo.add(jLabelTotServicies, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 430, 80, 30));
 
         jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonSave1.png"))); // NOI18N
         jButtonSave.setBorder(null);
         jButtonSave.setBorderPainted(false);
         jButtonSave.setContentAreaFilled(false);
+        jButtonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSave.setFocusPainted(false);
         jButtonSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonSave2.png"))); // NOI18N
@@ -177,7 +173,7 @@ public class FrameConsultation extends javax.swing.JFrame {
                 jButtonSaveActionPerformed(evt);
             }
         });
-        jPanelFondo.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
+        jPanelFondo.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, -1, -1));
 
         jButtonNewC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/newC1.png"))); // NOI18N
         jButtonNewC.setBorder(null);
@@ -209,11 +205,6 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableServiceData.setShowGrid(false);
         jTableServiceData.setShowVerticalLines(true);
         jTableServiceData.getTableHeader().setReorderingAllowed(false);
-        jTableServiceData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableServiceDataMouseClicked(evt);
-            }
-        });
         jScrollPane4.setViewportView(jTableServiceData);
 
         jPanelFondo.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1150, 110));
@@ -221,10 +212,12 @@ public class FrameConsultation extends javax.swing.JFrame {
         jLabelSelectService2.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelSelectService2.setText("Seleccione servicio:");
         jPanelFondo.add(jLabelSelectService2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, 30));
-        jPanelFondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 460, 240, 10));
+        jPanelFondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 460, 120, 10));
 
         jLabelTotal.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jPanelFondo.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 430, 240, 30));
+        jLabelTotal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabelTotal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanelFondo.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 430, 120, 30));
 
         jTableAppoints.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTableAppoints.setModel(new javax.swing.table.DefaultTableModel(
@@ -237,7 +230,7 @@ public class FrameConsultation extends javax.swing.JFrame {
         ));
         jTableAppoints.setCellSelectionEnabled(true);
         jTableAppoints.setFocusable(false);
-        jTableAppoints.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTableAppoints.setSelectionBackground(new java.awt.Color(102, 153, 255));
         jTableAppoints.setShowGrid(false);
         jTableAppoints.setShowVerticalLines(true);
         jTableAppoints.getTableHeader().setReorderingAllowed(false);
@@ -251,15 +244,23 @@ public class FrameConsultation extends javax.swing.JFrame {
         jPanelFondo.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1150, 140));
 
         jLabelNotificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jPanelFondo.add(jLabelNotificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, 640, 40));
+        jPanelFondo.add(jLabelNotificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 730, 250, 40));
 
-        jButton3.setText("Mostrar Servicio Seleccionado");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonBill1.png"))); // NOI18N
+        jButtonFactura.setBorder(null);
+        jButtonFactura.setBorderPainted(false);
+        jButtonFactura.setContentAreaFilled(false);
+        jButtonFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonFactura.setFocusPainted(false);
+        jButtonFactura.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFactura.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonBill2.png"))); // NOI18N
+        jButtonFactura.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonBill2.png"))); // NOI18N
+        jButtonFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonFacturaActionPerformed(evt);
             }
         });
-        jPanelFondo.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 630, -1, -1));
+        jPanelFondo.add(jButtonFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, -1, -1));
 
         getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 780));
 
@@ -327,35 +328,20 @@ public class FrameConsultation extends javax.swing.JFrame {
             jLabelNotificacion.setForeground(Color.RED);
             jLabelNotificacion.setText("E R R O R");
         }
+        jTableAppoints.setEnabled(false);
+        jTableAppoints.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jTableAppointsMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        report.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTableServiceDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableServiceDataMouseClicked
-        // TODO add your handling code here:
-        int fila = jTableAppoints.getSelectedRow();
-        int filaCodigo = jTableServiceData.getSelectedRow();
-        int filaNombreServicio = jTableServiceData.getSelectedRow();
-        int filaPrecioServicio = jTableServiceData.getSelectedRow();
-        Total = jLabelTotal.getText();
-        NombrePaciente = jTableAppoints.getValueAt(fila, 0).toString();
-        codigo = jTableServiceData.getValueAt(filaCodigo, 0).toString();
-        NombreServicio = jTableServiceData.getValueAt(filaNombreServicio, 1).toString();
-        PrecioServicio = jTableServiceData.getValueAt(filaPrecioServicio, 2).toString();
-        System.out.println(Total);
-        System.out.println(NombrePaciente);
-        System.out.println(NombreServicio);
-        System.out.println(PrecioServicio);
-        
-        report.agregarServicio(codigo, NombrePaciente, Total,NombreServicio, PrecioServicio);
-    }//GEN-LAST:event_jTableServiceDataMouseClicked
+    private void jButtonFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFacturaActionPerformed
+        Pdf pdf = new Pdf();
+        String Nombre = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 0).toString();
+        String tot = jLabelTotal.getText();
+        pdf.pdf(Nombre, tot, jTableServiceData);
+    }//GEN-LAST:event_jButtonFacturaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonFactura;
     private javax.swing.JButton jButtonMin;
     private javax.swing.JButton jButtonNewC;
     private javax.swing.JButton jButtonSave;
