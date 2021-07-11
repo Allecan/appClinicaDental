@@ -24,9 +24,9 @@ public class ConsultationSQL {
             instance = (com.mysql.jdbc.Connection) MenuMain.getInstance();
             PreparedStatement pst = 
                     instance.prepareStatement("INSERT INTO consulta (fecha, hora, observaciones, total) values(?,?,?,?)");
-            pst.setString(1, service.getNameofService());
-            pst.setString(2, service.getPrice());
-            pst.setInt(3, service.isEnable());
+//            pst.setString(1, service.getNameofService());
+//            pst.setString(2, service.getPrice());
+//            pst.setInt(3, service.isEnable());
             int registro = pst.executeUpdate();
             return registro;
         } catch (SQLException e) {

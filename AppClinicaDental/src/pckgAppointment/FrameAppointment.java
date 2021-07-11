@@ -199,6 +199,7 @@ public class FrameAppointment extends javax.swing.JFrame {
         jButtonSave.setBorder(null);
         jButtonSave.setBorderPainted(false);
         jButtonSave.setContentAreaFilled(false);
+        jButtonSave.setFocusPainted(false);
         jButtonSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonSave2.png"))); // NOI18N
         jButtonSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonSave2.png"))); // NOI18N
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +376,7 @@ public class FrameAppointment extends javax.swing.JFrame {
     private void toggleButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonVisualizarActionPerformed
         jPanelAgendarCita.setVisible(false);
         jPanelVerCitas.setVisible(true);
+        jLabelTitleV.setText("Listado de citas");
         jTableCita.setModel(adminCita.seeAllAppoints(0));
         jTableCita.getColumnModel().getColumn(3).setMinWidth(0);
         jTableCita.getColumnModel().getColumn(3).setMaxWidth(0);
@@ -518,8 +520,7 @@ public class FrameAppointment extends javax.swing.JFrame {
 
     private void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        this.setBackground(new Color(0, 0, 0, 0));
+        this.setBackground(new Color(0, 0, 0, 0));       
         jPanelFondo.setBackground(new Color(0xEDF0F2));
         jPanelAgendarCita.setVisible(false);
         jPanelAgendarCita.setBackground(Color.WHITE);

@@ -10,35 +10,45 @@ package pkgServicie;
  * @author Erick
  */
 public class Service {
-    private String NameofService, price, enableString;
+    private int idServicio;
+    private String nombre, precio, enableString;
     private boolean enable;
-    private Service servicio;
     
-   
-    public Service getServicio() {
-        return servicio;
+//    private Service servicio;
+//   
+//    public Service getServicio() {
+//        return servicio;
+//    }
+//
+//    public void setServicio(Service servicio) {
+//        this.servicio = servicio;
+//    }
+
+    public int getIdServicio() {
+        return idServicio;
     }
 
-    public void setServicio(Service servicio) {
-        this.servicio = servicio;
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
     }
 
-    public String getNameofService() {
-        return NameofService;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNameofService(String NameofService) {
-        this.NameofService = NameofService;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPrecio() {
+        return precio;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 
+    
     public int isEnable() { //Funcion que trabaja con el valor inicial true 
         if (enable == true) {   // en el boolean para poder agregar un nuevo servicio
             enableString = "True";
