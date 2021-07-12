@@ -5,6 +5,7 @@
  */
 package pkgServicie;
 
+import Iinterfazes.iControlUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,7 @@ import pkgServicie.ServiceManagement;
  *
  * @author Erick
  */
-public class FrameService extends javax.swing.JFrame {
+public class FrameService extends javax.swing.JFrame implements iControlUI{
 
     private int x, y;
     private ServiceManagement sm;
@@ -348,7 +349,8 @@ public class FrameService extends javax.swing.JFrame {
     private javax.swing.JLabel labelTitutloVisualizar1;
     // End of variables declaration//GEN-END:variables
 
-    private void setPropertiesGUI() {
+    @Override
+    public void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         jPanelFondo.setBackground(new Color(0xEDF0F2));
@@ -404,5 +406,10 @@ public class FrameService extends javax.swing.JFrame {
             }
         });
         jPopupMenu.add(enabled);
+    }
+
+    @Override
+    public void setInicialComponents() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

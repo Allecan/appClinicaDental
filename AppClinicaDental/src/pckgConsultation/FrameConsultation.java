@@ -5,6 +5,7 @@
  */
 package pckgConsultation;
 
+import Iinterfazes.iControlUI;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
@@ -17,7 +18,7 @@ import pkgServicie.ServiceSQL;
  *
  * @author allec
  */
-public class FrameConsultation extends javax.swing.JFrame {
+public class FrameConsultation extends javax.swing.JFrame implements iControlUI{
 
     private DefaultTableModel modeloTable = new DefaultTableModel();
     private int x, y;
@@ -41,7 +42,6 @@ public class FrameConsultation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jButtonMin = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -65,8 +65,6 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableAppoints = new javax.swing.JTable();
         jLabelNotificacion = new javax.swing.JLabel();
         jButtonFactura = new javax.swing.JButton();
-
-        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -336,7 +334,7 @@ public class FrameConsultation extends javax.swing.JFrame {
         Pdf pdf = new Pdf();
         String Nombre = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 0).toString();
         String tot = jLabelTotal.getText();
-        pdf.pdf(Nombre, tot, jTableServiceData);
+        pdf.generatePdf(Nombre, tot, jTableServiceData);
     }//GEN-LAST:event_jButtonFacturaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -346,7 +344,6 @@ public class FrameConsultation extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNewC;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox<String> jComboBoxService;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCabecera;
     private javax.swing.JLabel jLabelNotificacion;
@@ -366,7 +363,8 @@ public class FrameConsultation extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaObservaciones;
     // End of variables declaration//GEN-END:variables
 
-    private void setPropertiesGUI() {
+    @Override
+      public void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         jPanelFondo.setBackground(Color.WHITE);
@@ -380,7 +378,8 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTextAreaObservaciones.setLineWrap(true);
     }
 
-    private void setInicialComponents() {
+    @Override
+    public void setInicialComponents() {
         jTableAppoints.setModel(cm.listApointments());
         jTableAppoints.getColumnModel().getColumn(3).setMinWidth(0);
         jTableAppoints.getColumnModel().getColumn(3).setMaxWidth(0);

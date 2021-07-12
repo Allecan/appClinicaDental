@@ -5,6 +5,7 @@
  */
 package pckgAppointment;
 
+import Iinterfazes.iControlUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,7 @@ import pckgMenu.MenuMain;
  *
  * @author allec
  */
-public class FrameAppointment extends javax.swing.JFrame {
+public class FrameAppointment extends javax.swing.JFrame implements iControlUI{
 
     private int x, y;
     private AdminCita adminCita;
@@ -518,7 +519,8 @@ public class FrameAppointment extends javax.swing.JFrame {
     private javax.swing.ButtonGroup toggleTableButtonGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void setPropertiesGUI() {
+    @Override
+    public void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));       
         jPanelFondo.setBackground(new Color(0xEDF0F2));
@@ -560,7 +562,8 @@ public class FrameAppointment extends javax.swing.JFrame {
         jTableCita.setComponentPopupMenu(popupMenu);
     }
 
-    private void setInicialComponents() {
+    @Override
+    public void setInicialComponents() {
         jTablePatients.setModel(adminCita.listPatients());
         Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
         jTextFieldSearching.setText("Escriba DPI, Nombre o Apellido...");

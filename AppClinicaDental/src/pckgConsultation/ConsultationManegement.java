@@ -5,8 +5,7 @@
  */
 package pckgConsultation;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import ClasesAbstractas.FormatDate;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -20,7 +19,7 @@ import pkgServicie.ServiceSQL;
  *
  * @author Erick
  */
-public class ConsultationManegement {
+public class ConsultationManegement extends FormatDate {
 
     private final ServiceSQL ssql = new ServiceSQL();
     private final CitaSQL csql = new CitaSQL();
@@ -62,10 +61,10 @@ public class ConsultationManegement {
 
     public boolean registryConsul(String idCita) {
         ConsultationSQL cnsql = new ConsultationSQL();
-         Date fechaNow = new Date();
-          Consultation consul = new Consultation();
-          consul.setFecha(dateFormat(fechaNow, "yyyy-MM-dd"));
-          consul.setCita_idCita(Integer.parseInt(idCita));
+        Date fechaNow = new Date();
+        Consultation consul = new Consultation();
+        consul.setFecha(dateFormat(fechaNow, "yyyy-MM-dd"));
+        consul.setCita_idCita(Integer.parseInt(idCita));
         if (cnsql.insertConsultation(consul) == true) {
             return true;
         } else {
@@ -76,8 +75,8 @@ public class ConsultationManegement {
     public boolean updateConsul(String total, String observaciones) {
         Date fechaNow = new Date();
         float totalC = (float) (Math.round(Float.parseFloat(total) * 100.0) / 100.0);
-        
-        Consultation consul = new Consultation();       
+
+        Consultation consul = new Consultation();
         consul.setHora(dateFormat(fechaNow, "HH:mm"));
         consul.setObservaciones(observaciones);
         consul.setTotal(totalC);
@@ -86,25 +85,6 @@ public class ConsultationManegement {
             return true;
         } else {
             return false;
-        }
-    }   
-    
-    private String dateFormat(Date date, String format) {
-        SimpleDateFormat formato = new SimpleDateFormat(format);
-        if (date != null) {
-            return formato.format(date);
-        }
-        return null;
-    }
-
-    private String timeFormat(String time, String formatIn, String formatOut) {
-        SimpleDateFormat formatter = new SimpleDateFormat(formatIn);
-        Date date;
-        try {
-            date = formatter.parse(time);
-            return dateFormat(date, formatOut);
-        } catch (ParseException ex) {
-            return null;
         }
     }
 }

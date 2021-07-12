@@ -5,6 +5,7 @@
  */
 package pckgReporte;
 
+import ClasesAbstractas.FormatDate;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -22,7 +23,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,9 +32,9 @@ import javax.swing.JTable;
  *
  * @author ddani
  */
-public class Pdf {
+public class Pdf extends FormatDate{
 
-    public void pdf(String NombrePaciente, String Total, JTable jTableServicies) {
+    public void generatePdf(String NombrePaciente, String Total, JTable jTableServicies) {
         try {
             FileOutputStream archivo;
             File file = new File("src/pckgReporte/pdf/factura.pdf");
@@ -115,13 +115,5 @@ public class Pdf {
         } catch (IOException ex) {
             Logger.getLogger(Pdf.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private String dateFormat(Date date, String format) {
-        SimpleDateFormat formato = new SimpleDateFormat(format);
-        if (date != null) {
-            return formato.format(date);
-        }
-        return null;
     }
 }
