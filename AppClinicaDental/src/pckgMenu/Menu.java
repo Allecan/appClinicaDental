@@ -11,6 +11,7 @@ import pckgAppointment.FrameAppointment;
 import pckgConsultation.FrameConsultation;
 import pkgServicie.FrameService;
 import pckgPaciente.FramePatient;
+import email.FormMail;
 
 /**
  *
@@ -43,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
         jPanelFondo = new javax.swing.JPanel();
         jButtonConsul = new javax.swing.JButton();
         jButtonPatient = new javax.swing.JButton();
+        jButtonSend = new javax.swing.JButton();
         jButtonService = new javax.swing.JButton();
         jButtonAppoint = new javax.swing.JButton();
 
@@ -123,6 +125,20 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanelFondo.add(jButtonPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 210, 220));
 
+        jButtonSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/paper-plane (1).png"))); // NOI18N
+        jButtonSend.setBorder(null);
+        jButtonSend.setBorderPainted(false);
+        jButtonSend.setContentAreaFilled(false);
+        jButtonSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonSend.setFocusPainted(false);
+        jButtonSend.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/paper-plane.png"))); // NOI18N
+        jButtonSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSendActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jButtonSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, 260, 230));
+
         jButtonService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/icServicios.png"))); // NOI18N
         jButtonService.setBorder(null);
         jButtonService.setBorderPainted(false);
@@ -201,6 +217,12 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAppointActionPerformed
 
+    private void jButtonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendActionPerformed
+        FormMail mail = new FormMail();
+        mail.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonSendActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,6 +233,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMin;
     private javax.swing.JButton jButtonPatient;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonSend;
     private javax.swing.JButton jButtonService;
     private javax.swing.JLabel jLabelCabecera;
     private javax.swing.JPanel jPanelFondo;

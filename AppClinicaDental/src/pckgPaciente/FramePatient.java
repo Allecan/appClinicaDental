@@ -5,6 +5,7 @@
  */
 package pckgPaciente;
 
+import Iinterfazes.iControlUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ import pckgMenu.MenuMain;
 /**
  * @author allecc
  */
-public class FramePatient extends javax.swing.JFrame {
+public class FramePatient extends javax.swing.JFrame implements iControlUI{
 
     private int x, y;
     AdminPatient adminPaciente;
@@ -527,7 +528,8 @@ public class FramePatient extends javax.swing.JFrame {
     private javax.swing.ButtonGroup toggleGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void setPropertiesGUI() {
+    @Override
+    public void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         jPanelFondo.setBackground(new Color(0xEDF0F2));
@@ -546,7 +548,8 @@ public class FramePatient extends javax.swing.JFrame {
         jTextFieldSearching.setFont(font);
     }
 
-    private void setInicialComponents() {
+    @Override
+    public void setInicialComponents() {
         Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
         jTextFieldSearching.setText("Busqueda...");
         jTextFieldSearching.setForeground(new Color(153, 153, 153));

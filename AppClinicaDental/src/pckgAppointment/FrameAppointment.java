@@ -5,6 +5,7 @@
  */
 package pckgAppointment;
 
+import Iinterfazes.iControlUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,7 @@ import pckgMenu.MenuMain;
  *
  * @author allec
  */
-public class FrameAppointment extends javax.swing.JFrame {
+public class FrameAppointment extends javax.swing.JFrame implements iControlUI{
 
     private int x, y;
     private AdminCita adminCita;
@@ -199,6 +200,7 @@ public class FrameAppointment extends javax.swing.JFrame {
         jButtonSave.setBorder(null);
         jButtonSave.setBorderPainted(false);
         jButtonSave.setContentAreaFilled(false);
+        jButtonSave.setFocusPainted(false);
         jButtonSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonSave2.png"))); // NOI18N
         jButtonSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgAppointment/imgs/buttonSave2.png"))); // NOI18N
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +377,7 @@ public class FrameAppointment extends javax.swing.JFrame {
     private void toggleButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonVisualizarActionPerformed
         jPanelAgendarCita.setVisible(false);
         jPanelVerCitas.setVisible(true);
+        jLabelTitleV.setText("Listado de citas");
         jTableCita.setModel(adminCita.seeAllAppoints(0));
         jTableCita.getColumnModel().getColumn(3).setMinWidth(0);
         jTableCita.getColumnModel().getColumn(3).setMaxWidth(0);
@@ -516,10 +519,10 @@ public class FrameAppointment extends javax.swing.JFrame {
     private javax.swing.ButtonGroup toggleTableButtonGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void setPropertiesGUI() {
+    @Override
+    public void setPropertiesGUI() {
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        this.setBackground(new Color(0, 0, 0, 0));
+        this.setBackground(new Color(0, 0, 0, 0));       
         jPanelFondo.setBackground(new Color(0xEDF0F2));
         jPanelAgendarCita.setVisible(false);
         jPanelAgendarCita.setBackground(Color.WHITE);
@@ -559,7 +562,8 @@ public class FrameAppointment extends javax.swing.JFrame {
         jTableCita.setComponentPopupMenu(popupMenu);
     }
 
-    private void setInicialComponents() {
+    @Override
+    public void setInicialComponents() {
         jTablePatients.setModel(adminCita.listPatients());
         Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
         jTextFieldSearching.setText("Escriba DPI, Nombre o Apellido...");
