@@ -375,7 +375,7 @@ public class FrameService extends javax.swing.JFrame implements iControlUI{
         disable.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Object[] botones = {"Aceptar", "Cancelar"};
-                int opcionElegida = JOptionPane.showOptionDialog(null, "Desea cancelar esta cita?", "Alerta",
+                int opcionElegida = JOptionPane.showOptionDialog(null, "Desea deshabilitar este servicio?", "Alerta",
                         JOptionPane.YES_NO_CANCEL_OPTION, 2, null, botones, null);
                 if (opcionElegida == 0) {
                     String idServicio = jTableServicies.getModel().getValueAt(jTableServicies.getSelectedRow(), 0).toString();

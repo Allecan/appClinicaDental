@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package email;
+package pckgEnvioFactura;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.MessagingException;
+import Iinterfazes.iEnvioFactura;
+import java.awt.Color;
 import pckgMenu.MenuMain;
 
 /**
@@ -16,8 +14,8 @@ import pckgMenu.MenuMain;
  * @author Erick
  */
 public class FormMail extends javax.swing.JFrame {
-    int x,y;
-    BuildEmail BE = new BuildEmail();
+
+    private int x, y;
 
     /**
      * Creates new form FormMail
@@ -25,6 +23,7 @@ public class FormMail extends javax.swing.JFrame {
     public FormMail() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -36,10 +35,10 @@ public class FormMail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jButtonMin = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jLabelCabecera = new javax.swing.JLabel();
+        jPanelFondo = new javax.swing.JPanel();
         jLabelFileSubject = new javax.swing.JLabel();
         jLabelFileChooser = new javax.swing.JLabel();
         jLabelDestinatario = new javax.swing.JLabel();
@@ -53,13 +52,13 @@ public class FormMail extends javax.swing.JFrame {
         jButtonSend = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaBody = new javax.swing.JTextArea();
+        jCheckBoxOutlook = new javax.swing.JCheckBox();
+        jCheckBoxGmail = new javax.swing.JCheckBox();
+        jCheckBoxYahoo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/min1.png"))); // NOI18N
         jButtonMin.setBorder(null);
@@ -74,7 +73,7 @@ public class FormMail extends javax.swing.JFrame {
                 jButtonMinActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 60, 50));
+        getContentPane().add(jButtonMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 0, 60, 50));
 
         jButtonSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/exit1.png"))); // NOI18N
         jButtonSalir.setBorder(null);
@@ -88,12 +87,12 @@ public class FormMail extends javax.swing.JFrame {
                 jButtonSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 60, 50));
+        getContentPane().add(jButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 0, 60, 50));
 
         jLabelCabecera.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabelCabecera.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/barra.png"))); // NOI18N
-        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jLabelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabelCabeceraMouseDragged(evt);
@@ -104,63 +103,107 @@ public class FormMail extends javax.swing.JFrame {
                 jLabelCabeceraMousePressed(evt);
             }
         });
-        jPanel1.add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+        getContentPane().add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
+
+        jPanelFondo.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelFileSubject.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelFileSubject.setForeground(new java.awt.Color(0, 0, 0));
         jLabelFileSubject.setText("Asunto: ");
-        jPanel1.add(jLabelFileSubject, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 130, 30));
+        jPanelFondo.add(jLabelFileSubject, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 130, 30));
 
         jLabelFileChooser.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelFileChooser.setForeground(new java.awt.Color(0, 0, 0));
         jLabelFileChooser.setText("Escoja Factura:");
-        jPanel1.add(jLabelFileChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 130, 30));
+        jPanelFondo.add(jLabelFileChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, 30));
 
         jLabelDestinatario.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelDestinatario.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDestinatario.setText("Destinatario : ");
-        jPanel1.add(jLabelDestinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
+        jPanelFondo.add(jLabelDestinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
 
         jLabelFileBody.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         jLabelFileBody.setForeground(new java.awt.Color(0, 0, 0));
         jLabelFileBody.setText("Mensaje: ");
-        jPanel1.add(jLabelFileBody, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 130, 30));
+        jPanelFondo.add(jLabelFileBody, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 130, 30));
 
         jSeparator3.setPreferredSize(new java.awt.Dimension(48, 10));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 590, 490, 10));
+        jPanelFondo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 490, 10));
 
         jTextFieldSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldSubjectActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldSubject, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 490, 30));
+        jPanelFondo.add(jTextFieldSubject, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 490, 30));
 
         jSeparator2.setPreferredSize(new java.awt.Dimension(48, 10));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 490, 10));
-        jPanel1.add(jTextFieldDestinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 490, 30));
+        jPanelFondo.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 490, 10));
+        jPanelFondo.add(jTextFieldDestinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 490, 30));
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(48, 10));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 490, 10));
+        jPanelFondo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 490, 10));
 
-        jFileChooserFacturaPDF.setCurrentDirectory(new java.io.File("C:\\Users\\ASUS\\Documents\\URL\\4to año 2\\7mo. Interciclo 2\\Analisis y Diseño II"));
-        jPanel1.add(jFileChooserFacturaPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, 300));
+        jFileChooserFacturaPDF.setCurrentDirectory(new java.io.File("C:\\Users\\allec\\Documents\\NetBeansProjects\\AnyDis2\\appClinicaDental\\AppClinicaDental\\src\\pckgReporte\\pdf"));
+        jPanelFondo.add(jFileChooserFacturaPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 300));
 
-        jButtonSend.setText("Send");
+        jButtonSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgEnvioFactura/imgs/buttonSendMail1.png"))); // NOI18N
+        jButtonSend.setBorder(null);
+        jButtonSend.setContentAreaFilled(false);
+        jButtonSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonSend.setDefaultCapable(false);
+        jButtonSend.setFocusPainted(false);
+        jButtonSend.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSend.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgEnvioFactura/imgs/buttonSendMail2.png"))); // NOI18N
+        jButtonSend.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgEnvioFactura/imgs/buttonSendMail2.png"))); // NOI18N
         jButtonSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSendActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 560, -1, -1));
+        jPanelFondo.add(jButtonSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, -1, -1));
 
         jTextAreaBody.setColumns(20);
         jTextAreaBody.setRows(5);
         jScrollPane1.setViewportView(jTextAreaBody);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 490, -1));
+        jPanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, 490, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 680));
+        jCheckBoxOutlook.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxOutlook.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
+        jCheckBoxOutlook.setForeground(new java.awt.Color(0, 0, 0));
+        jCheckBoxOutlook.setText("Envio por Outlook");
+        jCheckBoxOutlook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxOutlookActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jCheckBoxOutlook, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
+
+        jCheckBoxGmail.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxGmail.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
+        jCheckBoxGmail.setForeground(new java.awt.Color(0, 0, 0));
+        jCheckBoxGmail.setText("Envio por Gmail");
+        jCheckBoxGmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxGmailActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jCheckBoxGmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, -1, -1));
+
+        jCheckBoxYahoo.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxYahoo.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
+        jCheckBoxYahoo.setForeground(new java.awt.Color(0, 0, 0));
+        jCheckBoxYahoo.setText("Envio por Yahoo");
+        jCheckBoxYahoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxYahooActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jCheckBoxYahoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, -1));
+
+        getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 900, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,59 +234,53 @@ public class FormMail extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jButtonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendActionPerformed
-        try {
-            BE.sendEmail(jTextFieldDestinatario.getText(), jTextFieldSubject.getText(), jTextAreaBody.getText(), jFileChooserFacturaPDF.getSelectedFile());
-        } catch (MessagingException | IOException ex) {
-            Logger.getLogger(FormMail.class.getName()).log(Level.SEVERE, null, ex);
+        if (jCheckBoxGmail.isSelected() == true) {
+            iEnvioFactura envio = new EnvioGmail();
+            envio.enviarFactura(jTextFieldDestinatario.getText(),
+                    jTextFieldSubject.getText(), jTextAreaBody.getText(),
+                    jFileChooserFacturaPDF.getSelectedFile());
+        }
+
+        if (jCheckBoxYahoo.isSelected() == true) {
+            iEnvioFactura envio = new EnvioYahoo();
+            envio.enviarFactura(jTextFieldDestinatario.getText(),
+                    jTextFieldSubject.getText(), jTextAreaBody.getText(),
+                    jFileChooserFacturaPDF.getSelectedFile());
         }
     }//GEN-LAST:event_jButtonSendActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.LojTextFieldDestinatarioger(FormMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jCheckBoxYahooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxYahooActionPerformed
+        jCheckBoxGmail.setEnabled(false);
+        jCheckBoxYahoo.setEnabled(false);
+        jCheckBoxOutlook.setEnabled(false);
+    }//GEN-LAST:event_jCheckBoxYahooActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormMail().setVisible(true);
-            }
-        });
-    }
+    private void jCheckBoxGmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxGmailActionPerformed
+        jCheckBoxGmail.setEnabled(false);
+        jCheckBoxYahoo.setEnabled(false);
+        jCheckBoxOutlook.setEnabled(false);
+    }//GEN-LAST:event_jCheckBoxGmailActionPerformed
+
+    private void jCheckBoxOutlookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxOutlookActionPerformed
+        jCheckBoxGmail.setEnabled(false);
+        jCheckBoxYahoo.setEnabled(false);
+        jCheckBoxOutlook.setEnabled(false);
+    }//GEN-LAST:event_jCheckBoxOutlookActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMin;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JButton jButtonSend;
+    private javax.swing.JCheckBox jCheckBoxGmail;
+    private javax.swing.JCheckBox jCheckBoxOutlook;
+    private javax.swing.JCheckBox jCheckBoxYahoo;
     private javax.swing.JFileChooser jFileChooserFacturaPDF;
     private javax.swing.JLabel jLabelCabecera;
     private javax.swing.JLabel jLabelDestinatario;
     private javax.swing.JLabel jLabelFileBody;
     private javax.swing.JLabel jLabelFileChooser;
     private javax.swing.JLabel jLabelFileSubject;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

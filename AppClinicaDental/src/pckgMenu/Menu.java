@@ -11,7 +11,7 @@ import pckgAppointment.FrameAppointment;
 import pckgConsultation.FrameConsultation;
 import pkgServicie.FrameService;
 import pckgPaciente.FramePatient;
-import email.FormMail;
+import pckgEnvioFactura.FormMail;
 
 /**
  *
@@ -205,9 +205,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonServiceActionPerformed
 
     private void jButtonConsulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsulActionPerformed
-//        FrameConsultation frame = new FrameConsultation();
-//        frame.setVisible(true);
-//        this.setVisible(false);
+        FrameConsultation frame = new FrameConsultation();
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonConsulActionPerformed
 
     private void jButtonAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppointActionPerformed
