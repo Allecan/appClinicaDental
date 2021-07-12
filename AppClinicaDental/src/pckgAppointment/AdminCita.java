@@ -5,6 +5,7 @@
  */
 package pckgAppointment;
 
+import ClasesAbstractas.FormatDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +18,7 @@ import pckgPaciente.PatientSQL;
  *
  * @author allec
  */
-class AdminCita {
+class AdminCita extends FormatDate {
 
     private CitaSQL csql = new CitaSQL();
     private PatientSQL psql = new PatientSQL();
@@ -57,7 +58,7 @@ class AdminCita {
         }
     }
 
-    public boolean cancelAppoint(String idCita) { 
+    public boolean cancelAppoint(String idCita) {
         if (csql.updateAppoint(Integer.parseInt(idCita)) == true) {
             return true;
         } else {
@@ -81,24 +82,5 @@ class AdminCita {
             modelTable.addRow(datos);
         }
         return modelTable;
-    }
-
-    private String dateFormat(Date date, String format) {
-        SimpleDateFormat formato = new SimpleDateFormat(format);
-        if (date != null) {
-            return formato.format(date);
-        }
-        return null;
-    }
-
-    private String timeFormat(String time, String formatIn, String formatOut) {
-        SimpleDateFormat formatter = new SimpleDateFormat(formatIn);
-        Date date;
-        try {
-            date = formatter.parse(time);
-            return dateFormat(date, formatOut);
-        } catch (ParseException ex) {
-            return null;
-        }
     }
 }

@@ -5,33 +5,32 @@
  */
 package pckgConsultation;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Iinterfazes.iControlUI;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 import pckgMenu.MenuMain;
+import pckgReporte.Pdf;
+import pkgServicie.ServiceSQL;
 
 /**
  *
  * @author allec
  */
-public class FrameConsultation extends javax.swing.JFrame {
+public class FrameConsultation extends javax.swing.JFrame implements iControlUI{
 
-    int x,y;
-    ConsultationManegement cm = new ConsultationManegement();
+    private DefaultTableModel modeloTable = new DefaultTableModel();
+    private int x, y;
+    private ConsultationManegement cm;  
+
     /**
      * Creates new form FrameSales
      */
     public FrameConsultation() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        jComboBoxService.addItem("Servicios");
-       
-        try {
-            jComboBoxService.setModel(cm.ListService());
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(FrameConsultation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setPropertiesGUI();
+        cm = new ConsultationManegement();
     }
 
     /**
@@ -43,68 +42,74 @@ public class FrameConsultation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jButtonMinimize = new javax.swing.JButton();
+        jButtonMin = new javax.swing.JButton();
         jButtonClose = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabelCabecera = new javax.swing.JLabel();
-        jLabelServicio1 = new javax.swing.JLabel();
-        jLabelServicio = new javax.swing.JLabel();
-        jComboBoxService = new javax.swing.JComboBox<>();
-        jButtonSave = new javax.swing.JButton();
-        jButtonAddService = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableServiceData1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableServiceData = new javax.swing.JTable();
+        jPanelFondo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaObservaciones = new javax.swing.JTextArea();
-
-        jLabel1.setText("jLabel1");
+        jLabelObservations = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
+        jLabelSelectAppoint1 = new javax.swing.JLabel();
+        jComboBoxService = new javax.swing.JComboBox<>();
+        jLabelTotServicies = new javax.swing.JLabel();
+        jButtonSave = new javax.swing.JButton();
+        jButtonNewC = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableServiceData = new javax.swing.JTable();
+        jLabelSelectService2 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabelTotal = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableAppoints = new javax.swing.JTable();
+        jLabelNotificacion = new javax.swing.JLabel();
+        jButtonFactura = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 820));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/min1.png"))); // NOI18N
-        jButtonMinimize.setBorderPainted(false);
-        jButtonMinimize.setContentAreaFilled(false);
-        jButtonMinimize.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/min2.png"))); // NOI18N
-        jButtonMinimize.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/minus.png"))); // NOI18N
-        jButtonMinimize.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/min1.png"))); // NOI18N
+        jButtonMin.setBorder(null);
+        jButtonMin.setBorderPainted(false);
+        jButtonMin.setContentAreaFilled(false);
+        jButtonMin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonMin.setFocusPainted(false);
+        jButtonMin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonMin.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/min2.png"))); // NOI18N
+        jButtonMin.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/min2.png"))); // NOI18N
+        jButtonMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMinimizeActionPerformed(evt);
+                jButtonMinActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 50, 40));
+        getContentPane().add(jButtonMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 50, 50));
 
-        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/exit1.png"))); // NOI18N
+        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/exit1.png"))); // NOI18N
+        jButtonClose.setBorder(null);
         jButtonClose.setBorderPainted(false);
         jButtonClose.setContentAreaFilled(false);
-        jButtonClose.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButtonClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pkgImgService/exit2.png"))); // NOI18N
-        jButtonClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/exit2.png"))); // NOI18N
+        jButtonClose.setFocusPainted(false);
+        jButtonClose.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/exit2.png"))); // NOI18N
+        jButtonClose.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/exit2.png"))); // NOI18N
         jButtonClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCloseActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 50, 40));
+        getContentPane().add(jButtonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 60, 50));
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Consulta");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, -1, 50));
 
         jLabelCabecera.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabelCabecera.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgMenu/imgs/barra.png"))); // NOI18N
-        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelCabecera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/barra.png"))); // NOI18N
+        jLabelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
         jLabelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabelCabeceraMouseDragged(evt);
@@ -115,64 +120,73 @@ public class FrameConsultation extends javax.swing.JFrame {
                 jLabelCabeceraMousePressed(evt);
             }
         });
-        jPanel1.add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+        getContentPane().add(jLabelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 50));
 
-        jLabelServicio1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
-        jLabelServicio1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelServicio1.setText("Observaciones");
-        jPanel1.add(jLabelServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 590, -1, -1));
+        jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelServicio.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
-        jLabelServicio.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelServicio.setText("Seleccione Servicio:");
-        jPanel1.add(jLabelServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jTextAreaObservaciones.setColumns(20);
+        jTextAreaObservaciones.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jTextAreaObservaciones.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaObservaciones);
 
-        jComboBoxService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicios" }));
-        jComboBoxService.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBoxServiceMouseClicked(evt);
-            }
-        });
+        jPanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 990, 100));
+
+        jLabelObservations.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelObservations.setText("Observaciones:");
+        jPanelFondo.add(jLabelObservations, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 120, 30));
+
+        jLabelTitle.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
+        jLabelTitle.setText("Registrar consulta");
+        jPanelFondo.add(jLabelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabelSelectAppoint1.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelSelectAppoint1.setText("Seleccione la cita:");
+        jPanelFondo.add(jLabelSelectAppoint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 160, 30));
+
+        jComboBoxService.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jComboBoxService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicios..." }));
+        jComboBoxService.setFocusable(false);
         jComboBoxService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxServiceActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxService, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 160, -1));
+        jPanelFondo.add(jComboBoxService, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 990, 30));
 
-        jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/diskette.png"))); // NOI18N
+        jLabelTotServicies.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelTotServicies.setText("Total: Q.");
+        jPanelFondo.add(jLabelTotServicies, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 430, 80, 30));
+
+        jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonSave1.png"))); // NOI18N
+        jButtonSave.setBorder(null);
         jButtonSave.setBorderPainted(false);
         jButtonSave.setContentAreaFilled(false);
-        jButtonSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/diskette (1).png"))); // NOI18N
-        jPanel1.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 750, 70, 50));
-
-        jButtonAddService.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/right-arrow.png"))); // NOI18N
-        jButtonAddService.setBorderPainted(false);
-        jButtonAddService.setContentAreaFilled(false);
-        jButtonAddService.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/right-arrow (1).png"))); // NOI18N
-        jButtonAddService.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonSave.setFocusPainted(false);
+        jButtonSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonSave2.png"))); // NOI18N
+        jButtonSave.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonSave2.png"))); // NOI18N
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddServiceActionPerformed(evt);
+                jButtonSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAddService, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 80, 40));
+        jPanelFondo.add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, -1, -1));
 
-        jTableServiceData1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTableServiceData1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
+        jButtonNewC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/newC1.png"))); // NOI18N
+        jButtonNewC.setBorder(null);
+        jButtonNewC.setBorderPainted(false);
+        jButtonNewC.setContentAreaFilled(false);
+        jButtonNewC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonNewC.setFocusPainted(false);
+        jButtonNewC.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/newC2.png"))); // NOI18N
+        jButtonNewC.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/newC2.png"))); // NOI18N
+        jButtonNewC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNewCActionPerformed(evt);
             }
-        ));
-        jTableServiceData1.setCellSelectionEnabled(true);
-        jTableServiceData1.setFocusable(false);
-        jTableServiceData1.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        jTableServiceData1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(jTableServiceData1);
-
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 530, 220));
+        });
+        jPanelFondo.add(jButtonNewC, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 47, 42));
 
         jTableServiceData.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTableServiceData.setModel(new javax.swing.table.DefaultTableModel(
@@ -186,30 +200,70 @@ public class FrameConsultation extends javax.swing.JFrame {
         jTableServiceData.setCellSelectionEnabled(true);
         jTableServiceData.setFocusable(false);
         jTableServiceData.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTableServiceData.setShowGrid(false);
+        jTableServiceData.setShowVerticalLines(true);
         jTableServiceData.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTableServiceData);
+        jScrollPane4.setViewportView(jTableServiceData);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 530, 180));
+        jPanelFondo.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1150, 110));
 
-        jTextAreaObservaciones.setColumns(20);
-        jTextAreaObservaciones.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaObservaciones);
+        jLabelSelectService2.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabelSelectService2.setText("Seleccione servicio:");
+        jPanelFondo.add(jLabelSelectService2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, 30));
+        jPanelFondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 460, 120, 10));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 610, 530, 150));
+        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelTotal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabelTotal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanelFondo.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 430, 120, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 820));
+        jTableAppoints.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTableAppoints.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableAppoints.setCellSelectionEnabled(true);
+        jTableAppoints.setFocusable(false);
+        jTableAppoints.setSelectionBackground(new java.awt.Color(102, 153, 255));
+        jTableAppoints.setShowGrid(false);
+        jTableAppoints.setShowVerticalLines(true);
+        jTableAppoints.getTableHeader().setReorderingAllowed(false);
+        jTableAppoints.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAppointsMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jTableAppoints);
+
+        jPanelFondo.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1150, 140));
+
+        jLabelNotificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jPanelFondo.add(jLabelNotificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 730, 250, 40));
+
+        jButtonFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonBill1.png"))); // NOI18N
+        jButtonFactura.setBorder(null);
+        jButtonFactura.setBorderPainted(false);
+        jButtonFactura.setContentAreaFilled(false);
+        jButtonFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonFactura.setFocusPainted(false);
+        jButtonFactura.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFactura.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonBill2.png"))); // NOI18N
+        jButtonFactura.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgConsultation/img/buttonBill2.png"))); // NOI18N
+        jButtonFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFacturaActionPerformed(evt);
+            }
+        });
+        jPanelFondo.add(jButtonFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 640, -1, -1));
+
+        getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinimizeActionPerformed
-        this.setState(ICONIFIED);
-    }//GEN-LAST:event_jButtonMinimizeActionPerformed
-
-    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
-        dispose();
-        MenuMain.menuVisible();
-    }//GEN-LAST:event_jButtonCloseActionPerformed
 
     private void jLabelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCabeceraMouseDragged
         //metodo para establecer la posicion de la ventana cuando se arrastre el boton por la cabecera
@@ -222,75 +276,118 @@ public class FrameConsultation extends javax.swing.JFrame {
         y = evt.getY();
     }//GEN-LAST:event_jLabelCabeceraMousePressed
 
+    private void jButtonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinActionPerformed
+        this.setState(ICONIFIED);
+    }//GEN-LAST:event_jButtonMinActionPerformed
+
+    private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
+        dispose();
+        MenuMain.menuVisible();
+    }//GEN-LAST:event_jButtonCloseActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        String total = jLabelTotal.getText();
+        String observaciones = jTextAreaObservaciones.getText();
+        if (cm.updateConsul(total, observaciones) == true) {
+            jLabelNotificacion.setForeground(new Color(30, 215, 96));
+            jLabelNotificacion.setText("Registro exitoso");
+        } else {
+            jLabelNotificacion.setForeground(Color.RED);
+            jLabelNotificacion.setText("E R R O R al guardar, revise los campos");
+        }
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jButtonNewCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewCActionPerformed
+        setInicialComponents();
+    }//GEN-LAST:event_jButtonNewCActionPerformed
+
     private void jComboBoxServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxServiceActionPerformed
-         
+        ConsultationSQL consql = new ConsultationSQL();
+        ServiceSQL ssql = new ServiceSQL();
+        int idServicio = Character.getNumericValue(jComboBoxService.getSelectedItem().toString().charAt(0));
+        float total = 0;
+
+        modeloTable.addRow(ssql.selectServiceById(idServicio));
+        consql.insertConsulDetail(idServicio);
+
+        for (int i = 0; i < jTableServiceData.getRowCount(); i++) {
+            total = total + Float.parseFloat(jTableServiceData.getValueAt(i, 2).toString());
+        }
+
+        jLabelTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jComboBoxServiceActionPerformed
 
-    private void jComboBoxServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxServiceMouseClicked
-        
-    }//GEN-LAST:event_jComboBoxServiceMouseClicked
-
-    private void jButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddServiceActionPerformed
-        String fecha = jTableServiceData.getModel().getValueAt(jTableServiceData.getSelectedRow(), 2).toString();
-        String hora = jTableServiceData.getModel().getValueAt(jTableServiceData.getSelectedRow(), 3).toString();
-//        String paciente= jTableServiceData.getModel().getValueAt(jTableServiceData.getSelectedRow(), 1).toString();
-        String observaciones = jTextAreaObservaciones.getText();
-        cm.getToInsert(jComboBoxService.getSelectedItem().toString(), fecha, hora, observaciones);  
-    }//GEN-LAST:event_jButtonAddServiceActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameConsultation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jTableAppointsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAppointsMouseClicked
+        String idCita = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 3).toString();
+        if (cm.registryConsul(idCita) == true) {
+            jLabelNotificacion.setForeground(new Color(30, 215, 96));
+            jLabelNotificacion.setText("Consulta creada");
+        } else {
+            jLabelNotificacion.setForeground(Color.RED);
+            jLabelNotificacion.setText("E R R O R");
         }
-        //</editor-fold>
-        //</editor-fold>
+        jTableAppoints.setEnabled(false);
+        jTableAppoints.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jTableAppointsMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrameConsultation().setVisible(true);
-            }
-        });
-    }
+    private void jButtonFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFacturaActionPerformed
+        Pdf pdf = new Pdf();
+        String Nombre = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 0).toString();
+        String tot = jLabelTotal.getText();
+        pdf.generatePdf(Nombre, tot, jTableServiceData);
+    }//GEN-LAST:event_jButtonFacturaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddService;
     private javax.swing.JButton jButtonClose;
-    private javax.swing.JButton jButtonMinimize;
+    private javax.swing.JButton jButtonFactura;
+    private javax.swing.JButton jButtonMin;
+    private javax.swing.JButton jButtonNewC;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox<String> jComboBoxService;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCabecera;
-    private javax.swing.JLabel jLabelServicio;
-    private javax.swing.JLabel jLabelServicio1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelNotificacion;
+    private javax.swing.JLabel jLabelObservations;
+    private javax.swing.JLabel jLabelSelectAppoint1;
+    private javax.swing.JLabel jLabelSelectService2;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelTotServicies;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTable jTableAppoints;
     private javax.swing.JTable jTableServiceData;
-    private javax.swing.JTable jTableServiceData1;
     private javax.swing.JTextArea jTextAreaObservaciones;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+      public void setPropertiesGUI() {
+        this.setLocationRelativeTo(null);
+        this.setBackground(new Color(0, 0, 0, 0));
+        jPanelFondo.setBackground(Color.WHITE);
+        jComboBoxService.setBackground(Color.WHITE);
+        jTableAppoints.setDefaultEditor(Object.class, null);
+        jTableServiceData.setDefaultEditor(Object.class, null);
+        UIManager.put("ToolTip.background", new Color(0xEDF0F2));
+        UIManager.put("ToolTip.foreground", Color.BLACK);
+        UIManager.put("ToolTip.font", new Font("Arial", Font.PLAIN, 12));
+        jButtonNewC.setToolTipText("Nueva Consulta");
+        jTextAreaObservaciones.setLineWrap(true);
+    }
+
+    @Override
+    public void setInicialComponents() {
+        jTableAppoints.setModel(cm.listApointments());
+        jTableAppoints.getColumnModel().getColumn(3).setMinWidth(0);
+        jTableAppoints.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTableAppoints.getColumnModel().getColumn(3).setWidth(0);
+        jComboBoxService.setModel(cm.listService());
+        modeloTable.addColumn("Codigo");
+        modeloTable.addColumn("Nombre");
+        modeloTable.addColumn("Precio");
+        jTableServiceData.setModel(modeloTable);
+    }
 }
