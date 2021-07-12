@@ -5,12 +5,12 @@
  */
 package pckgConsultation;
 
-import Reportes.Pdf;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import pckgMenu.MenuMain;
+import pckgReporte.Pdf;
 import pkgServicie.ServiceSQL;
 
 /**

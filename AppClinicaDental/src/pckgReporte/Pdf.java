@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reportes;
+package pckgReporte;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -37,7 +37,7 @@ public class Pdf {
     public void pdf(String NombrePaciente, String Total, JTable jTableServicies) {
         try {
             FileOutputStream archivo;
-            File file = new File("src/pdf/factura.pdf");
+            File file = new File("src/pckgReporte/pdf/factura.pdf");
             archivo = new FileOutputStream(file);
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
@@ -47,13 +47,13 @@ public class Pdf {
             Paragraph fecha = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLACK);
             fecha.add(Chunk.NEWLINE);
-            Date date = new Date();
-            fecha.add("Fecha: " + new SimpleDateFormat("dd-MM-yyyy").format(date) + "\n\n");
+            Date date = new Date();            
+            fecha.add("Fecha: " + dateFormat(date, "dd-MM-yyyy") + "\n" + "Hora: " + dateFormat(date, "hh:mm aa"));
 
             PdfPTable Encabezado = new PdfPTable(3);
-            Encabezado.setWidthPercentage(50);
+            Encabezado.setWidthPercentage(100);
             Encabezado.getDefaultCell().setBorder(0);
-            float[] ColumnaEncabezado = new float[]{60f, 10f, 70f};
+            float[] ColumnaEncabezado = new float[]{10f, 70f, 40f};
             Encabezado.setWidths(ColumnaEncabezado);
             Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
             Encabezado.addCell(img);
@@ -62,9 +62,9 @@ public class Pdf {
             String NombreDr = "Kelvin Cano";
             String frase1 = "ODONTOLOGIA GENERAL Y ORTODONCIA";
             String frase2 = "Colegiado 1891";
-            String Dir = "Huehuetenango";
+            String Dir = "4av, 1-82 Chiantla, Huehuetenango";
 
-            Encabezado.addCell("");
+            //Encabezado.addCell("");
             Encabezado.addCell(NombreClinica + "\nDoctor: " + NombreDr + "\n" + frase1 + "\n" + frase2 + "\nDireccion: " + Dir);
             Encabezado.addCell(fecha);
             doc.add(Encabezado);
@@ -115,5 +115,13 @@ public class Pdf {
         } catch (IOException ex) {
             Logger.getLogger(Pdf.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private String dateFormat(Date date, String format) {
+        SimpleDateFormat formato = new SimpleDateFormat(format);
+        if (date != null) {
+            return formato.format(date);
+        }
+        return null;
     }
 }
