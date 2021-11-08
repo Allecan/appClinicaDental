@@ -42,30 +42,47 @@ public class Pdf extends FormatDate{
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
+            
+            //Imagen
             Image img = Image.getInstance("src/pckgReporte/imgs/logo.jpg");
-
+           /* Image image = null;
+            try {
+                image =  Image.getInstance(img);//carga imagen
+                image.scaleAbsolute(40,50);//cambia tamaño
+                image.setAbsolutePosition(25, 705);//coloca imagen en la posicion
+                
+            } catch (Exception e) {
+            }
+            doc.add(image);*/
+            
+            //Titulo del documento
+            Font cursiva = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.ITALIC, BaseColor.BLACK);
+            Paragraph titulo = new Paragraph("Clinica Dental Dr. Kelvin Cano",cursiva);
+            titulo.setAlignment(1);
+            doc.add(titulo);
+                        
+            //Fecha del documento
             Paragraph fecha = new Paragraph();
-            Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLACK);
+            Font negrita = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK);
             fecha.add(Chunk.NEWLINE);
             Date date = new Date();            
-            fecha.add("Fecha: " + dateFormat(date, "dd-MM-yyyy") + "\n" + "Hora: " + dateFormat(date, "hh:mm aa"));
-
+            fecha.add("\n"+"Emision de Factura:"+"\n"+ "Fecha: " + dateFormat(date, "dd-MM-yyyy") + "\n" + "Hora: " + dateFormat(date, "hh:mm aa"));
+                
             PdfPTable Encabezado = new PdfPTable(3);
             Encabezado.setWidthPercentage(100);
             Encabezado.getDefaultCell().setBorder(0);
-            float[] ColumnaEncabezado = new float[]{10f, 70f, 40f};
+            float[] ColumnaEncabezado = new float[]{10f, 80f, 40f};
             Encabezado.setWidths(ColumnaEncabezado);
             Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
             Encabezado.addCell(img);
 
-            String NombreClinica = "Clinica Dental";
-            String NombreDr = "Kelvin Cano";
             String frase1 = "ODONTOLOGIA GENERAL Y ORTODONCIA";
             String frase2 = "Colegiado 1891";
             String Dir = "4av, 1-82 Chiantla, Huehuetenango";
+            String Tel = "7778-9015";
 
             //Encabezado.addCell("");
-            Encabezado.addCell(NombreClinica + "\nDoctor: " + NombreDr + "\n" + frase1 + "\n" + frase2 + "\nDireccion: " + Dir);
+            Encabezado.addCell("\n" +frase1 + "\n" + frase2 + "\nDireccion: " + Dir + "\nTelefono: " + Tel);
             Encabezado.addCell(fecha);
             doc.add(Encabezado);
 
@@ -76,14 +93,14 @@ public class Pdf extends FormatDate{
 
             PdfPTable tabla = new PdfPTable(2);
             tabla.setWidthPercentage(100);
-            float[] ColumnaTabla = new float[]{30f, 15f};
+            float[] ColumnaTabla = new float[]{40f, 15f};
             tabla.setWidths(ColumnaTabla);
-            tabla.setHorizontalAlignment(Element.ALIGN_LEFT);
+            tabla.setHorizontalAlignment(Element.ALIGN_CENTER);
             PdfPCell cl1 = new PdfPCell(new Phrase("Servicio", negrita));
             PdfPCell cl2 = new PdfPCell(new Phrase("Costo", negrita));
 
-            cl1.setBackgroundColor(BaseColor.ORANGE);
-            cl2.setBackgroundColor(BaseColor.ORANGE);
+            cl1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cl2.setBackgroundColor(BaseColor.LIGHT_GRAY);
 
             tabla.addCell(cl1);
             tabla.addCell(cl2);
@@ -101,7 +118,7 @@ public class Pdf extends FormatDate{
 
             Paragraph info = new Paragraph();
             info.add(Chunk.NEWLINE);
-            info.add("Total: Q. " + Total);
+            info.add("Total a pagar: Q. " + Total);
 
             info.setAlignment(Element.ALIGN_RIGHT);
             doc.add(info);

@@ -462,7 +462,7 @@ public class FrameAppointment extends javax.swing.JFrame implements iControlUI{
                 bandera3 = true;
             }
             //SI todo esta correcto se procede al registro de la cita
-            if (bandera1 == true && bandera2 == true && bandera3 == true) {          
+            if (bandera1 == true && bandera2 == true && bandera3 == true) {
                 boolean bandera = adminCita.registerAppoint(fecha, hora, dpi);
                 if (bandera == true) {
                     jLabelNotificacion.setForeground(new Color(30, 215, 96));

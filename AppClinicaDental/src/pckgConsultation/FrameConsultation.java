@@ -333,8 +333,12 @@ public class FrameConsultation extends javax.swing.JFrame implements iControlUI{
     private void jButtonFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFacturaActionPerformed
         Pdf pdf = new Pdf();
         String Nombre = jTableAppoints.getValueAt(jTableAppoints.getSelectedRow(), 0).toString();
+//        String Direccion;
+//        
+//        Direccion = "SELECT direccion FROM paciente WHERE(nombre ='" + Nombre + "')";
         String tot = jLabelTotal.getText();
         pdf.generatePdf(Nombre, tot, jTableServiceData);
+        
     }//GEN-LAST:event_jButtonFacturaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

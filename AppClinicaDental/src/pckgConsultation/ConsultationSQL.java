@@ -84,4 +84,8 @@ public class ConsultationSQL {
             return 0;
         }
     }
+    
+//    private String getLastConsul(){
+//      String sql = "SELECT direccion FROM paciente WHERE idPaciente ";  
+//    }
 }
