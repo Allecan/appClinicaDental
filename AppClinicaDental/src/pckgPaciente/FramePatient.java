@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
 import java.util.*;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -25,6 +26,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import pckgMenu.MenuMain;
 
 /**
@@ -64,7 +66,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         labelTitutloAgregar = new javax.swing.JLabel();
         jLabelDirecc = new javax.swing.JLabel();
         jComboMes = new javax.swing.JComboBox<>();
-        jComboAño = new javax.swing.JComboBox<>();
         jLabelNotificacion = new javax.swing.JLabel();
         jLabelNotiDPI = new javax.swing.JLabel();
         jLabelNotiCel = new javax.swing.JLabel();
@@ -82,6 +83,10 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLabeiCO1 = new javax.swing.JLabel();
         jLabelDPI = new javax.swing.JLabel();
         jComboDia = new javax.swing.JComboBox<>();
+        jFtdTxtANIO = new RoundJFTextField();
+        jFtdTxtDPI = new RoundJFTextField();
+        jFtdTxtCEL = new RoundJFTextField();
+        jFtdTxtTEL = new RoundJFTextField();
         jPanelVerPaciente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
@@ -183,12 +188,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jComboMes.setFocusable(false);
         jPanelAgregarPaciente.add(jComboMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 615, 160, 35));
 
-        jComboAño.setBackground(new java.awt.Color(206, 248, 233));
-        jComboAño.setFont(new java.awt.Font("Calibri", 0, 25)); // NOI18N
-        jComboAño.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboAño.setFocusable(false);
-        jPanelAgregarPaciente.add(jComboAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 615, 95, 35));
-
         jLabelNotificacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jPanelAgregarPaciente.add(jLabelNotificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 740, 350, 40));
 
@@ -210,6 +209,14 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jTextFieldDPI.setBorder(null);
         jTextFieldDPI.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldDPI.setPreferredSize(new java.awt.Dimension(400, 35));
+        jTextFieldDPI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldDPIFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldDPIFocusLost(evt);
+            }
+        });
         jTextFieldDPI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldDPIKeyReleased(evt);
@@ -293,6 +300,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLabelIMG2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/Vector2.png"))); // NOI18N
         jPanelAgregarPaciente.add(jLabelIMG2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 700, 580, 80));
 
+        jLabelIMG3.setBackground(new java.awt.Color(255, 255, 255));
         jLabelIMG3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/cepilloR.png"))); // NOI18N
         jPanelAgregarPaciente.add(jLabelIMG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, 170, 210));
 
@@ -308,6 +316,59 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jComboDia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboDia.setFocusable(false);
         jPanelAgregarPaciente.add(jComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 615, 85, 35));
+
+        jFtdTxtANIO.setBorder(null);
+        try {
+            jFtdTxtANIO.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFtdTxtANIO.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jFtdTxtANIO.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jFtdTxtANIO.setFont(new java.awt.Font("Calibri", 0, 25)); // NOI18N
+        jPanelAgregarPaciente.add(jFtdTxtANIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 615, 95, 35));
+
+        jFtdTxtDPI.setBorder(null);
+        try {
+            jFtdTxtDPI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#### ##### ####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFtdTxtDPI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jFtdTxtDPI.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jFtdTxtDPI.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jFtdTxtDPI.setFont(new java.awt.Font("Calibri", 0, 25)); // NOI18N
+        jFtdTxtDPI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFtdTxtDPIFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFtdTxtDPIFocusLost(evt);
+            }
+        });
+        jPanelAgregarPaciente.add(jFtdTxtDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 100, 240, 35));
+
+        jFtdTxtCEL.setBorder(null);
+        try {
+            jFtdTxtCEL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#### ####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFtdTxtCEL.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jFtdTxtCEL.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jFtdTxtCEL.setFont(new java.awt.Font("Calibri", 0, 25)); // NOI18N
+        jPanelAgregarPaciente.add(jFtdTxtCEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 530, 95, 35));
+
+        jFtdTxtTEL.setBorder(null);
+        try {
+            jFtdTxtTEL.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#### ####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFtdTxtTEL.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jFtdTxtTEL.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jFtdTxtTEL.setFont(new java.awt.Font("Calibri", 0, 25)); // NOI18N
+        jPanelAgregarPaciente.add(jFtdTxtTEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 95, 35));
 
         getContentPane().add(jPanelAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
 
@@ -457,14 +518,14 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     }//GEN-LAST:event_jTextFieldSearchingKeyReleased
 
     private void jTextFieldDPIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDPIKeyReleased
-        if (jTextFieldDPI.getText().matches("^[0-9]*$")) {
-            jLabelNotiDPI.setText("");
-            jLabelNotiDPI.setToolTipText("");
-        } else {
-            jLabelNotiDPI.setForeground(Color.red);
-            jLabelNotiDPI.setText("*");
-            jLabelNotiDPI.setToolTipText("El campo contiene errores");
-        }
+//        if (jTextFieldDPI.getText().matches("^[0-9]*$")) {
+//            jLabelNotiDPI.setText("");
+//            jLabelNotiDPI.setToolTipText("");
+//        } else {
+//            jLabelNotiDPI.setForeground(Color.red);
+//            jLabelNotiDPI.setText("*");
+//            jLabelNotiDPI.setToolTipText("El campo contiene errores");
+//        }
     }//GEN-LAST:event_jTextFieldDPIKeyReleased
 
     private void jTextFieldTelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTelKeyReleased
@@ -478,17 +539,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         }
     }//GEN-LAST:event_jTextFieldTelKeyReleased
 
-    private void jTextFieldCelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCelKeyReleased
-        if (jTextFieldCel.getText().matches("^[0-9]*$")) {
-            jLabelNotiCel.setText("");
-            jLabelNotiCel.setToolTipText("");
-        } else {
-            jLabelNotiCel.setForeground(Color.red);
-            jLabelNotiCel.setText("*");
-            jLabelNotiCel.setToolTipText("El campo contiene errores");
-        }
-    }//GEN-LAST:event_jTextFieldCelKeyReleased
-
     private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
         Object[] botones = {"Aceptar", "Cancelar"};
 
@@ -501,7 +551,8 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
                 String nombre = jTextFieldNombre.getText();
                 String apellido = jTextFieldApellido.getText();
                 String[] fechaNac = new String[3];
-                fechaNac[0] = String.valueOf(jComboAño.getSelectedItem());
+//                fechaNac[0] = String.valueOf(jComboAño.getSelectedItem());
+                fechaNac[0] = jFtdTxtANIO.getText();
                 fechaNac[1] = String.valueOf(jComboMes.getSelectedItem());
                 fechaNac[2] = String.valueOf(jComboDia.getSelectedItem());
                 String direccion = jTextFieldDirec.getText();
@@ -510,12 +561,14 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
                 try {
                     boolean status = adminPaciente.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
                     if (status == true) {
-                        jLabelNotificacion.setForeground(new Color(30, 215, 96));
-                        jLabelNotificacion.setText("Registro correcto");
+//                        jLabelNotificacion.setForeground(new Color(30, 215, 96));
+//                        jLabelNotificacion.setText("Registro correcto");
+                        notiOKNT(1);
 //                        setInicialComponents();
                     } else {
-                        jLabelNotificacion.setForeground(Color.red);
-                        jLabelNotificacion.setText("ERROR en el guardado, revise los campos");
+                        notiOKNT(0);
+//                        jLabelNotificacion.setForeground(Color.red);
+//                        jLabelNotificacion.setText("ERROR en el guardado, revise los campos");
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -530,13 +583,69 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         }
     }//GEN-LAST:event_jButtonSaveDataPatientActionPerformed
 
+    private void jTextFieldDPIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDPIFocusLost
+//        if (jTextFieldDPI.getText().length() == 13) {
+//            if (jTextFieldDPI.getText().matches("^[0-9]*$")) {
+//                jTextFieldDPI.setBackground(Color.decode("#19DEA3"));
+//                jLabelNotiDPI.setText("");
+//                jLabelNotiDPI.setToolTipText("");
+//            } else {
+//                jLabelNotiDPI.setForeground(Color.red);
+//                jTextFieldDPI.setBackground(Color.decode("#FFA6A6"));
+//                jLabelNotiDPI.setText("*");
+//                jLabelNotiDPI.setToolTipText("El campo contiene errores");
+//            }
+//
+//        } else {
+//            jTextFieldDPI.setBackground(Color.decode("#FFA6A6"));
+//            jLabelNotiDPI.setForeground(Color.red);
+//            jLabelNotiDPI.setText("*");
+//            jLabelNotiDPI.setToolTipText("El campo debe contener 13 numeros");
+//        }
+    }//GEN-LAST:event_jTextFieldDPIFocusLost
+
+    private void jTextFieldDPIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDPIFocusGained
+        jTextFieldDPI.setBackground(Color.decode("#CEF8E9"));
+    }//GEN-LAST:event_jTextFieldDPIFocusGained
+
+    private void jTextFieldCelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCelKeyReleased
+        if (jTextFieldCel.getText().matches("^[0-9]*$")) {
+            jLabelNotiCel.setText("");
+            jLabelNotiCel.setToolTipText("");
+        } else {
+            jLabelNotiCel.setForeground(Color.red);
+            jLabelNotiCel.setText("*");
+            jLabelNotiCel.setToolTipText("El campo contiene errores");
+        }
+    }//GEN-LAST:event_jTextFieldCelKeyReleased
+
+    private void jFtdTxtDPIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtDPIFocusGained
+        jFtdTxtDPI.setBackground(Color.decode("#CEF8E9"));
+    }//GEN-LAST:event_jFtdTxtDPIFocusGained
+
+    private void jFtdTxtDPIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtDPIFocusLost
+        if (jFtdTxtDPI.getText().length() == 13) {
+            jFtdTxtDPI.setBackground(Color.decode("#19DEA3"));
+            jLabelNotiDPI.setText("");
+            jLabelNotiDPI.setToolTipText("");
+        } else {
+            jFtdTxtDPI.setBackground(Color.decode("#FFA6A6"));
+            jLabelNotiDPI.setForeground(Color.red);
+            jLabelNotiDPI.setText("*");
+            jLabelNotiDPI.setToolTipText("El campo debe contener 13 numeros");
+        }
+    }//GEN-LAST:event_jFtdTxtDPIFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClose;
     private javax.swing.JButton jButtonMin;
     private javax.swing.JButton jButtonSaveDataPatient;
-    private javax.swing.JComboBox<String> jComboAño;
     private javax.swing.JComboBox<String> jComboDia;
     private javax.swing.JComboBox<String> jComboMes;
+    private javax.swing.JFormattedTextField jFtdTxtANIO;
+    private javax.swing.JFormattedTextField jFtdTxtCEL;
+    private javax.swing.JFormattedTextField jFtdTxtDPI;
+    private javax.swing.JFormattedTextField jFtdTxtTEL;
     private javax.swing.JLabel jLabeiCO1;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelBarraCabecera;
@@ -621,12 +730,21 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jTextFieldCel.setBackground(Color.decode("#CEF8E9"));
         jTextFieldCel.setBorder(border);
 
+        jFtdTxtDPI.setBackground(Color.decode("#CEF8E9"));
+        jFtdTxtDPI.setBorder(border);
+        jFtdTxtTEL.setBackground(Color.decode("#CEF8E9"));
+        jFtdTxtTEL.setBorder(border);
+        jFtdTxtCEL.setBackground(Color.decode("#CEF8E9"));
+        jFtdTxtCEL.setBorder(border);
+        jFtdTxtANIO.setBackground(Color.decode("#CEF8E9"));
+        jFtdTxtANIO.setBorder(border);
+
         jComboDia.setUI(jComboCustom.createUI(rootPane));
         jComboMes.setUI(jComboCustom.createUI(rootPane));
-        jComboAño.setUI(jComboCustom.createUI(rootPane));
+//        jComboAño.setUI(jComboCustom.createUI(rootPane));
         UIManager.put("ToolTip.background", Color.white);
         UIManager.put("ToolTip.foreground", Color.red);
-        UIManager.put("ToolTip.border",new LineBorder(Color.BLACK,0));
+        UIManager.put("ToolTip.border", new LineBorder(Color.BLACK, 0));
         UIManager.put("ToolTip.font", new Font("Calibri", Font.PLAIN, 15));
     }
 
@@ -649,23 +767,49 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jComboDia.removeAllItems();
         jComboMes.removeAllItems();
-        jComboAño.removeAllItems();
- 
+//        jComboAño.removeAllItems();
+
         jComboDia.addItem("Dia");
         jComboMes.addItem("Mes");
-        jComboAño.addItem("Año");
-        int actualYear = Calendar.getInstance().get(Calendar.YEAR);
+//        jComboAño.addItem("Año");
+//        int actualYear = Calendar.getInstance().get(Calendar.YEAR);
 
         for (int i = 1; i < 32; i++) {
             jComboDia.addItem(String.valueOf(i));
         }
-        for (int i = actualYear; i > (actualYear - 100) - 1; i--) {
-            jComboAño.addItem(String.valueOf(i));
-        }
+//        for (int i = actualYear; i > (actualYear - 100) - 1; i--) {
+//            jComboAño.addItem(String.valueOf(i));
+//        }
 
         String[] months = new DateFormatSymbols().getMonths();
         for (int i = 0; i < months.length - 1; i++) {
             jComboMes.addItem(months[i]);
+        }
+        jTextFieldDPI.setBackground(Color.decode("#CEF8E9"));
+    }
+
+    private void notiOKNT(int i) {
+        if (i == 1) {
+            ImageIcon imgicon = new ImageIcon(getClass().getResource("/pckgPaciente/imgs/icoOK.png"));
+            JLabel labelNoti = new JLabel(imgicon);
+            try {
+                Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/pckgPaciente/Capriola-Regular.ttf"));
+                Font biggerFont = font.deriveFont(Font.PLAIN, 18f);
+                labelNoti.setFont(biggerFont);
+            } catch (FontFormatException ex) {
+                ex.getMessage();
+            } catch (IOException ex) {
+                ex.getMessage();
+            }
+            labelNoti.setBackground(Color.decode("#EAFDF7"));
+            labelNoti.setOpaque(true);
+            labelNoti.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            labelNoti.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            jPanelAgregarPaciente.add(labelNoti, new AbsoluteConstraints(345, 285, 250, 250), 1);
+            labelNoti.setText("Registro Correcto " + "()");
+            PatientThread hilo = new PatientThread(labelNoti);
+            hilo.start();
+        } else if (i == 0) {
         }
     }
 }
