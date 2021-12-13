@@ -12,6 +12,7 @@ import pckgConsultation.FrameConsultation;
 import pkgServicie.FrameService;
 import pckgPaciente.FramePatient;
 import pckgEnvioFactura.FormMail;
+import pckgPaciente.ComboCustomUI;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
-        initComponents();
+        initComponents();         
         setPropertiesGUI(); //metodo para establecer las propiedades graficas del Frame Menu
     }
 

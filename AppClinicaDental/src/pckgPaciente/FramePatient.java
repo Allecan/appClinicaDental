@@ -9,8 +9,6 @@ import Iinterfazes.iControlUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
@@ -42,6 +40,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
     public FramePatient() {
         initComponents();
+       
         setPropertiesGUI();
         adminPaciente = new AdminPatient();
     }
@@ -96,6 +95,8 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiStatusNME = new javax.swing.JLabel();
         jLblNotiStatusLNME = new javax.swing.JLabel();
         jLblNotiStatusADRS = new javax.swing.JLabel();
+        jLblNotiStatusANIO = new javax.swing.JLabel();
+        jLblNotiANIO = new javax.swing.JLabel();
         jPanelVerPaciente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
@@ -226,6 +227,14 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         }
         jFtdTxtANIO.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jFtdTxtANIO.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jFtdTxtANIO.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFtdTxtANIOFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFtdTxtANIOFocusLost(evt);
+            }
+        });
         jPanelAgregarPaciente.add(jFtdTxtANIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 615, 95, 35));
 
         jFtdTxtCEL.setBorder(null);
@@ -268,7 +277,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jComboDia.setAlignmentX(0.0F);
         jComboDia.setAlignmentY(0.0F);
         jComboDia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboDia.setFocusable(false);
         jPanelAgregarPaciente.add(jComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 615, 85, 35));
 
         jComboMes.setBackground(new java.awt.Color(206, 248, 233));
@@ -388,6 +396,11 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiStatusADRS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLblNotiStatusADRS.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanelAgregarPaciente.add(jLblNotiStatusADRS, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, 55, 55));
+
+        jPanelAgregarPaciente.add(jLblNotiStatusANIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 605, 55, 55));
+
+        jLblNotiANIO.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
+        jPanelAgregarPaciente.add(jLblNotiANIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 655, 150, 20));
 
         getContentPane().add(jPanelAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
 
@@ -804,6 +817,42 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         this.jLblButton3.setIcon(null);
     }//GEN-LAST:event_jBttnExitToMenuMouseExited
 
+    private void jFtdTxtANIOFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtANIOFocusGained
+        if (jFtdTxtANIO.getText().equals(String.valueOf(year))) {
+            jFtdTxtANIO.setText("");
+            jFtdTxtANIO.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jFtdTxtANIO.setForeground(Color.black);
+        } else {
+            jLblNotiStatusANIO.setIcon(null);
+            jLblNotiANIO.setText("");
+            jFtdTxtANIO.setBackground(Color.decode("#CEF8E9"));
+            reAdjustCaret(4);
+        }
+    }//GEN-LAST:event_jFtdTxtANIOFocusGained
+
+    private void jFtdTxtANIOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtANIOFocusLost
+
+        if (jFtdTxtANIO.getText().replaceAll("\\s+", "").length() == 0) {
+            jLblNotiStatusANIO.setIcon(null);
+            jLblNotiStatusANIO.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
+            jFtdTxtANIO.setBackground(Color.decode("#FFA6A6"));
+            jLblNotiANIO.setText("Campo incompleto");
+        } else {
+            int yearLabel = Integer.parseInt(jFtdTxtANIO.getText().replaceAll("\\s+", ""));
+            if (yearLabel >= year - 100 && yearLabel <= year) {
+                jFtdTxtANIO.setBackground(Color.decode("#19DEA3"));
+                jLblNotiStatusANIO.setIcon(null);
+                jLblNotiStatusANIO.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/okICO.png")));
+                jLblNotiANIO.setText("");
+            } else {
+                jLblNotiStatusANIO.setIcon(null);
+                jLblNotiStatusANIO.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
+                jFtdTxtANIO.setBackground(Color.decode("#FFA6A6"));
+                jLblNotiANIO.setText("Año incorrecto");
+            }
+        }
+    }//GEN-LAST:event_jFtdTxtANIOFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBttnExitToMenu;
     private javax.swing.JButton jButtonClose;
@@ -830,11 +879,13 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private javax.swing.JLabel jLabelNotificacion;
     private javax.swing.JLabel jLabelTel;
     private javax.swing.JLabel jLblNotiADRS;
+    private javax.swing.JLabel jLblNotiANIO;
     private javax.swing.JLabel jLblNotiCEL;
     private javax.swing.JLabel jLblNotiDPI;
     private javax.swing.JLabel jLblNotiLNME;
     private javax.swing.JLabel jLblNotiNME;
     private javax.swing.JLabel jLblNotiStatusADRS;
+    private javax.swing.JLabel jLblNotiStatusANIO;
     private javax.swing.JLabel jLblNotiStatusCEL;
     private javax.swing.JLabel jLblNotiStatusDPI;
     private javax.swing.JLabel jLblNotiStatusLNME;
@@ -880,19 +931,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiADRS.setForeground(Color.red);
         jLblNotiTEL.setForeground(Color.red);
         jLblNotiCEL.setForeground(Color.red);
-
-        Font font2;
-        try {
-            font2 = Font.createFont(Font.TRUETYPE_FONT, new File("Capriola-Regular.ttf")).deriveFont(25f);
-            GraphicsEnvironment ge
-                    = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Capriola-Regular.ttf")));
-            jLblNotiStatusDPI.setFont(font2);
-            jLblNotiStatusTEL.setFont(font2);
-            jLblNotiStatusCEL.setFont(font2);
-        } catch (IOException | FontFormatException e) {
-            System.out.println("No encuentro la fuente TTF; ERROR: " + e);
-        }
+        jLblNotiANIO.setForeground(Color.red);
 
         Border round = new LineBorder(Color.decode("#CEF8E9"));
         Border empty = new EmptyBorder(5, 5, 0, 5);
@@ -905,9 +944,13 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jFtdTxtTEL.setBorder(border);
         jFtdTxtCEL.setBorder(border);
         jFtdTxtANIO.setBorder(border);
+//      
+        jComboDia.setUI(new ComboCustomUI());
+        jComboDia.setEditable(false);
 
-        jComboDia.setUI(jComboCustom.createUI(rootPane));
-        jComboMes.setUI(jComboCustom.createUI(rootPane));
+//        jComboDia.setUI(jComboCustom.createUI(rootPane));
+//        jComboMes.setUI(jComboCustom.createUI(rootPane));
+//       
         jLblButton1 = new JLabel();
         getContentPane().add(jLblButton1, new AbsoluteConstraints(140, 80, 170, 38), 1);
         jLblButton2 = new JLabel();
@@ -965,6 +1008,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiADRS.setText("");
         jLblNotiTEL.setText("");
         jLblNotiCEL.setText("");
+        jLblNotiANIO.setText("");
 
         jLblNotiStatusDPI.setIcon(null);
         jLblNotiStatusNME.setIcon(null);
@@ -972,7 +1016,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiStatusADRS.setIcon(null);
         jLblNotiStatusTEL.setIcon(null);
         jLblNotiStatusCEL.setIcon(null);
-//        jLblNotiStatusANIO.setIcon(null);
+        jLblNotiStatusANIO.setIcon(null);
 
         jComboDia.removeAllItems();
         jComboMes.removeAllItems();
@@ -994,7 +1038,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
             ImageIcon imgicon = new ImageIcon(getClass().getResource("/pckgPaciente/imgs/icoOK.png"));
             JLabel labelNoti = new JLabel(imgicon);
             try {
-                Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/pckgPaciente/Capriola-Regular.ttf"));
+                Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("Capriola-Regular.ttf"));
                 Font biggerFont = font.deriveFont(Font.PLAIN, 18f);
                 labelNoti.setFont(biggerFont);
             } catch (FontFormatException ex) {
@@ -1041,6 +1085,9 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
                 caretPos += 0;
             }
             jFtdTxtCEL.setCaretPosition(caretPos);
+        } else if (i == 4) {
+            int caretPos = jFtdTxtANIO.getText().replaceAll("\\s+", "").length();
+            jFtdTxtANIO.setCaretPosition(caretPos);
         }
     }
 }
