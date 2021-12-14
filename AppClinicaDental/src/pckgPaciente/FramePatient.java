@@ -101,8 +101,8 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiStatusNME = new javax.swing.JLabel();
         jLblNotiStatusLNME = new javax.swing.JLabel();
         jLblNotiStatusADRS = new javax.swing.JLabel();
-        jLblNotiStatusANIO = new javax.swing.JLabel();
-        jLblNotiANIO = new javax.swing.JLabel();
+        jLblNotiStatusFechaNac = new javax.swing.JLabel();
+        jLblNotiFechaNac = new javax.swing.JLabel();
         jPanelVerPaciente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
@@ -179,7 +179,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jTextFieldNombre.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextFieldNombre.setToolTipText("");
         jTextFieldNombre.setBorder(null);
         jTextFieldNombre.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldNombre.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -195,7 +194,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jTextFieldApellido.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldApellido.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextFieldApellido.setToolTipText("");
         jTextFieldApellido.setBorder(null);
         jTextFieldApellido.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldApellido.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -211,7 +209,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jTextFieldDirec.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldDirec.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextFieldDirec.setToolTipText("");
         jTextFieldDirec.setBorder(null);
         jTextFieldDirec.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldDirec.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -282,9 +279,25 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jComboDia.setAlignmentX(0.0F);
         jComboDia.setAlignmentY(0.0F);
         jComboDia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jComboDia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboDiaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboDiaFocusLost(evt);
+            }
+        });
         jPanelAgregarPaciente.add(jComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 615, 85, 35));
 
         jComboMes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jComboMes.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboMesFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboMesFocusLost(evt);
+            }
+        });
         jPanelAgregarPaciente.add(jComboMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 615, 160, 35));
 
         jButtonSaveDataPatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/button (1).png"))); // NOI18N
@@ -399,10 +412,10 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiStatusADRS.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanelAgregarPaciente.add(jLblNotiStatusADRS, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, 55, 55));
 
-        jPanelAgregarPaciente.add(jLblNotiStatusANIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 605, 55, 55));
+        jPanelAgregarPaciente.add(jLblNotiStatusFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 605, 55, 55));
 
-        jLblNotiANIO.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
-        jPanelAgregarPaciente.add(jLblNotiANIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 655, 150, 20));
+        jLblNotiFechaNac.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
+        jPanelAgregarPaciente.add(jLblNotiFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 655, 150, 20));
 
         getContentPane().add(jPanelAgregarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
 
@@ -585,37 +598,37 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
     private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
         Object[] botones = {"Aceptar", "Cancelar"};
-
         int opcionElegida = JOptionPane.showOptionDialog(null, " Guardar este nuevo paciente?", "Alerta", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, botones, null);
         if (opcionElegida == 0) {
-            if (jLblNotiStatusDPI.getText().equals("") && jLblNotiStatusTEL.getText().equals("")
-                    && jLblNotiStatusCEL.getText().equals("")) {
-
-                String DPI = jFtdTxtDPI.getText().replaceAll("\\s+", "");
-                String nombre = jTextFieldNombre.getText();
-                String apellido = jTextFieldApellido.getText();
-                String[] fechaNac = new String[3];
-                fechaNac[0] = jFtdTxtANIO.getText();
-                fechaNac[1] = String.valueOf(jComboMes.getSelectedItem());
-                fechaNac[2] = String.valueOf(jComboDia.getSelectedItem());
-                String direccion = jTextFieldDirec.getText();
-                String tel = jFtdTxtTEL.getText().replaceAll("\\s+", "");
-                String cel = jFtdTxtCEL.getText().replaceAll("\\s+", "");
-                try {
-                    boolean status = adminPaciente.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
-                    if (status == true) {
-                        notiOKNT(1);
-//                        setInicialComponents();
-                    } else {
-                        notiOKNT(0);
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+            if (verificarIcons(0) == true) {
+                notiOKNT(0);
             } else {
-                JOptionPane.showMessageDialog(null, "Porfavor corrija los errores dentro de los campos",
-                        "Alerta por caracteres invalidos",
-                        JOptionPane.WARNING_MESSAGE);
+                if (verificarIcons(1) == true) {
+                    System.out.println("SI");
+                    String DPI = jFtdTxtDPI.getText().replaceAll("\\s+", "");
+                    String nombre = jTextFieldNombre.getText();
+                    String apellido = jTextFieldApellido.getText();
+                    String[] fechaNac = new String[3];
+                    fechaNac[0] = jFtdTxtANIO.getText();
+                    fechaNac[1] = String.valueOf(jComboMes.getSelectedItem());
+                    fechaNac[2] = String.valueOf(jComboDia.getSelectedItem());
+                    String direccion = jTextFieldDirec.getText();
+                    String tel = jFtdTxtTEL.getText().replaceAll("\\s+", "");
+                    String cel = jFtdTxtCEL.getText().replaceAll("\\s+", "");
+                    try {
+                        boolean status = adminPaciente.registrarPaciente(DPI, nombre, apellido, fechaNac, direccion, tel, cel);
+                        if (status == true) {
+                            notiOKNT(1);
+                            setInicialComponents();
+                        } else {
+                            System.out.println("Algo salio mal en SQL");
+                        }
+                    } catch (SQLException ex) {
+                        ex.getMessage();
+                    }
+                } else {
+                    notiOKNT(0);
+                }
             }
         } else {
             System.out.println("Cancelar operacion");
@@ -825,8 +838,8 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
             jFtdTxtANIO.setFont(OpenSans);
             jFtdTxtANIO.setForeground(Color.black);
         } else {
-            jLblNotiStatusANIO.setIcon(null);
-            jLblNotiANIO.setText("");
+            jLblNotiStatusFechaNac.setIcon(null);
+            jLblNotiFechaNac.setText("");
             jFtdTxtANIO.setBackground(Color.decode("#CEF8E9"));
             reAdjustCaret(4);
         }
@@ -835,25 +848,75 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jFtdTxtANIOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtANIOFocusLost
 
         if (jFtdTxtANIO.getText().replaceAll("\\s+", "").length() == 0) {
-            jLblNotiStatusANIO.setIcon(null);
-            jLblNotiStatusANIO.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
+            jLblNotiStatusFechaNac.setIcon(null);
+            jLblNotiStatusFechaNac.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
             jFtdTxtANIO.setBackground(Color.decode("#FFA6A6"));
-            jLblNotiANIO.setText("Campo incompleto");
+            jLblNotiFechaNac.setText("Campo incompleto");
         } else {
             int yearLabel = Integer.parseInt(jFtdTxtANIO.getText().replaceAll("\\s+", ""));
             if (yearLabel >= year - 100 && yearLabel <= year) {
                 jFtdTxtANIO.setBackground(Color.decode("#19DEA3"));
-                jLblNotiStatusANIO.setIcon(null);
-                jLblNotiStatusANIO.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/okICO.png")));
-                jLblNotiANIO.setText("");
+                jLblNotiStatusFechaNac.setIcon(null);
+                jLblNotiStatusFechaNac.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/okICO.png")));
+                jLblNotiFechaNac.setText("");
             } else {
-                jLblNotiStatusANIO.setIcon(null);
-                jLblNotiStatusANIO.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
+                jLblNotiStatusFechaNac.setIcon(null);
+                jLblNotiStatusFechaNac.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
                 jFtdTxtANIO.setBackground(Color.decode("#FFA6A6"));
-                jLblNotiANIO.setText("Año incorrecto");
+                jLblNotiFechaNac.setText("Año incorrecto");
             }
         }
     }//GEN-LAST:event_jFtdTxtANIOFocusLost
+
+    private void jComboDiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboDiaFocusGained
+        if (jComboDia.getItemAt(0).equals("Dia")) {
+            jComboDia.removeItemAt(0);
+            jComboDia.setSelectedIndex(-1);
+            jComboDia.setFont(OpenSans);
+            jComboDia.setForeground(Color.BLACK);
+        } else {
+            jComboDia.setUI(new ComboCustomUI(0));
+            jComboDia.showPopup();
+        }
+    }//GEN-LAST:event_jComboDiaFocusGained
+
+    private void jComboDiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboDiaFocusLost
+        if (jComboDia.getSelectedItem() == null) {
+            jComboDia.setUI(new ComboCustomUI(2));
+            jLblNotiStatusFechaNac.setIcon(null);
+            jLblNotiStatusFechaNac.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
+            jLblNotiFechaNac.setText("Campo incompleto");
+        } else {
+            jComboDia.setUI(new ComboCustomUI(1));
+            jLblNotiStatusFechaNac.setIcon(null);
+            jLblNotiFechaNac.setText("");
+        }
+    }//GEN-LAST:event_jComboDiaFocusLost
+
+    private void jComboMesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboMesFocusGained
+        if (jComboMes.getItemAt(0).equals("Mes")) {
+            jComboMes.removeItemAt(0);
+            jComboMes.setSelectedIndex(-1);
+            jComboMes.setFont(OpenSans);
+            jComboMes.setForeground(Color.BLACK);
+        } else {
+            jComboMes.setUI(new ComboCustomUI(0));
+            jComboMes.showPopup();
+        }
+    }//GEN-LAST:event_jComboMesFocusGained
+
+    private void jComboMesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboMesFocusLost
+        if (jComboMes.getSelectedItem() == null) {
+            jComboMes.setUI(new ComboCustomUI(2));
+            jLblNotiStatusFechaNac.setIcon(null);
+            jLblNotiStatusFechaNac.setIcon(new ImageIcon(getClass().getResource("/pckgPaciente/imgs/notokICO.png")));
+            jLblNotiFechaNac.setText("Campo incompleto");
+        } else {
+            jComboMes.setUI(new ComboCustomUI(1));
+            jLblNotiStatusFechaNac.setIcon(null);
+            jLblNotiFechaNac.setText("");
+        }
+    }//GEN-LAST:event_jComboMesFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBttnExitToMenu;
@@ -881,15 +944,15 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private javax.swing.JLabel jLabelNotificacion;
     private javax.swing.JLabel jLabelTel;
     private javax.swing.JLabel jLblNotiADRS;
-    private javax.swing.JLabel jLblNotiANIO;
     private javax.swing.JLabel jLblNotiCEL;
     private javax.swing.JLabel jLblNotiDPI;
+    private javax.swing.JLabel jLblNotiFechaNac;
     private javax.swing.JLabel jLblNotiLNME;
     private javax.swing.JLabel jLblNotiNME;
     private javax.swing.JLabel jLblNotiStatusADRS;
-    private javax.swing.JLabel jLblNotiStatusANIO;
     private javax.swing.JLabel jLblNotiStatusCEL;
     private javax.swing.JLabel jLblNotiStatusDPI;
+    private javax.swing.JLabel jLblNotiStatusFechaNac;
     private javax.swing.JLabel jLblNotiStatusLNME;
     private javax.swing.JLabel jLblNotiStatusNME;
     private javax.swing.JLabel jLblNotiStatusTEL;
@@ -947,10 +1010,10 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiADRS.setForeground(Color.red);
         jLblNotiTEL.setForeground(Color.red);
         jLblNotiCEL.setForeground(Color.red);
-        jLblNotiANIO.setForeground(Color.red);
+        jLblNotiFechaNac.setForeground(Color.red);
 
         Border round = new LineBorder(Color.decode("#CEF8E9"));
-        Border empty = new EmptyBorder(0,5,0,5);
+        Border empty = new EmptyBorder(0, 5, 0, 5);
         Border border = new CompoundBorder(round, empty);
 
         jTextFieldNombre.setBorder(border);
@@ -960,10 +1023,12 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jFtdTxtTEL.setBorder(border);
         jFtdTxtCEL.setBorder(border);
         jFtdTxtANIO.setBorder(border);
-//      
-        jComboDia.setUI(new ComboCustomUI());
+
+        jComboDia.setUI(new ComboCustomUI(0));
+
         jComboDia.setEditable(false);
-        jComboMes.setUI(new ComboCustomUI());
+        jComboMes.setUI(new ComboCustomUI(0));
+
         jComboMes.setEditable(false);
 
         jLblButton1 = new JLabel();
@@ -984,8 +1049,8 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jFtdTxtTEL.setFont(OpenSansItalic);
         jFtdTxtCEL.setFont(OpenSansItalic);
         jFtdTxtANIO.setFont(OpenSansItalic);
-        jComboDia.setFont(OpenSans);
-        jComboMes.setFont(OpenSans);
+        jComboDia.setFont(OpenSansItalic);
+        jComboMes.setFont(OpenSansItalic);
         jTextFieldSearching.setForeground(Color.decode("#9B9797"));
         jFtdTxtDPI.setForeground(Color.decode("#9B9797"));
         jTextFieldNombre.setForeground(Color.decode("#9B9797"));
@@ -994,6 +1059,8 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jFtdTxtTEL.setForeground(Color.decode("#9B9797"));
         jFtdTxtCEL.setForeground(Color.decode("#9B9797"));
         jFtdTxtANIO.setForeground(Color.decode("#9B9797"));
+        jComboDia.setForeground(Color.decode("#9B9797"));
+        jComboMes.setForeground(Color.decode("#9B9797"));
 
         jTextFieldNombre.setBackground(Color.decode("#CEF8E9"));
         jTextFieldApellido.setBackground(Color.decode("#CEF8E9"));
@@ -1023,7 +1090,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiADRS.setText("");
         jLblNotiTEL.setText("");
         jLblNotiCEL.setText("");
-        jLblNotiANIO.setText("");
+        jLblNotiFechaNac.setText("");
 
         jLblNotiStatusDPI.setIcon(null);
         jLblNotiStatusNME.setIcon(null);
@@ -1031,7 +1098,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiStatusADRS.setIcon(null);
         jLblNotiStatusTEL.setIcon(null);
         jLblNotiStatusCEL.setIcon(null);
-        jLblNotiStatusANIO.setIcon(null);
+        jLblNotiStatusFechaNac.setIcon(null);
 
         jComboDia.removeAllItems();
         jComboMes.removeAllItems();
@@ -1052,24 +1119,27 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         if (i == 1) {
             ImageIcon imgicon = new ImageIcon(getClass().getResource("/pckgPaciente/imgs/icoOK.png"));
             JLabel labelNoti = new JLabel(imgicon);
-            try {
-                Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/Fonts/Capriola-Regular.ttf"));
-                Font biggerFont = font.deriveFont(Font.PLAIN, 18f);
-                labelNoti.setFont(biggerFont);
-            } catch (FontFormatException ex) {
-                ex.getMessage();
-            } catch (IOException ex) {
-                ex.getMessage();
-            }
+            labelNoti.setFont(OpenSans);
             labelNoti.setBackground(Color.decode("#EAFDF7"));
             labelNoti.setOpaque(true);
             labelNoti.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
             labelNoti.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
             jPanelAgregarPaciente.add(labelNoti, new AbsoluteConstraints(345, 285, 250, 250), 1);
             labelNoti.setText("Registro Correcto " + "()");
-            PatientThread hilo = new PatientThread(labelNoti);
+            PatientThread hilo = new PatientThread(labelNoti, 1);
             hilo.start();
         } else if (i == 0) {
+            ImageIcon imgicon = new ImageIcon(getClass().getResource("/pckgPaciente/imgs/icoERROR.png"));
+            JLabel labelNoti = new JLabel(imgicon);
+            labelNoti.setFont(OpenSans);
+            labelNoti.setBackground(Color.decode("#FFD0D0"));
+            labelNoti.setOpaque(true);
+            labelNoti.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            labelNoti.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            jPanelAgregarPaciente.add(labelNoti, new AbsoluteConstraints(345, 285, 250, 250), 1);
+            labelNoti.setText("Registro Fallido " + "()");
+            PatientThread hilo = new PatientThread(labelNoti, 0);
+            hilo.start();
         }
     }
 
@@ -1103,6 +1173,41 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         } else if (i == 4) {
             int caretPos = jFtdTxtANIO.getText().replaceAll("\\s+", "").length();
             jFtdTxtANIO.setCaretPosition(caretPos);
+        }
+    }
+
+    private boolean verificarIcons(int i) {
+        if (i == 0) {
+            Object dpiNull = jLblNotiStatusDPI.getIcon();
+            Object nombreNull = jLblNotiStatusNME.getIcon();
+            Object apellidoNull = jLblNotiStatusLNME.getIcon();
+            Object direccionNull = jLblNotiStatusADRS.getIcon();
+            Object telNull = jLblNotiStatusTEL.getIcon();
+            Object celNull = jLblNotiStatusCEL.getIcon();
+            Object fechaNacNull = jLblNotiStatusFechaNac.getIcon();
+
+            if (dpiNull == null || nombreNull == null || apellidoNull == null
+                    || direccionNull == null || telNull == null || celNull == null
+                    || fechaNacNull == null) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            boolean dpiStatus = jLblNotiStatusDPI.getIcon().toString().contains("/imgs/okICO.png");
+            boolean nombreStatus = jLblNotiStatusNME.getIcon().toString().contains("/imgs/okICO.png");
+            boolean apellidoStatus = jLblNotiStatusLNME.getIcon().toString().contains("/imgs/okICO.png");
+            boolean direccionStatus = jLblNotiStatusADRS.getIcon().toString().contains("/imgs/okICO.png");
+            boolean telStatus = jLblNotiStatusTEL.getIcon().toString().contains("/imgs/okICO.png");
+            boolean celStatus = jLblNotiStatusCEL.getIcon().toString().contains("/imgs/okICO.png");
+            boolean fechaNacStatus = jLblNotiStatusFechaNac.getIcon().toString().contains("/imgs/okICO.png");
+            if ((dpiStatus && nombreStatus && apellidoStatus && direccionStatus
+                    && telStatus && celStatus && fechaNacStatus) == true) {
+                System.out.println("SI");
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

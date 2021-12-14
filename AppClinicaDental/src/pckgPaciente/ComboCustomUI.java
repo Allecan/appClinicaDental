@@ -3,10 +3,15 @@ package pckgPaciente;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,11 +29,23 @@ import javax.swing.plaf.basic.ComboPopup;
 
 public class ComboCustomUI extends BasicComboBoxUI {
 
+    public int statusS = 0;
+
+    public ComboCustomUI(int comboStatus) {
+        this.statusS = comboStatus;        
+    }
+
     @Override
     public void installUI(JComponent jc) {
         super.installUI(jc);
-        Border border = new Border();
-        comboBox.setBackground(Color.decode("#CEF8E9"));
+        Border border = new Border();        
+        if (statusS == 0) {
+            comboBox.setBackground(Color.decode("#CEF8E9"));
+        } else if (statusS == 1) {
+            comboBox.setBackground(Color.decode("#19DEA3"));
+        } else if (statusS == 2) {
+            comboBox.setBackground(Color.decode("#FFA6A6"));
+        }
         comboBox.setBorder(border);
     }
 
@@ -49,7 +66,20 @@ public class ComboCustomUI extends BasicComboBoxUI {
             public Component getListCellRendererComponent(JList jlist, Object e, int i, boolean bln, boolean bln1) {
                 String text = e == null ? "" : e.toString();
                 JLabel label = new JLabel(text);
-                label.setFont(comboBox.getFont());
+                Font OpenSans;
+                try {
+                    OpenSans = Font.createFont(Font.TRUETYPE_FONT,
+                            getClass().getResourceAsStream("/Fonts/OpenSans-Regular.ttf"));
+                    OpenSans = OpenSans.deriveFont(Font.PLAIN, 23f);
+                     label.setFont(OpenSans);
+                } catch (FontFormatException ex) {
+                    Logger.getLogger(ComboCustomUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ComboCustomUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+//                Font fuente = new Font("Segoe UI", Font.PLAIN, 15);
+               
                 if (i >= 0) {
                     label.setBorder(new EmptyBorder(5, 8, 5, 8));
                 } else {
@@ -104,7 +134,14 @@ public class ComboCustomUI extends BasicComboBoxUI {
         public ArrowButton() {
             setContentAreaFilled(false);
             setBorder(new EmptyBorder(5, 5, 5, 5));
-            setBackground(Color.decode("#4BC088"));
+            if (statusS == 0) {
+                setBackground(Color.decode("#4BC088"));
+            } else if (statusS == 1) {
+                setBackground(Color.decode("#CEF8E9"));
+            } else if (statusS == 2) {
+                setBackground(Color.decode("#F24E1E"));
+            }
+//            setBackground(Color.decode("#4BC088"));
         }
 
         @Override
@@ -158,6 +195,16 @@ public class ComboCustomUI extends BasicComboBoxUI {
 
         @Override
         public void paintBorder(Component cmpnt, Graphics grphcs, int x, int y, int width, int height) {
+            if (statusS == 0) {
+                setColor(Color.decode("#CEF8E9"));
+                setFocusColor(Color.decode("#CEF8E9"));
+            } else if (statusS == 1) {
+                setColor(Color.decode("#19DEA3"));
+                setFocusColor(Color.decode("#19DEA3"));
+            } else if (statusS == 2) {
+                setColor(Color.decode("#FFA6A6"));
+                setFocusColor(Color.decode("#FFA6A6"));
+            }
             Graphics2D g2 = (Graphics2D) grphcs.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             if (cmpnt.isFocusOwner()) {
