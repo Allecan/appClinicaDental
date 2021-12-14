@@ -7,12 +7,12 @@ package pckgMenu;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 import pckgAppointment.FrameAppointment;
 import pckgConsultation.FrameConsultation;
 import pkgServicie.FrameService;
 import pckgPaciente.FramePatient;
 import pckgEnvioFactura.FormMail;
-import pckgPaciente.ComboCustomUI;
 
 /**
  *
@@ -26,7 +26,17 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() {
-        initComponents();         
+        initComponents();
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
         setPropertiesGUI(); //metodo para establecer las propiedades graficas del Frame Menu
     }
 

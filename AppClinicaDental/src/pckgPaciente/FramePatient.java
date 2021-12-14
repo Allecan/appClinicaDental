@@ -13,10 +13,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -37,10 +42,11 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private JLabel jLblButton1;
     private JLabel jLblButton2;
     private JLabel jLblButton3;
+    private Font OpenSans;
+    private Font OpenSansItalic;
 
     public FramePatient() {
         initComponents();
-       
         setPropertiesGUI();
         adminPaciente = new AdminPatient();
     }
@@ -161,7 +167,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jSeparatorFondo.setBackground(new java.awt.Color(0, 0, 0));
         jSeparatorFondo.setForeground(new java.awt.Color(0, 0, 0));
         jSeparatorFondo.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparatorFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 10, 800));
+        getContentPane().add(jSeparatorFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 20, 10, 800));
 
         jPanelAgregarPaciente.setFocusable(false);
         jPanelAgregarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,16 +279,12 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         });
         jPanelAgregarPaciente.add(jFtdTxtTEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 445, 400, 35));
 
-        jComboDia.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jComboDia.setAlignmentX(0.0F);
         jComboDia.setAlignmentY(0.0F);
         jComboDia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanelAgregarPaciente.add(jComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 615, 85, 35));
 
-        jComboMes.setBackground(new java.awt.Color(206, 248, 233));
-        jComboMes.setFont(new java.awt.Font("Calibri", 0, 25)); // NOI18N
         jComboMes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jComboMes.setFocusable(false);
         jPanelAgregarPaciente.add(jComboMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 615, 160, 35));
 
         jButtonSaveDataPatient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/button (1).png"))); // NOI18N
@@ -623,7 +625,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jFtdTxtDPIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtDPIFocusGained
         if (jFtdTxtDPI.getText().equals("9999 99999 9999")) {
             jFtdTxtDPI.setText("");
-            jFtdTxtDPI.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jFtdTxtDPI.setFont(OpenSans);
             jFtdTxtDPI.setForeground(Color.black);
         } else {
             reAdjustCaret(1);
@@ -652,7 +654,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jFtdTxtTELFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtTELFocusGained
         if (jFtdTxtTEL.getText().equals("7777 7777")) {
             jFtdTxtTEL.setText("");
-            jFtdTxtTEL.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jFtdTxtTEL.setFont(OpenSans);
             jFtdTxtTEL.setForeground(Color.black);
         } else {
             reAdjustCaret(2);
@@ -679,7 +681,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jFtdTxtCELFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtCELFocusGained
         if (jFtdTxtCEL.getText().equals("5555 5555")) {
             jFtdTxtCEL.setText("");
-            jFtdTxtCEL.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jFtdTxtCEL.setFont(OpenSans);
             jFtdTxtCEL.setForeground(Color.black);
         } else {
             reAdjustCaret(3);
@@ -706,7 +708,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jTextFieldNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNombreFocusGained
         if (jTextFieldNombre.getText().equals("Escribir Nombres...")) {
             jTextFieldNombre.setText("");
-            jTextFieldNombre.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jTextFieldNombre.setFont(OpenSans);
             jTextFieldNombre.setForeground(Color.black);
         } else {
             jLblNotiStatusNME.setIcon(null);
@@ -732,7 +734,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jTextFieldApellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldApellidoFocusGained
         if (jTextFieldApellido.getText().equals("Escribir Apellidos...")) {
             jTextFieldApellido.setText("");
-            jTextFieldApellido.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jTextFieldApellido.setFont(OpenSans);
             jTextFieldApellido.setForeground(Color.black);
         } else {
             jLblNotiStatusLNME.setIcon(null);
@@ -758,7 +760,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jTextFieldDirecFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDirecFocusGained
         if (jTextFieldDirec.getText().equals("Escribir Direccion...")) {
             jTextFieldDirec.setText("");
-            jTextFieldDirec.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jTextFieldDirec.setFont(OpenSans);
             jTextFieldDirec.setForeground(Color.black);
         } else {
             jLblNotiStatusADRS.setIcon(null);
@@ -820,7 +822,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void jFtdTxtANIOFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFtdTxtANIOFocusGained
         if (jFtdTxtANIO.getText().equals(String.valueOf(year))) {
             jFtdTxtANIO.setText("");
-            jFtdTxtANIO.setFont(new Font("Calibri", Font.PLAIN, 25));
+            jFtdTxtANIO.setFont(OpenSans);
             jFtdTxtANIO.setForeground(Color.black);
         } else {
             jLblNotiStatusANIO.setIcon(null);
@@ -912,6 +914,19 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
     @Override
     public void setPropertiesGUI() {
+        try {
+            this.OpenSans = Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getResourceAsStream("/Fonts/OpenSans-Regular.ttf"));
+            this.OpenSans = OpenSans.deriveFont(Font.PLAIN, 23f);
+            this.OpenSansItalic = Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getResourceAsStream("/Fonts/OpenSans-Italic.ttf"));
+            this.OpenSansItalic = OpenSans.deriveFont(Font.ITALIC, 23f);
+        } catch (FontFormatException ex) {
+            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         jPanelFondo.setBackground(new Color(0xEDF0F2));
@@ -923,6 +938,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
         jTextFieldSearching.setFont(font);
+
         jTextFieldSearching.setText("Busqueda...");
         jTextFieldSearching.setForeground(new Color(153, 153, 153));
         jLblNotiDPI.setForeground(Color.red);
@@ -934,7 +950,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiANIO.setForeground(Color.red);
 
         Border round = new LineBorder(Color.decode("#CEF8E9"));
-        Border empty = new EmptyBorder(5, 5, 0, 5);
+        Border empty = new EmptyBorder(0,5,0,5);
         Border border = new CompoundBorder(round, empty);
 
         jTextFieldNombre.setBorder(border);
@@ -947,10 +963,9 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 //      
         jComboDia.setUI(new ComboCustomUI());
         jComboDia.setEditable(false);
+        jComboMes.setUI(new ComboCustomUI());
+        jComboMes.setEditable(false);
 
-//        jComboDia.setUI(jComboCustom.createUI(rootPane));
-//        jComboMes.setUI(jComboCustom.createUI(rootPane));
-//       
         jLblButton1 = new JLabel();
         getContentPane().add(jLblButton1, new AbsoluteConstraints(140, 80, 170, 38), 1);
         jLblButton2 = new JLabel();
@@ -961,16 +976,16 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
     public void setInicialComponents() {
 
-        Font font = new Font("Calibri", Font.ITALIC, 25);
-        jTextFieldSearching.setFont(font);
-        jFtdTxtDPI.setFont(font);
-        jTextFieldNombre.setFont(font);
-        jTextFieldApellido.setFont(font);
-        jTextFieldDirec.setFont(font);
-        jFtdTxtTEL.setFont(font);
-        jFtdTxtCEL.setFont(font);
-        jFtdTxtANIO.setFont(font);
-
+        jTextFieldSearching.setFont(OpenSansItalic);
+        jFtdTxtDPI.setFont(OpenSansItalic);
+        jTextFieldNombre.setFont(OpenSansItalic);
+        jTextFieldApellido.setFont(OpenSansItalic);
+        jTextFieldDirec.setFont(OpenSansItalic);
+        jFtdTxtTEL.setFont(OpenSansItalic);
+        jFtdTxtCEL.setFont(OpenSansItalic);
+        jFtdTxtANIO.setFont(OpenSansItalic);
+        jComboDia.setFont(OpenSans);
+        jComboMes.setFont(OpenSans);
         jTextFieldSearching.setForeground(Color.decode("#9B9797"));
         jFtdTxtDPI.setForeground(Color.decode("#9B9797"));
         jTextFieldNombre.setForeground(Color.decode("#9B9797"));
@@ -1038,7 +1053,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
             ImageIcon imgicon = new ImageIcon(getClass().getResource("/pckgPaciente/imgs/icoOK.png"));
             JLabel labelNoti = new JLabel(imgicon);
             try {
-                Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("Capriola-Regular.ttf"));
+                Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/Fonts/Capriola-Regular.ttf"));
                 Font biggerFont = font.deriveFont(Font.PLAIN, 18f);
                 labelNoti.setFont(biggerFont);
             } catch (FontFormatException ex) {
