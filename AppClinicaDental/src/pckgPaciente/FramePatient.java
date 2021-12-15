@@ -19,9 +19,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -36,14 +33,14 @@ import pckgMenu.MenuMain;
  */
 public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
-    private int x, y;
     AdminPatient adminPaciente;
+    private int x, y;
     public int year = Calendar.getInstance().get(Calendar.YEAR);
+    private Font OpenSans;
+    private Font OpenSansItalic;
     private JLabel jLblButton1;
     private JLabel jLblButton2;
     private JLabel jLblButton3;
-    private Font OpenSans;
-    private Font OpenSansItalic;
 
     public FramePatient() {
         initComponents();
@@ -106,8 +103,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jPanelVerPaciente = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
-        jSeparator1 = new javax.swing.JSeparator();
-        jTextFieldSearching = new javax.swing.JTextField();
+        jTextFieldSEARCH = new RoundJTextField(10);
         jLabelBuscar = new javax.swing.JLabel();
         labelTitutloVisualizar = new javax.swing.JLabel();
         jPanelFondo = new javax.swing.JPanel();
@@ -179,6 +175,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jTextFieldNombre.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldNombre.setToolTipText("");
         jTextFieldNombre.setBorder(null);
         jTextFieldNombre.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldNombre.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -194,6 +191,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jTextFieldApellido.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldApellido.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldApellido.setToolTipText("");
         jTextFieldApellido.setBorder(null);
         jTextFieldApellido.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldApellido.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -209,6 +207,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jTextFieldDirec.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldDirec.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldDirec.setToolTipText("");
         jTextFieldDirec.setBorder(null);
         jTextFieldDirec.setMinimumSize(new java.awt.Dimension(400, 35));
         jTextFieldDirec.setPreferredSize(new java.awt.Dimension(400, 35));
@@ -421,7 +420,6 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
 
         jPanelVerPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTablePatient.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -433,41 +431,36 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
                 "DPI", "Nombre", "Apellido", "Edad", "Direccion", "Telefono", "Celular"
             }
         ));
-        jTablePatient.setCellSelectionEnabled(true);
         jTablePatient.setFocusable(false);
-        jTablePatient.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTablePatient.setSelectionBackground(Color.decode("#CEF8E9"));
+        jTablePatient.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jTablePatient.setShowGrid(false);
         jTablePatient.setShowVerticalLines(true);
         jTablePatient.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePatient);
 
-        jPanelVerPaciente.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1030, 690));
+        jPanelVerPaciente.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1030, 650));
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jPanelVerPaciente.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 55, 410, 5));
-
-        jTextFieldSearching.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextFieldSEARCH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldSearchingMouseClicked(evt);
+                jTextFieldSEARCHMouseClicked(evt);
             }
         });
-        jTextFieldSearching.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldSEARCH.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldSearchingKeyReleased(evt);
+                jTextFieldSEARCHKeyReleased(evt);
             }
         });
-        jPanelVerPaciente.add(jTextFieldSearching, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 410, 30));
+        jPanelVerPaciente.add(jTextFieldSEARCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 20, 300, 35));
 
         jLabelBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/search.png"))); // NOI18N
         jLabelBuscar.setPreferredSize(new java.awt.Dimension(46, 46));
-        jPanelVerPaciente.add(jLabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1001, 17, 50, 45));
+        jPanelVerPaciente.add(jLabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1005, 15, 45, 45));
 
         labelTitutloVisualizar.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
-        labelTitutloVisualizar.setText("Listado pacientes");
-        jPanelVerPaciente.add(labelTitutloVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        labelTitutloVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pckgPaciente/imgs/Titulo2.png"))); // NOI18N
+        jPanelVerPaciente.add(labelTitutloVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 305, 45));
 
         getContentPane().add(jPanelVerPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 1070, 780));
 
@@ -579,22 +572,22 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private void toggleButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleButtonVisualizarActionPerformed
         jPanelVerPaciente.setVisible(true);
         jPanelAgregarPaciente.setVisible(false);
+        setInicialComponents();
         jTablePatient.setModel(adminPaciente.seeAllPatients());
         jTablePatient.setAutoCreateRowSorter(true);
     }//GEN-LAST:event_toggleButtonVisualizarActionPerformed
 
-    private void jTextFieldSearchingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSearchingMouseClicked
-        Font font = new Font("Segoe UI Semilight", Font.PLAIN, 18);
-        jTextFieldSearching.setText("");
-        jTextFieldSearching.setForeground(Color.black);
-        jTextFieldSearching.setFont(font);
-    }//GEN-LAST:event_jTextFieldSearchingMouseClicked
+    private void jTextFieldSEARCHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSEARCHMouseClicked
+        jTextFieldSEARCH.setText("");
+        jTextFieldSEARCH.setForeground(Color.black);
+        jTextFieldSEARCH.setFont(OpenSans);
+    }//GEN-LAST:event_jTextFieldSEARCHMouseClicked
 
-    private void jTextFieldSearchingKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchingKeyReleased
+    private void jTextFieldSEARCHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSEARCHKeyReleased
         TableRowSorter<TableModel> tableFilter = new TableRowSorter<TableModel>(jTablePatient.getModel());
         jTablePatient.setRowSorter(tableFilter);
-        tableFilter.setRowFilter(RowFilter.regexFilter(jTextFieldSearching.getText()));
-    }//GEN-LAST:event_jTextFieldSearchingKeyReleased
+        tableFilter.setRowFilter(RowFilter.regexFilter(jTextFieldSEARCH.getText()));
+    }//GEN-LAST:event_jTextFieldSEARCHKeyReleased
 
     private void jButtonSaveDataPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveDataPatientActionPerformed
         Object[] botones = {"Aceptar", "Cancelar"};
@@ -961,13 +954,12 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JPanel jPanelVerPaciente;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparatorFondo;
     private javax.swing.JTable jTablePatient;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldDirec;
     private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldSearching;
+    private javax.swing.JTextField jTextFieldSEARCH;
     private javax.swing.JLabel labelTitutloAgregar;
     private javax.swing.JLabel labelTitutloVisualizar;
     private javax.swing.JToggleButton toggleButtonNuevo;
@@ -981,6 +973,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
             this.OpenSans = Font.createFont(Font.TRUETYPE_FONT,
                     getClass().getResourceAsStream("/Fonts/OpenSans-Regular.ttf"));
             this.OpenSans = OpenSans.deriveFont(Font.PLAIN, 23f);
+
             this.OpenSansItalic = Font.createFont(Font.TRUETYPE_FONT,
                     getClass().getResourceAsStream("/Fonts/OpenSans-Italic.ttf"));
             this.OpenSansItalic = OpenSans.deriveFont(Font.ITALIC, 23f);
@@ -990,20 +983,21 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
             Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        Border round = new LineBorder(Color.decode("#CEF8E9"));
+        Border empty = new EmptyBorder(0, 5, 0, 5);
+        Border border = new CompoundBorder(round, empty);
+        jTextFieldNombre.setBorder(border);
+        jTextFieldApellido.setBorder(border);
+        jTextFieldDirec.setBorder(border);
+        jFtdTxtDPI.setBorder(border);
+        jFtdTxtTEL.setBorder(border);
+        jFtdTxtCEL.setBorder(border);
+        jFtdTxtANIO.setBorder(border);
+        jTextFieldSEARCH.setBorder(border);
+
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        jPanelFondo.setBackground(new Color(0xEDF0F2));
-        jPanelAgregarPaciente.setVisible(false);
-        jPanelAgregarPaciente.setBackground(Color.WHITE);
-        jPanelVerPaciente.setVisible(false);
-        jPanelVerPaciente.setBackground(Color.WHITE);
-        jTablePatient.setDefaultEditor(Object.class, null);
 
-        Font font = new Font("Segoe UI Semilight", Font.ITALIC, 18);
-        jTextFieldSearching.setFont(font);
-
-        jTextFieldSearching.setText("Busqueda...");
-        jTextFieldSearching.setForeground(new Color(153, 153, 153));
+        jTextFieldSEARCH.setForeground(new Color(153, 153, 153));
         jLblNotiDPI.setForeground(Color.red);
         jLblNotiNME.setForeground(Color.red);
         jLblNotiLNME.setForeground(Color.red);
@@ -1012,23 +1006,33 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jLblNotiCEL.setForeground(Color.red);
         jLblNotiFechaNac.setForeground(Color.red);
 
-        Border round = new LineBorder(Color.decode("#CEF8E9"));
-        Border empty = new EmptyBorder(0, 5, 0, 5);
-        Border border = new CompoundBorder(round, empty);
+        this.setBackground(new Color(0, 0, 0, 0));
+        jPanelFondo.setBackground(new Color(0xEDF0F2));
+        jPanelAgregarPaciente.setBackground(Color.WHITE);
+        jPanelVerPaciente.setBackground(Color.WHITE);
 
-        jTextFieldNombre.setBorder(border);
-        jTextFieldApellido.setBorder(border);
-        jTextFieldDirec.setBorder(border);
-        jFtdTxtDPI.setBorder(border);
-        jFtdTxtTEL.setBorder(border);
-        jFtdTxtCEL.setBorder(border);
-        jFtdTxtANIO.setBorder(border);
+        jPanelAgregarPaciente.setVisible(false);
+        jPanelVerPaciente.setVisible(false);
+
+        jTablePatient.setDefaultEditor(Object.class, null);
+        jTablePatient.getTableHeader().setFont(OpenSans);
+        jTablePatient.getTableHeader().setForeground(Color.BLACK);
+        try {
+            Font OpenSansTable = Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getResourceAsStream("/Fonts/OpenSans-Regular.ttf")).deriveFont(15f);
+            jTablePatient.setFont(OpenSansTable);
+        } catch (FontFormatException ex) {
+            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FramePatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        jTablePatient.setRowHeight(25);
 
         jComboDia.setUI(new ComboCustomUI(0));
-
-        jComboDia.setEditable(false);
         jComboMes.setUI(new ComboCustomUI(0));
 
+        jComboDia.setEditable(false);
         jComboMes.setEditable(false);
 
         jLblButton1 = new JLabel();
@@ -1040,8 +1044,7 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
     }
 
     public void setInicialComponents() {
-
-        jTextFieldSearching.setFont(OpenSansItalic);
+        jTextFieldSEARCH.setFont(OpenSansItalic);
         jFtdTxtDPI.setFont(OpenSansItalic);
         jTextFieldNombre.setFont(OpenSansItalic);
         jTextFieldApellido.setFont(OpenSansItalic);
@@ -1051,7 +1054,9 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jFtdTxtANIO.setFont(OpenSansItalic);
         jComboDia.setFont(OpenSansItalic);
         jComboMes.setFont(OpenSansItalic);
-        jTextFieldSearching.setForeground(Color.decode("#9B9797"));
+        jTextFieldSEARCH.setFont(OpenSansItalic);
+
+        jTextFieldSEARCH.setForeground(Color.decode("#9B9797"));
         jFtdTxtDPI.setForeground(Color.decode("#9B9797"));
         jTextFieldNombre.setForeground(Color.decode("#9B9797"));
         jTextFieldApellido.setForeground(Color.decode("#9B9797"));
@@ -1069,8 +1074,9 @@ public class FramePatient extends javax.swing.JFrame implements iControlUI {
         jFtdTxtTEL.setBackground(Color.decode("#CEF8E9"));
         jFtdTxtCEL.setBackground(Color.decode("#CEF8E9"));
         jFtdTxtANIO.setBackground(Color.decode("#CEF8E9"));
+        jTextFieldSEARCH.setBackground(Color.decode("#CEF8E9"));
 
-        jTextFieldSearching.setText("Busqueda...");
+        jTextFieldSEARCH.setText("Busque aqui...");
         jTextFieldNombre.setText("Escribir Nombres...");
         jTextFieldApellido.setText("Escribir Apellidos...");
         jTextFieldDirec.setText("Escribir Direccion...");
